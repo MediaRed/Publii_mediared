@@ -194,6 +194,11 @@ export default {
             icon: 'gallery',
             label: 'editor.gallery'
         },
+             {
+            blockName: 'publii-cards',
+            icon: 'cards',
+            label: 'editor.cards'
+        },
         {
             blockName: 'publii-list',
             icon: 'unordered-list',
@@ -522,6 +527,11 @@ export default {
         background: var(--pre-bg-hover) !important;
       }
       .publii-block-gallery-uploader-loader-overlay {
+        height: 250px;
+        top: 61px;
+        width: calc(100% - 64px) !important;
+      }
+      .publii-block-cards-uploader-loader-overlay {
         height: 250px;
         top: 61px;
         width: calc(100% - 64px) !important;
