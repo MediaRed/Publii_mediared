@@ -6,9 +6,9 @@ export NVM_DIR="$HOME/.nvm"
 
 echo "##    set nodejs version to 14"
 nvm use 14
-echo "##    install global libs: electron electron-packager node-gyp gulp"
+echo "##    install global libs: electron electron-packager node-gyp gulp gulp-cli"
 pnpm i -D @electron/rebuild
-pnpm i -g electron-packager node-gyp gulp
+pnpm i -g electron-packager node-gyp gulp gulp-cli
 echo "##    install application packages"
 npm i
 cd app
@@ -16,5 +16,7 @@ npm i
 cd ../
 echo "##    libraries installed"
 node-gyp rebuild
-npm run dev
+npm run dev && npm start 
+npm run build
+
 
