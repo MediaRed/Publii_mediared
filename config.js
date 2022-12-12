@@ -16,5 +16,5 @@ npm i
 cd ../
 echo "##    libraries installed"
 node-gyp rebuild
-npm run tart
+npm run dev
 
