@@ -27,6 +27,7 @@
   "dependencies": {
     "@gitbeaker/node": "28.0.4",
     "@google-cloud/storage": "5.8.0",
+    "@octokit/rest": "^19.0.5",
     "archiver": "5.3.1",
     "aws-sdk": "2.1069.0",
     "better-sqlite3": "7.6.2",
@@ -43,7 +44,6 @@
     "file-exists": "1.0.0",
     "fs-extra": "10.1.0",
     "ftp": "0.3.10",
-    "github": "^14.0.0",
     "handlebars": "4.7.7",
     "html-minifier": "4.0.0",
     "image-downloader": "3.3.0",

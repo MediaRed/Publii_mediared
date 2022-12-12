@@ -6,8 +6,8 @@ const fs = require('fs-extra');
 const path = require('path');
 const passwordSafeStorage = require('keytar');
 const slug = require('./../../helpers/slug');
-const githubApi = require("github");
-const list = require('ls-all');
+const { Octokit } = require("@octokit/rest");
+const list = require('ls-all/build/lib/list');
 const crypto = require('crypto');
 const countFiles = require('count-files');
 const moment = require('moment');
@@ -25,7 +25,7 @@ class GithubPages {
         }
 
         this.connection = false;
-        this.client = new githubApi({
+        this.client = new Octokit({
             version: "3.0.0",
             protocol: "https",
             host: server,

@@ -11,6 +11,7 @@
   "license": "GPL-3.0",
   "main": "app/main.js",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "dev": "cross-env NODE_ENV=development webpack --mode=development --progress --colors --watch",
     "prod": "cross-env NODE_ENV=production webpack --mode=production --progress --colors --hide-modules",
     "build": "gulp build && cross-env NODE_ENV=development ./node_modules/.bin/electron app/",
@@ -26,6 +27,9 @@
     "packager:mac-m1": "electron-builder build --mac --arm64",
     "packager:linux": "electron-builder build --linux"
   },
+  "resolutions": {
+    "graceful-fs": "^4.2.10"
+  },
   "repository": {
     "url": "https://github.com/GetPublii/Publii/"
   },
@@ -36,8 +40,10 @@
   "devDependencies": {
     "@electron/rebuild": "^3.2.10",
     "cross-env": "7.0.2",
+    "css-loader": "0.28.7",
     "electron": "^22.0.0",
     "electron-builder": "^22.10.3",
+    "file-loader": "4.2.0",
     "glob": "7.1.6",
     "gulp": "^3.9.1",
     "gulp-dart-sass": "1.0.2",
@@ -45,8 +51,7 @@
     "node-abi": "3.28.0",
     "node-loader": "1.0.1",
     "sass-loader": "10.2.0",
-    "css-loader": "0.28.7",
-    "file-loader": "4.2.0",
+    "vue-loader": "15.9.3",
     "vue-template-compiler": "2.6.14",
     "webpack": "^4.0.0",
     "webpack-cli": "3.3.12"
@@ -137,5 +142,9 @@
   },
   "appImage": {
     "license": "license.txt"
+  },
+  "dependencies": {
+    "ls-all": "^1.1.0",
+    "vue-loader": "^17.0.1"
   }
 }
