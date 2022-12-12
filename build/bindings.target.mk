@@ -39,13 +39,13 @@ CFLAGS_CC_Debug := \
 	-std=gnu++1y
 
 INCS_Debug := \
-	-I/home/tom/.cache/node-gyp/14.20.1/include/node \
-	-I/home/tom/.cache/node-gyp/14.20.1/src \
-	-I/home/tom/.cache/node-gyp/14.20.1/deps/openssl/config \
-	-I/home/tom/.cache/node-gyp/14.20.1/deps/openssl/openssl/include \
-	-I/home/tom/.cache/node-gyp/14.20.1/deps/uv/include \
-	-I/home/tom/.cache/node-gyp/14.20.1/deps/zlib \
-	-I/home/tom/.cache/node-gyp/14.20.1/deps/v8/include
+	-I/home/tom/.cache/node-gyp/14.17.6/include/node \
+	-I/home/tom/.cache/node-gyp/14.17.6/src \
+	-I/home/tom/.cache/node-gyp/14.17.6/deps/openssl/config \
+	-I/home/tom/.cache/node-gyp/14.17.6/deps/openssl/openssl/include \
+	-I/home/tom/.cache/node-gyp/14.17.6/deps/uv/include \
+	-I/home/tom/.cache/node-gyp/14.17.6/deps/zlib \
+	-I/home/tom/.cache/node-gyp/14.17.6/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=bindings' \
@@ -81,13 +81,13 @@ CFLAGS_CC_Release := \
 	-std=gnu++1y
 
 INCS_Release := \
-	-I/home/tom/.cache/node-gyp/14.20.1/include/node \
-	-I/home/tom/.cache/node-gyp/14.20.1/src \
-	-I/home/tom/.cache/node-gyp/14.20.1/deps/openssl/config \
-	-I/home/tom/.cache/node-gyp/14.20.1/deps/openssl/openssl/include \
-	-I/home/tom/.cache/node-gyp/14.20.1/deps/uv/include \
-	-I/home/tom/.cache/node-gyp/14.20.1/deps/zlib \
-	-I/home/tom/.cache/node-gyp/14.20.1/deps/v8/include
+	-I/home/tom/.cache/node-gyp/14.17.6/include/node \
+	-I/home/tom/.cache/node-gyp/14.17.6/src \
+	-I/home/tom/.cache/node-gyp/14.17.6/deps/openssl/config \
+	-I/home/tom/.cache/node-gyp/14.17.6/deps/openssl/openssl/include \
+	-I/home/tom/.cache/node-gyp/14.17.6/deps/uv/include \
+	-I/home/tom/.cache/node-gyp/14.17.6/deps/zlib \
+	-I/home/tom/.cache/node-gyp/14.17.6/deps/v8/include
 
 OBJS :=
 
