@@ -7,6 +7,9 @@
   "scripts": {
     "start": "electron main.js"
   },
+  "resolutions": {
+    "graceful-fs": "^4.2.10"
+  },
   "keywords": [],
   "author": {
     "name": "TidyCustoms",
