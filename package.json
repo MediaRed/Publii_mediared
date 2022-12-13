@@ -30,7 +30,7 @@
     "packager:linux": "electron-builder build --linux"
   },
   "resolutions": {
-    "graceful-fs": "4.2.2"
+    "graceful-fs": "4.2.10"
   },
   "repository": {
     "url": "https://github.com/GetPublii/Publii/"
