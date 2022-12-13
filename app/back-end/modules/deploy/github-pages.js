@@ -7,12 +7,17 @@ const path = require('path');
 const passwordSafeStorage = require('keytar');
 const slug = require('./../../helpers/slug');
 const { Octokit } = require("@octokit/rest");
-const list = require('ls-all/build/lib/list');
+const list = require('ls-all');
 const crypto = require('crypto');
 const countFiles = require('count-files');
 const moment = require('moment');
 const normalizePath = require('normalize-path');
 
+// const list = (dir) => {
+//     return fs.readdirSync(dir, {withFileTypes: true})
+//     //.filter(item => !item.isDirectory())
+//     .map(item => item.name)
+// }
 class GithubPages {
     constructor(deploymentInstance = false) {
         this.deployment = deploymentInstance;
