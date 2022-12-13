@@ -564,10 +564,11 @@ class App {
 
         Menu.setApplicationMenu(null);
         this.mainWindow = new BrowserWindow(windowParams);
+        
         this.mainWindow.setMenu(null);
         this.mainWindow.loadURL('file:///' + this.basedir + '/dist/index.html');
         this.mainWindow.removeMenu();
-
+        
         // Register search shortcut listener
         this.mainWindow.webContents.on('before-input-event', (e, input) => {
             if (input.key === 'f' && (input.meta || input.control)) {
@@ -580,12 +581,13 @@ class App {
             ) {
                 this.mainWindow.webContents.send('block-editor-redo');
             }
+            
         });
 
         // Prevent from creating new windows in the Electron context
         this.mainWindow.webContents.on('new-window', function(event, urlToOpen) {
             event.preventDefault();
-
+            this.mainWindow.webContents.openDevTools();
             if (typeof urlToOpen !== 'string') {
                 return false;
             }
