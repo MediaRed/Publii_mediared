@@ -26,7 +26,7 @@
     "packager:win": "electron-builder build --win --x64",
     "packager:mac": "electron-builder build --mac",
     "packager:mac-m1": "electron-builder build --mac --arm64",
-    "packager:linux": "electron-builder build --linux"
+    "packager:linux": "electron-builder -ml build --linux --x64"
   },
   "resolutions": {
     "graceful-fs": "4.2.10"
@@ -44,8 +44,9 @@
     "browser-sync": "^2.27.10",
     "cross-env": "7.0.2",
     "css-loader": "0.28.7",
+    "dmg-license": "^1.0.11",
     "electron": "^19.1.9",
-    "electron-builder": "^22.10.3",
+    "electron-builder": "^22.14.13",
     "file-loader": "4.2.0",
     "glob": "7.1.6",
     "gulp": "^4.0.0",
@@ -114,27 +115,9 @@
       "icon": "build/installation/icon.ico",
       "target": "nsis"
     },
-    "mac": {
-      "category": "public.app-category.utilities",
-      "icon": "build/installation/icon.icns",
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "entitlements": "build/entitlements.mac.plist",
-      "entitlementsInherit": "build/entitlements.mac.plist",
-      "minimumSystemVersion": "10.10"
-    },
     "nsis": {
       "oneClick": true,
       "createDesktopShortcut": "always"
-    },
-    "dmg": {
-      "sign": false,
-      "icon": "build/installation/volume.icns",
-      "title": "Install Publii"
     },
     "publish": {
       "provider": "generic",

@@ -123,7 +123,7 @@ function watchFiles() {
 }
 
 const watching = parallel(watchFiles, prepareEditorCss,updateBuildNumber, browserSync);
-const build = parallel(prepareEditorCss,updateBuildNumber);
+const build = parallel(afterPack, prepareEditorCss,updateBuildNumber);
 exports.css = css;
 exports.prepareEditorCss = prepareEditorCss;
 exports.updateBuildNumber = updateBuildNumber;
