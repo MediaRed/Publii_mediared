@@ -26,7 +26,7 @@
     "packager:win": "electron-builder build --win --x64",
     "packager:mac": "electron-builder build --mac",
     "packager:mac-m1": "electron-builder build --mac --arm64",
-    "packager:linux": "electron-builder -ml build --linux --x64"
+    "packager:linux": "electron-builder -wl build"
   },
   "resolutions": {
     "graceful-fs": "4.2.10"
