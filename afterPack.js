@@ -1,6 +1,7 @@
 "use strict"
 
 const builder = require("electron-builder")
+const electronRebuild = require("@electron/rebuild")
 const Platform = builder.Platform
 
 // Let's get that intellisense working
@@ -18,7 +19,7 @@ const options = {
   },
 
   // "store” | “normal” | "maximum". - For testing builds, use 'store' to reduce build time significantly.
-  compression: "normal",
+  compression: "store",
   removePackageScripts: true,
 
     afterSign: async (context) => {
@@ -58,6 +59,7 @@ const options = {
       "app/node_modules/publii-block-editor"
     ],
     linux: {
+      mimeTypes: ["x-scheme-handler/deeplink"],
       icon: "./build/installation/icon.icns",
       target: [
         "rpm",
@@ -83,32 +85,6 @@ const options = {
     appImage: {
       license: "license.txt"
     },
-    win: {
-      icon: "build/installation/icon.ico",
-      target: "nsis"
-    },
-    mac: {
-      category: "public.app-category.utilities",
-      icon: "build/installation/icon.icns",
-      hardenedRuntime: true,
-      gatekeeperAssess: false,
-      target: [
-        "dmg",
-        "zip"
-      ],
-      entitlements: "build/entitlements.mac.plist",
-      entitlementsInherit: "build/entitlements.mac.plist",
-      minimumSystemVersion: "10.10"
-    },
-    nsis: {
-      oneClick: true,
-      createDesktopShortcut: "always"
-    },
-    dmg: {
-      sign: false,
-      icon: "build/installation/volume.icns",
-      title: "Install Publii"
-    },
     publish: {
       provider: "generic",
       url: "https://dev-zen.com/publii-publish-test/",
@@ -117,8 +93,13 @@ const options = {
   };
 
 // Promise is returned
+const targets = new Map()
+    .set(Platform.LINUX, new Map())
+    .set(Platform.WINDOWS, new Map())
+    .set(Platform.MAC, new Map());
+
 builder.build({
-  targets: Platform.MAC.createTarget(),
+  targets,
   config: options
 })
 .then((result) => {
