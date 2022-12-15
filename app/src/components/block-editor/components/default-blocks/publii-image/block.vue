@@ -82,6 +82,26 @@
         v-model="content.alt"
         :placeholder="$t('image.enterAltText')"
         ref="contentAlt" />
+      <input
+        v-if="!editor.bulkOperationsMode && $parent.uiOpened"
+        type="text"
+        @focus="updateCurrentBlockID"
+        @keydown="handleLinkKeyboard"
+        @keyup="handleCaretAlt"
+        @click.stop
+        v-model="content.alt"
+        :placeholder="$t('image.enterLink')"
+        ref="contentAlt" />
+          <input
+        v-if="!editor.bulkOperationsMode && $parent.uiOpened"
+        type="text"
+        @focus="updateCurrentBlockID"
+        @keydown="handleLinkCaptionKeyboard"
+        @keyup="handleCaretAlt"
+        @click.stop
+        v-model="content.alt"
+        :placeholder="$t('image.enterLinkCaption')"
+        ref="contentAlt" />
     </div>
 
     <top-menu

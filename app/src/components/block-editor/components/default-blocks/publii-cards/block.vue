@@ -51,8 +51,10 @@
         </div>
 
         <div class="publii-block-cards-list-item-config">
-          <input type="text" v-model="image.alt" :placeholder="$t('editor.enterAltText')"/>
-          <input type="text" v-model="image.caption" :placeholder="$t('editor.enterCaption')"/>
+          <input type="text" v-model="image.title" :placeholder="$t('editor.enterTitle')"/>
+          <textarea class="publii-block-cards-item-body" name="body" cols="60" rows="10" required="required" v-model="image.body" :placeholder="$t('editor.enterBody')"/>
+          <input type="text" v-model="image.link" :placeholder="$t('editor.enterLink')"/>
+          <input type="text" v-model="image.linkCaption" :placeholder="$t('editor.enterLinkCaption')"/>
         </div>
       </div>
     </draggable>
@@ -331,10 +333,20 @@ export default {
 
 @import '../../../../../scss/variables.scss';
 @import '../../../../../scss/mixins.scss';
-
-.publii-block-cards {
+.publii-block-cards-item-body {
   display: flex;
   flex-wrap: wrap;
+  margin: -1rem;
+  outline: none;
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-8);
+  font-family: var(--font-base);
+  font-size: 14px;
+  text-align: left;
+}
+.publii-block-cards {
+  display: flex;
   margin: -1rem;
   outline: none;
   position: relative;
@@ -515,7 +527,13 @@ export default {
 
       &-config {
         width: calc(100% - 140px);
-
+        textarea {
+          display: block;
+          width: 97%;
+          margin: 5px;
+          border-color: var(--grey-3);
+          padding: 5px;
+        };
         input {
           display: block;
           width: 100%;       
