@@ -136,6 +136,9 @@
             "gallery": {
                 "idTooltip": "This value will be used as the gallery ID"
             },
+            "cards": {
+                "idTooltip": "This value will be used as the cards ID"
+            },
             "header": {
                 "customIdLabel": "Use custom ID",
                 "customIdTooltip": "Enable this option if you want to use your own ID, instead of the auto-generated ID",
@@ -196,12 +199,14 @@
         "dropToUploadYourPhotosOr": "Drop to upload your photos or",
         "element": "Element",
         "emptyGalleryBlock": "Empty gallery block",
+        "emptyCardsBlock": "Empty cards block",
         "emptyImageBlock": "Empty image block",
         "enterAltText": "Enter alternative text",
         "enterCaption": "Enter caption",
         "enterUrlOrEmbedCode": "Enter URL or embed code...",
         "errorOccurred": "An error occurred - please try again.",
         "gallery": "Gallery",
+        "cards": "Cards",
         "header": "Header",
         "heading1": "Heading 1",
         "heading2": "Heading 2",
@@ -213,6 +218,7 @@
         "hideStats": "Hide Stats",
         "html": "HTML",
         "insertGallery": "Insert gallery",
+        "insertCards": "Insert cards",
         "list": "List",
         "markdown": "Markdown",
         "markdownHelpPanelDesc": "You can easily manage headings, text styles or create other HTML elements by using the following keyboard shortcuts or markdown syntax:",
@@ -331,6 +337,7 @@
         "imageCaption": "Image caption",
         "images": "Images",
         "insertEditGallery": "Insert/Edit Gallery",
+        "insertEditCards": "Insert/Edit Cards",
         "layout": "Layout",
         "loadingImage": "Loading image...",
         "none": "None",
@@ -344,7 +351,8 @@
         "uploading": "Uploading",
         "wide": "Wide",
         "wideImage": "Wide image",
-        "yourGalleryIsEmpty": "Your gallery is empty"
+        "yourGalleryIsEmpty": "Your gallery is empty",
+        "yourCardsIsEmpty": "Your cards is empty"
     },
     "langs": {
         "addLanguageSuccessMessage": "Language has been added",
