@@ -17,7 +17,7 @@
     "prod": "cross-env NODE_ENV=production webpack --mode=production --progress --colors --hide-modules",
     "build": "gulp build && cross-env NODE_ENV=development ./node_modules/.bin/electron app/",
     "build2": "cross-env NODE_ENV=development ./node_modules/.bin/electron app/",
-    "start": "electron app/main.js --enable-logging",
+    "start": "export ELECTRON_ENABLE_LOGGING=true && electron app/main.js --enable-logging",
     "test": "mocha app/back-end/**/*.spec.js --reporter dot",
     "prepare-editor": "npm run remove-vendor-dist-dir && npm run prepare-vendor-dist-dir && npm run copy-vendor-files",
     "remove-vendor-dist-dir": "rm -rf app/dist/vendor",
@@ -26,7 +26,7 @@
     "packager:win": "electron-builder build --win --x64",
     "packager:mac": "electron-builder build --mac",
     "packager:mac-m1": "electron-builder build --mac --arm64",
-    "packager:linux": "electron-builder -wl build"
+    "packager:linux": "electron-builder --linux build"
   },
   "resolutions": {
     "graceful-fs": "4.2.10"
@@ -46,7 +46,7 @@
     "css-loader": "0.28.7",
     "dmg-license": "^1.0.11",
     "electron": "^19.1.9",
-    "electron-builder": "^22.14.13",
+    "electron-builder": "^23.6.0",
     "file-loader": "4.2.0",
     "glob": "7.1.6",
     "gulp": "^4.0.0",

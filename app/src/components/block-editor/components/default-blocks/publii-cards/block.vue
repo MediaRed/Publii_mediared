@@ -42,20 +42,17 @@
       <div
         v-for="(image, index) of content.images"
         :key="'card-item-' + index"
-        class="publii-block-cards-list-item">
-        <div class="publii-block-cards-list-item-image">
-          <img
-            :src="image.thumbnailSrc"
-            :height="image.height"
-            :width="image.width" />
-        </div>
-
-        <div class="publii-block-cards-list-item-config">
+        class="publii-block-card" >
+          <div class="publii-block-card-item-image">
+            <img
+             :src="image.thumbnailSrc"
+             :height="image.height"
+             :width="image.width" />
+          </div>
           <input type="text" v-model="image.title" :placeholder="$t('editor.enterTitle')"/>
-          <textarea class="publii-block-cards-item-body" name="body" cols="60" rows="10" required="required" v-model="image.body" :placeholder="$t('editor.enterBody')"/>
+          <textarea required="required" v-model="image.body" rows="10" :placeholder="$t('editor.enterBody')"/>
           <input type="text" v-model="image.link" :placeholder="$t('editor.enterLink')"/>
           <input type="text" v-model="image.linkCaption" :placeholder="$t('editor.enterLinkCaption')"/>
-        </div>
       </div>
     </draggable>
 
@@ -333,7 +330,25 @@ export default {
 
 @import '../../../../../scss/variables.scss';
 @import '../../../../../scss/mixins.scss';
-.publii-block-cards-item-body {
+.publii-block-cards-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.publii-block-cards-list-item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: -1rem;
+  outline: none;
+  position: relative;
+  background: var(--color-secondary);
+  color: var(--color-8);
+  font-family: var(--font-base);
+  font-size: 14px;
+  text-align: left;
+}
+.publii-block-card-item-body {
   display: flex;
   flex-wrap: wrap;
   margin: -1rem;
@@ -345,6 +360,47 @@ export default {
   font-size: 14px;
   text-align: left;
 }
+.publii-block-cards-item-image {
+  width: 100%;
+  height: auto;
+}
+.publii-block-card-item-image > img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: inherit;
+
+}
+.publii-block-card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  margin-right: 1em;
+}
+.threecol {
+  width: 30%;
+}
+.twocol {
+  width: 47%;
+}
+.onecol {
+  width: 100%;
+}
+.onecolcol :nth-child(1n) {
+// Styling for every third element here.
+  margin-right: 0;
+}
+.twocol :nth-child(2n) {
+// Styling for every third element here.
+  margin-right: 0;
+}
+.threecol :nth-child(3n) {
+// Styling for every third element here.
+  margin-right: 0;
+}
+
+
 .publii-block-cards {
   display: flex;
   margin: -1rem;
@@ -529,7 +585,7 @@ export default {
         width: calc(100% - 140px);
         textarea {
           display: block;
-          width: 97%;
+          width: inherit;
           margin: 5px;
           border-color: var(--grey-3);
           padding: 5px;
