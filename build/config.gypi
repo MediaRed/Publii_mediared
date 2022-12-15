@@ -348,7 +348,7 @@
     "force": "true",
     "auto_install_peers": "true",
     "userconfig": "/home/tom/.npmrc",
-    "local_prefix": "/home/tom/build/Publii-src",
+    "local_prefix": "/home/tom/build/Publii_mediared",
     "metrics_registry": "https://registry.npmjs.org/",
     "prefix": "/home/tom/.nvm/versions/node/v16.13.0",
     "cache": "/home/tom/.npm",

@@ -1,81 +1,49 @@
-appId: 'com.tidycustoms.publii'
-artifactName: 'Publii'
-productName: 'Publii'
-electronVersion: '19.1.3'
-copyright: 'Copyright (C) 2018-2022 TidyCustoms. All rights reserved.'
-
-forceCodeSigning: false
-
-# native dependencies compiling gets triggered in ./scripts/prepare-native-deps.ts
-npmRebuild: false
-
 directories:
-  output: ./dist
-files:
-  # TODO exclude not needed stuff in 'files:' section to reduce app packages size, can save megabytes, so a significant improvement
-  - '**/*'
-  - './app/**/*'
-  - './dist/**/*'
-  - './package.json'
-  - '!app/**/*/index-e2e.{js,cjs,mjs}'
-  - '!app/node_modules/electron-*'
-  - 'app/node_modules/publii-block-editor'
-compression: normal
+  output: dist
+  buildResources: build
+appId: com.tidycustoms.publii
+electronVersion: 19.1.3
+productName: Publii
+copyright: Copyright (C) 2018-2022 TidyCustoms. All rights reserved.
 asar: true
 asarUnpack:
-  - "*.+(dylib|node|dll|aff|dic)"
-  - "default-files/default-themes/**/*"
-  - "default-files/default-languages/**/*"
-  - "default-files/gdpr-assets/**/*"
-  - "node_modules/sharp/**/*"
-  - "node_modules/keytar/**/*"
-  - "node_modules/better-sqlite3/**/*"
-  - "node_modules/integer/**/*"
-  - "node_modules/node-expat/**/*"
-afterPack: './build/scripts/afterPack.js'
-
-mac:
-  icon: ./app/assets/icons/mac/icon.icns
-  category: public.app-category.productivity
-  darkModeSupport: true
-  target:
-    - {target: dmg}
-
-dmg:
-  icon: ./app/assets/icons/mac/icon.icns
-  iconSize: 128
-  contents:
-    - {x: 380, y: 240, type: link, path: /Applications}
-    - {x: 122, y: 240, type: file}
-
+  - '*.+(dylib|node|dll|aff|dic)'
+  - default-files/default-themes/**/*
+  - default-files/default-languages/**/*
+  - default-files/gdpr-assets/**/*
+  - node_modules/sharp/**/*
+  - node_modules/keytar/**/*
+  - node_modules/better-sqlite3/**/*
+  - node_modules/integer/**/*
+  - node_modules/node-expat/**/*
+afterPack: ./build/scripts/afterPack.js
+files:
+  - filter:
+      - '**/*'
+      - dist/**/*
+      - '!app/node_modules/devtron/**/*'
+      - '!app/node_modules/accessibility-developer-tools/**/*'
+      - '!app/node_modules/babel*'
+      - '!app/node_modules/postcss*'
+      - '!app/node_modules/asn1/**/*'
+      - '!app/node_modules/electron-*'
+      - app/node_modules/publii-block-editor
 linux:
-  icon: ./app/assets/icons/png
-  category: Office
-  packageCategory: Office
-  desktop:
-    StartupWMClass: electron-mail
-  executableArgs:
-    - '--js-flags="--max-old-space-size=12288"'
-
-snap:
-  confinement: strict
-  stagePackages:
-    - default
-  plugs:
-    - default
-    - password-manager-service
-  environment:
-    DISABLE_WAYLAND: 1
-    HUNSPELL_DICTIONARIES: $SNAP/usr/share/hunspell
-
-win:
-  artifactName: ${name}-${version}-windows-${arch}.${ext}
-  icon: ./app/assets/icons/win/icon.ico
+  icon: ./build/installation/icon.icns
   target:
-    - {target: nsis}
-
+    - rpm
+    - AppImage
+    - deb
+  category: Development
+  description: Static Site CMS
+  executableName: Publii
+win:
+  icon: build/installation/icon.ico
+  target: nsis
 nsis:
-  artifactName: ${name}-${version}-windows-${arch}-nsis-installer.${ext}
-  oneClick: false
-  perMachine: false
-  include: scripts/electron-builder/installer.nsh
+  oneClick: true
+  createDesktopShortcut: always
+publish:
+  provider: generic
+  url: https://dev-zen.com/publii-publish-test/
+  channel: stable
