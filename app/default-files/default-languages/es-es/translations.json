@@ -128,7 +128,8 @@
       "externalLink": "Enlace externo",
       "textSeparator": "Separador de texto",
       "externalURL": "URL externa (https://url.com)",
-      "selectLinkTarget": "Seleccionar destino de enlace"
+      "selectLinkTarget": "Seleccionar destino de enlace",
+      "editCardItem": "Editar elemento de tarjeta"
     },
     "editor": {
         "addHeading": "Add heading",

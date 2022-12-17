@@ -397,6 +397,7 @@ export default {
   width: 100%;
   aspect-ratio: 16 / 9;
   height: inherit;
+  object-fit: cover;
 
 }
 .publii-block-card {
@@ -406,6 +407,7 @@ export default {
   flex-direction: column;
   border-radius: 5px;
   margin-right: 1em;
+  width: 100%;
 }
 .publii-block-card > textarea {
   background: var(--input-bg);

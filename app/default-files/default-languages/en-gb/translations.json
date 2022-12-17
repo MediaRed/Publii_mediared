@@ -128,7 +128,8 @@
         "externalLink": "Extrenal link",
         "textSeparator": "Text separator",
         "externalURL": "External URL  (https://url.com)",
-        "selectLinkTarget": "Select link target"
+        "selectLinkTarget": "Select link target",
+        "editCardItem": "Edit card item"
     },
     "editor": {
         "addHeading": "Add heading",

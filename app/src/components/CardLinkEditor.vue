@@ -1,4 +1,4 @@
-<template>
+<template >
     <div
         :key="'card-item-view-' + id"
         class="card-options-container">
@@ -14,11 +14,12 @@
                 @click.prevent="hide()">
                 &times;
             </span>
-            <div class="publii-block-card-item-image">
-                <img
-                :src="image.thumbnailSrc"
-                :height="image.height"
-                :width="image.width" />
+            <div class="publii-block-card-item-image" 
+                flex 
+                items-end 
+                :style="{ backgroundImage: `url(${image.thumbnailSrc})` }"
+                >
+                <h1 class="publii-block-card-title" >{{image.title}}</h1>
             </div>
             <input type="text" v-model="image.title" :placeholder="$t('editor.enterTitle')"/>
             <textarea required="required" v-model="image.body" rows="10" :placeholder="$t('editor.enterBody')"/>
@@ -201,7 +202,7 @@ export default {
             cardID: '',
             label: '',
             title: '',
-            image: '',
+            image: this.image,
             type: '',
             target: '_self',
             rel: '',
@@ -475,6 +476,39 @@ export default {
 <style lang="scss" scoped>
 @import '../scss/variables.scss';
 
+.publii-block-card-title {
+    text-align: center;
+    font-weight: bold;
+    font-family: var(--font-base);
+    color: var(--headings-color);
+    font-size: 5.8rem;
+    font-weight: 600;
+    margin: 0 0 2rem;
+    text-shadow: 0px 15px 5px rgba(0,0,0,0.1),
+                 10px 20px 5px rgba(0,0,0,0.05),
+                 -10px 20px 5px rgba(0,0,0,0.05);
+    background: -webkit-linear-gradient(0deg,rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.25));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.publii-block-card-item-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    min-height: 25vh;
+    max-height: 40vh;
+    max-width:  100%;
+    object-fit: cover;
+    aspect-ratio: 6 / 2;
+    width: 100%;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 .card-options {
     display: flex;
     width: inherit;
@@ -488,7 +522,6 @@ export default {
       margin: 5px;
       background: var(--input-bg);
       color: var(--text-primary-color);
-      border-color: var(--grey-3);
       padding: 5px;
     }
     &-buttons {
