@@ -482,7 +482,15 @@ export default {
     h2 {
         margin-bottom: 1.2rem;
     }
-
+    textarea {
+      display: block;
+      width: inherit;
+      margin: 5px;
+      background: var(--input-bg);
+      color: var(--text-primary-color);
+      border-color: var(--grey-3);
+      padding: 5px;
+    }
     &-buttons {
         border: none;
         padding-top: 1.8rem;
