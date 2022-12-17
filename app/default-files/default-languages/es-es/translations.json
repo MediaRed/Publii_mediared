@@ -117,6 +117,17 @@
         "oct": "Oct",
         "sep": "Sep"
     },
+    "card": {
+      "addNewCardItem": "Agregar nuevo elemento de tarjeta",
+      "label": "Etiqueta",
+      "type": "Tipo de enlace",
+      "classCSS": "Nombre de la clase css para ese vínculo",
+      "addCardItem": "Agregar elemento de tarjeta",
+      "selectItemType": "Seleccione el tipo de enlace de la tarjeta",
+      "internalLink": "Enlace interno",
+      "externalLink": "Enlace externo",
+      "textSeparator": "Separador de texto"
+    },
     "editor": {
         "addHeading": "Add heading",
         "addLabel": "Add label",

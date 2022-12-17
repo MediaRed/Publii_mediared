@@ -1,8 +1,8 @@
 <template>
     <div
         :key="'card-item-view-' + id"
-        class="options-sidebar-container">
-        <div class="options-sidebar">
+        class="card-options-container">
+        <div class="card-options">
             <h2>
                 <template v-if="cardItemID !== ''">{{ $t('card.editCardItem') }}</template>
                 <template v-if="cardItemID === ''">{{ $t('card.addNewCardItem') }}</template>
@@ -452,10 +452,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '../scss/variables.scss';
-@import '../scss/options-sidebar.scss';
 
-.options-sidebar {
-
+.card-options {
+    display: flex;
+    width: inherit;
+    flex-direction: column;
     h2 {
         margin-bottom: 1.2rem;
     }
