@@ -28,9 +28,9 @@ echo "##    update npm and pnpm"
 echo "##    install global libs: electron electron-packager node-gyp gulp rollup"
 #npm i -g electron-packager node-gyp gulp@^4.0.0
 echo "##    install @electron/rebuild"
-npm i -D @electron/rebuild
+npm i -D @electron/rebuild --force
 echo "##    install application packages"
-npm i
+npm i --force
 npm run rebuild
 # npm rebuild
 # npm audit fix --force

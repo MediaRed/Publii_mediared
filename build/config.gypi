@@ -343,18 +343,6 @@
     "v8_use_siphash": 1,
     "want_separate_host_toolset": 0,
     "nodedir": "/home/tom/.cache/node-gyp/16.13.0",
-    "standalone_static_library": 1,
-    "user_agent": "npm/9.2.0 node/v16.13.0 linux x64 workspaces/false",
-    "force": "true",
-    "auto_install_peers": "true",
-    "userconfig": "/home/tom/.npmrc",
-    "local_prefix": "/home/tom/build/Publii_mediared",
-    "metrics_registry": "https://registry.npmjs.org/",
-    "prefix": "/home/tom/.nvm/versions/node/v16.13.0",
-    "cache": "/home/tom/.npm",
-    "node_gyp": "/home/tom/.nvm/versions/node/v16.13.0/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
-    "globalconfig": "/home/tom/.nvm/versions/node/v16.13.0/etc/npmrc",
-    "init_module": "/home/tom/.npm-init.js",
-    "global_prefix": "/home/tom/.nvm/versions/node/v16.13.0"
+    "standalone_static_library": 1
   }
 }
