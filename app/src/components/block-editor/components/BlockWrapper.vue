@@ -153,6 +153,9 @@ export default {
       if (this.blockType === 'publii-paragraph' && this.blockContentIsEmpty) {
         blocks = blocks.filter(block => block.blockName !== 'publii-paragraph');
       }
+      if (this.blockType === 'publii-cards' && this.blockContentIsEmpty) {
+        blocks = blocks.filter(block => block.blockName !== 'publii-cards');
+      }
 
       if (this.blockFilterPhrase.length) {
         blocks = blocks.filter(block => block.blockName.replace('publii-', '').indexOf(this.blockFilterPhrase.toLocaleLowerCase()) > -1);
@@ -187,7 +190,7 @@ export default {
         {
             blockName: 'publii-image',
             icon: 'image',
-            label: 'image.image'
+            label: 'editor.image'
         },
         {
             blockName: 'publii-gallery',
