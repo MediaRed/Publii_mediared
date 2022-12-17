@@ -19,7 +19,7 @@
         :key="'card-item-' + index"
         class="publii-block-cards-item"
         :style="{ backgroundImage: `url(${image.src})` }"
-        @click="navigate(image.linkTarget)"
+        @click="navigate(image)"
         >
         <h3>{{image.title}}</h3>
 
