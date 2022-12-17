@@ -28,7 +28,7 @@
                 key="card-item-editor-field-label">
                 <span>{{ $t('card.label') }}</span>
                 <input
-                    v-model="label"
+                    v-model="image.label"
                     :spellcheck="$store.state.currentSite.config.spellchecking"
                     @keyup="cleanError('label')"
                     type="text">
@@ -39,7 +39,7 @@
                 key="card-item-editor-field-type">
                 <span>{{ $t('card.type') }}</span>
                 <v-select
-                    v-model="type"
+                    v-model="image.type"
                     @click.native="cleanError('type')"
                     :options="linkTypes"
                     :searchable="false"
@@ -54,7 +54,7 @@
                 key="card-item-editor-field-internal">
                 <span>{{ $t('card.internalLink') }}</span>
                 <input
-                    v-model="internalLink"
+                    v-model="image.internalLink"
                     @keyup="cleanError('internalLink')"
                     spellcheck="false"
                     type="text" />
@@ -66,7 +66,7 @@
                 key="card-item-editor-field-external">
                 <span>{{ $t('card.externalURL') }}</span>
                 <input
-                    v-model="externalLink"
+                    v-model="image.externalLink"
                     @keyup="cleanError('externalLink')"
                     spellcheck="false"
                     type="text" />
@@ -81,7 +81,7 @@
                     ref="tagPagesSelect"
                     :options="tagPages"
                     @click.native="cleanError('tagPage')"
-                    v-model="tagPage"
+                    v-model="image.tagPage"
                     :custom-label="customTagLabels"
                     :close-on-select="true"
                     :show-labels="false"
@@ -98,7 +98,7 @@
                     ref="authorPagesSelect"
                     :options="authorPages"
                     @click.native="cleanError('authorPage')"
-                    v-model="authorPage"
+                    v-model="image.authorPage"
                     :custom-label="customAuthorsLabels"
                     :close-on-select="true"
                     :show-labels="false"
@@ -115,7 +115,7 @@
                     ref="postPagesSelect"
                     :options="postPages"
                     @click.native="cleanError('postPage')"
-                    v-model="postPage"
+                    v-model="image.postPage"
                     :custom-label="customPostLabels"
                     :close-on-select="true"
                     :show-labels="false"
@@ -126,7 +126,7 @@
             <label key="card-item-editor-field-title">
                 <span>{{ $t('link.linkTitleAttribute') }}</span>
                 <input
-                    v-model="title"
+                    v-model="image.title"
                     :spellcheck="$store.state.currentSite.config.spellchecking"
                     type="text" />
             </label>
@@ -134,7 +134,7 @@
             <label key="card-item-editor-field-cssclass">
                 <span>{{ $t('card.classCSS') }}</span>
                 <input
-                    v-model="cssClass"
+                    v-model="image.cssClass"
                     spellcheck="false"
                     type="text" />
             </label>
@@ -142,7 +142,7 @@
             <label key="card-item-editor-field-target">
                 <span>{{ $t('ui.linkTarget') }}:</span>
                 <v-select
-                    v-model="target"
+                    v-model="image.target"
                     :options="linkTargets"
                     :searchable="false"
                     :custom-label="customTargetLabels"
@@ -153,32 +153,10 @@
             <label key="card-item-editor-field-rel">
                 <span>{{ $t('link.linkRelAttribute') }}:</span>
                 <input
-                    v-model="rel"
+                    v-model="image.rel"
                     spellcheck="false"
                     type="text" />
             </label>
-
-            <div class="options-sidebar-buttons">
-                <p-button
-                    v-if="cardItemID !== ''"
-                    type="primary"
-                    @click.native="editCardItem">
-                    {{ $t('ui.saveChanges') }}
-                </p-button>
-
-                <p-button
-                    v-if="cardItemID === ''"
-                    type="primary"
-                    @click.native="addCardItem">
-                    {{ $t('card.addCardItem') }}
-                </p-button>
-
-                <p-button
-                    @click.native="hide()"
-                    type="outline">
-                    {{ $t('ui.cancel') }}
-                </p-button>
-            </div>
         </div>
     </div>
 </template>
@@ -492,11 +470,20 @@ export default {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.publii-block-cards-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.75;
+  min-height: 25vh !important;
+  max-width:  100%;
+  object-fit: cover;
+}
 .publii-block-card-item-image {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.85;
+    opacity: 0.75;
     min-height: 25vh;
     max-height: 40vh;
     max-width:  100%;

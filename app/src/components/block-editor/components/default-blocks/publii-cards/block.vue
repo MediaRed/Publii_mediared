@@ -17,11 +17,10 @@
       <div
         v-for="(image, index) of content.images"
         :key="'card-item-' + index"
-        class="publii-block-cards-item">
-        <img
-          :src="image.src"
-          :height="image.height"
-          :width="image.width" />
+        class="publii-block-cards-item"
+        :style="{ backgroundImage: `url(${image.src})` }"
+        >
+        <h3>{{image.title}}</h3>
 
         <button
           class="publii-block-cards-item-delete"
@@ -364,7 +363,7 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 }
-.publii-block-cards-list-item {
+.publii-block-cards-list-item , .publii-block-card-item {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -376,6 +375,16 @@ export default {
   font-family: var(--font-base);
   font-size: 14px;
   text-align: left;
+}
+.publii-block-cards-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.75;
+  min-height: 25vh;
+  max-height: 40vh;
+  max-width:  100%;
+  object-fit: cover;
 }
 .publii-block-card-item-body {
   display: flex;
@@ -398,7 +407,6 @@ export default {
   aspect-ratio: 16 / 9;
   height: inherit;
   object-fit: cover;
-
 }
 .publii-block-card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
