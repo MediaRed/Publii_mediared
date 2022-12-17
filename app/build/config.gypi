@@ -356,16 +356,17 @@
     "runtime": "electron",
     "target": "19.1.3",
     "build_from_source": "true",
-    "user_agent": "npm/9.2.0 node/v16.13.0 linux x64 workspaces/false",
-    "auto_install_peers": "true",
     "userconfig": "/home/tom/.npmrc",
-    "local_prefix": "/home/tom/build/Publii_mediared/app",
-    "metrics_registry": "https://registry.npmjs.org/",
-    "prefix": "/home/tom/.nvm/versions/node/v16.13.0",
     "cache": "/home/tom/.npm",
-    "node_gyp": "/home/tom/.nvm/versions/node/v16.13.0/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
+    "local_prefix": "/home/tom/build/Publii_mediared/app",
     "globalconfig": "/home/tom/.nvm/versions/node/v16.13.0/etc/npmrc",
+    "auto_install_peers": "true",
     "init_module": "/home/tom/.npm-init.js",
+    "prefix": "/home/tom/.nvm/versions/node/v16.13.0",
+    "user_agent": "npm/9.2.0 node/v16.13.0 linux x64 workspaces/false",
+    "legacy_peer_deps": "true",
+    "metrics_registry": "https://registry.npmjs.org/",
+    "node_gyp": "/home/tom/.nvm/versions/node/v16.13.0/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
     "global_prefix": "/home/tom/.nvm/versions/node/v16.13.0"
   }
 }

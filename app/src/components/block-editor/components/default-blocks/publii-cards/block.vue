@@ -51,6 +51,10 @@
           </div>
           <input type="text" v-model="image.title" :placeholder="$t('editor.enterTitle')"/>
           <textarea required="required" v-model="image.body" rows="10" :placeholder="$t('editor.enterBody')"/>
+          <card-link-editor
+            ref="card-link-editor"
+            :config="linkConfig"
+            :advancedConfig="configForm" />
           <input type="text" v-model="image.link" :placeholder="$t('editor.enterLink')"/>
           <input type="text" v-model="image.linkCaption" :placeholder="$t('editor.enterLinkCaption')"/>
       </div>
@@ -107,6 +111,7 @@ import ContentEditableImprovements from './../../helpers/ContentEditableImprovem
 import EditorIcon from './../../elements/EditorIcon.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
 import Utils from './../../utils/Utils.js';
+import CardLinkEditor from '../../../../CardLinkEditor.vue';
 
 export default {
   name: 'PCards',
@@ -117,7 +122,8 @@ export default {
   components: {
     'icon': EditorIcon,
     'top-menu': TopMenuUI,
-    'draggable': Draggable
+    'draggable': Draggable,
+    'card-link-editor': CardLinkEditor
   },
   watch: {
     '$parent.uiOpened': function (newValue) {
@@ -354,8 +360,8 @@ export default {
   margin: -1rem;
   outline: none;
   position: relative;
-  background: var(--color-bg);
-  color: var(--color-8);
+  background: var(--input-bg);
+  color: var(--text-primary-color);
   font-family: var(--font-base);
   font-size: 14px;
   text-align: left;
@@ -377,6 +383,14 @@ export default {
   flex-direction: column;
   border-radius: 5px;
   margin-right: 1em;
+}
+.publii-block-card > textarea {
+  background: var(--input-bg);
+  color: var(--text-primary-color);
+  font-size: 1.5rem;
+  font-family: var(--font-base);
+  font-weight: 400;
+  padding: 1.2rem 1.8rem;
 }
 .threecol {
   width: 30%;
@@ -587,6 +601,8 @@ export default {
           display: block;
           width: inherit;
           margin: 5px;
+          background: var(--input-bg);
+          color: var(--text-primary-color);
           border-color: var(--grey-3);
           padding: 5px;
         };

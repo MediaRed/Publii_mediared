@@ -564,7 +564,8 @@ class App {
 
         Menu.setApplicationMenu(null);
         this.mainWindow = new BrowserWindow(windowParams);
-        
+        //activate devTools bar
+        this.mainWindow.webContents.openDevTools();
         this.mainWindow.setMenu(null);
         this.mainWindow.loadURL('file:///' + this.basedir + '/dist/index.html');
         this.mainWindow.removeMenu();
