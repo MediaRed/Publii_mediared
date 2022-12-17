@@ -126,7 +126,9 @@
         "selectItemType": "Select card link type",
         "internalLink": "Internal link",
         "externalLink": "Extrenal link",
-        "textSeparator": "Text separator"
+        "textSeparator": "Text separator",
+        "externalURL": "External URL  (https://url.com)",
+        "selectLinkTarget": "Select link target"
     },
     "editor": {
         "addHeading": "Add heading",

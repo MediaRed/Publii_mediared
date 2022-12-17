@@ -126,7 +126,9 @@
       "selectItemType": "Seleccione el tipo de enlace de la tarjeta",
       "internalLink": "Enlace interno",
       "externalLink": "Enlace externo",
-      "textSeparator": "Separador de texto"
+      "textSeparator": "Separador de texto",
+      "externalURL": "URL externa (https://url.com)",
+      "selectLinkTarget": "Seleccionar destino de enlace"
     },
     "editor": {
         "addHeading": "Add heading",

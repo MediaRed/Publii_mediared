@@ -14,7 +14,14 @@
                 @click.prevent="hide()">
                 &times;
             </span>
-
+            <div class="publii-block-card-item-image">
+                <img
+                :src="image.thumbnailSrc"
+                :height="image.height"
+                :width="image.width" />
+            </div>
+            <input type="text" v-model="image.title" :placeholder="$t('editor.enterTitle')"/>
+            <textarea required="required" v-model="image.body" rows="10" :placeholder="$t('editor.enterBody')"/>
             <label
                 :class="{ 'is-invalid': errors.indexOf('label') > -1 }"
                 key="card-item-editor-field-label">
@@ -176,8 +183,15 @@
 </template>
 
 <script>
+
 export default {
     name: 'card-item-editor',
+    props: {
+        image: {
+            type: Object,
+            required: true
+        }
+    },
     data () {
         return {
             isVisible: false,
@@ -187,6 +201,7 @@ export default {
             cardID: '',
             label: '',
             title: '',
+            image: '',
             type: '',
             target: '_self',
             rel: '',
@@ -248,9 +263,10 @@ export default {
             } else {
                 this.cardID = '';
             }
-
+            console.log("image", params.image);
             this.label = params.label || '';
             this.title = params.title || '';
+            this.image = params.image || '';
             this.cssClass = params.cssClass || '';
             this.target = params.target || '_self';
             this.rel = params.rel || '';
@@ -326,6 +342,10 @@ export default {
                 this.errors.push('type');
             }
 
+            if(!this.image) {
+                this.errors.push('image');
+            }
+
             if(this.type === 'post' && !(!!this.postPage)) {
                 this.errors.push('postPage');
             }
@@ -372,6 +392,7 @@ export default {
                 id: new Date().getTime(),
                 label: this.label,
                 title: this.title,
+                image: this.image,
                 type: this.type,
                 target: this.target,
                 rel: this.rel,
@@ -406,6 +427,7 @@ export default {
                 id: this.cardItemID,
                 label: this.label,
                 title: this.title,
+                image: this.image,
                 type: this.type,
                 target: this.target,
                 rel: this.rel,

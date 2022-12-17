@@ -43,20 +43,11 @@
         v-for="(image, index) of content.images"
         :key="'card-item-' + index"
         class="publii-block-card" >
-          <div class="publii-block-card-item-image">
-            <img
-             :src="image.thumbnailSrc"
-             :height="image.height"
-             :width="image.width" />
-          </div>
-          <input type="text" v-model="image.title" :placeholder="$t('editor.enterTitle')"/>
-          <textarea required="required" v-model="image.body" rows="10" :placeholder="$t('editor.enterBody')"/>
           <card-link-editor
             ref="card-link-editor"
-            :config="linkConfig"
+            v-bind:image="image"
+            :config="linkEditorConfig"
             :advancedConfig="configForm" />
-          <input type="text" v-model="image.link" :placeholder="$t('editor.enterLink')"/>
-          <input type="text" v-model="image.linkCaption" :placeholder="$t('editor.enterLinkCaption')"/>
       </div>
     </draggable>
 
@@ -157,6 +148,35 @@ export default {
       content: {
         images: []
       },
+      linkEditorConfig: [
+        {
+          type: 'select',
+          label: this.$t('image.columns'),
+          configKey: 'columns',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+          options: [1, 2, 3, 4, 5, 6, 7, 8]
+        },
+        {
+          activeState: function () { return this.config.imageAlign === 'center'; },
+          onClick: function () { this.alignImage('center'); },
+          icon: 'center',
+          tooltip: this.$t('image.centeredImage')
+        },
+        {
+          activeState: function () { return this.config.imageAlign === 'wide'; },
+          onClick: function () { this.alignImage('wide'); },
+          icon: 'wide',
+          tooltip: this.$t('image.wideImage')
+        },
+        {
+          activeState: function () { return this.config.imageAlign === 'full'; },
+          onClick: function () { this.alignImage('full'); },
+          icon: 'full',
+          tooltip: this.$t('image.fullWidthImage')
+        }
+      ],
       topMenuConfig: [
         {
           type: 'select',
@@ -185,8 +205,9 @@ export default {
           icon: 'full',
           tooltip: this.$t('image.fullWidthImage')
         }
+      
       ]
-    };
+    }
   },
   computed: {
     isInsidePublii () {
@@ -336,6 +357,8 @@ export default {
 
 @import '../../../../../scss/variables.scss';
 @import '../../../../../scss/mixins.scss';
+
+
 .publii-block-cards-list {
   display: flex;
   flex-direction: row;
