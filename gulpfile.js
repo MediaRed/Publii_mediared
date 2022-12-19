@@ -99,6 +99,11 @@ function afterPack() {
     )
     .pipe(gulpcopy(paths.build + 'scripts', { prefix: 2 }));
 }
+function install() {
+    // Copy assets
+    return src(['assets/**'])
+    .pipe(gulpcopy(paths.build + 'assets', { prefix: 2 }));
+}
 // BrowserSync
 function browserSync() {
     browsersync({
@@ -130,7 +135,7 @@ function watchFiles() {
 }
 
 const watching = parallel(watchFiles, prepareCardsCss, prepareEditorCss,updateBuildNumber, browserSync);
-const build = parallel(afterPack, prepareCardsCss, prepareEditorCss,updateBuildNumber);
+const build = parallel(afterPack, prepareCardsCss, prepareEditorCss,install, updateBuildNumber);
 exports.css = css;
 exports.prepareEditorCss = prepareEditorCss;
 exports.prepareCardsCss = prepareCardsCss;
