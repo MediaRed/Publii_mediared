@@ -447,9 +447,9 @@ export default {
 // Styling for every third element here.
   margin-right: 0;
 }
+              
 
-
-.publii-block-cards {
+.publii-block-cards , .cards-wrapper{
   display: flex;
   margin: -1rem;
   outline: none;
