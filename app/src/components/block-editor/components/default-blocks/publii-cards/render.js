@@ -18,6 +18,7 @@ function render (blockData) {
     images += `<figure class="cards__item" :style="${backgroundImage}" >
       <a class="card_link" href="${img.src}" data-size="${img.dimensions}">
         <img class="card_image" src="${img.thumbnailSrc}" height="${img.height}" width="${img.width}" alt="${img.alt}" />
+        <h3 class="card-title">${img.title}</h3>
         ${caption}
       </a>
     </figure>`;
