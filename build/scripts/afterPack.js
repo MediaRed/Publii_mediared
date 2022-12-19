@@ -146,7 +146,7 @@ case "mac":
     console.log("Using build configuration to macOS.");
     target = Platform.MAC.createTarget();
     break;
-case "linux":
+case "--linux":
     console.log("Using build configuration to Linux (64-bit).");
     target = Platform.LINUX.createTarget();
     config = {
@@ -179,7 +179,6 @@ case "linux":
           ],
         target: "linux",
         linux: {
-            mimeTypes: ["x-scheme-handler/deeplink"],
             icon: "./build/installation/icon.icns",
             target: [
 						"rpm",
