@@ -63,6 +63,13 @@ function prepareEditorCss() {
     .pipe(sourcemaps.write('.'))
     .pipe(dest(paths.css));
 }
+function prepareCardsCss() {
+    return src(paths.sass + 'editor-cards.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass())
+    .pipe(sourcemaps.write('.'))
+    .pipe(dest(paths.css));
+}
 /*
  * Build
  */
@@ -122,10 +129,11 @@ function watchFiles() {
     .on('change', series(copyAssets, css, browserReload()));
 }
 
-const watching = parallel(watchFiles, prepareEditorCss,updateBuildNumber, browserSync);
-const build = parallel(afterPack, prepareEditorCss,updateBuildNumber);
+const watching = parallel(watchFiles, prepareCardsCss, prepareEditorCss,updateBuildNumber, browserSync);
+const build = parallel(afterPack, prepareCardsCss, prepareEditorCss,updateBuildNumber);
 exports.css = css;
 exports.prepareEditorCss = prepareEditorCss;
+exports.prepareCardsCss = prepareCardsCss;
 exports.updateBuildNumber = updateBuildNumber;
 exports.default = parallel(copyAssets, css);
 exports.watch = watching;

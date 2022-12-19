@@ -78,6 +78,52 @@ body#tinymce {
     }
 }
 
+.cards-wrapper {
+    display: flex;
+    margin: -1rem;
+    outline: none;
+    position: relative;
+  
+  }
+  .cards-wrapper--full {
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+  }
+  .cards {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      border-radius: 5px;
+      margin-right: 1em;
+      width: 100%;
+      gap: .25rem;
+  }
+  .cards__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.75;
+      width: 33%;
+      
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+  }
+  .cards__item a > img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: 100%;
+      transition-duration: 200ms;
+      object-fit: fill;
+      object-position: center;
+
+  }
+
 a:not(.btn):not(.mce-item-anchor):not(.gallery__item a) {
     @include links (var(--link-invert-color), var(--link-invert-color), var(--link-invert-color), var(--link-invert-color));
 }

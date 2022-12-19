@@ -201,35 +201,3 @@ form p {
         }
     }
 }
-.cards-wrapper {
-  display: flex;
-  margin: -1rem;
-  outline: none;
-  position: relative;
-
-}
-.cards {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    margin-right: 1em;
-    width: 100%;
-}
-.cards__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.75;
-    min-height: 25vh;
-    max-height: 40vh;
-    max-width:  100%;
-    object-fit: cover;
-}
-.cards__item a > img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    height: inherit;
-    object-fit: cover;
-}
