@@ -63,7 +63,6 @@ class RendererContextPostPreview extends RendererContext {
             isFeatured: this.renderer.postData.status.indexOf('featured') > -1,
             isHidden: this.renderer.postData.status.indexOf('hidden') > -1,
             isExcludedOnHomepage: this.renderer.postData.status.indexOf('excluded_homepage') > -1,
-            hasGallery: preparedText.indexOf('class="gallery') !== -1,
             template: this.renderer.postData.template,
             hasCustomExcerpt: hasCustomExcerpt
         };
@@ -510,7 +509,7 @@ class RendererContextPostPreview extends RendererContext {
                         url.toLowerCase().indexOf('.png') === -1 && 
                         url.toLowerCase().indexOf('.webp') === -1
                     ) &&
-                    url.toLowerCase().indexOf('/gallery/') === -1
+                    (url.toLowerCase().indexOf('/gallery/') === -1 || url.toLowerCase().indexOf('/cards/') === -1)
                 ) {
                     if(ContentHelper.getContentImageSizes(self.themeConfig)) {
                         return matches +
@@ -552,6 +551,10 @@ class RendererContextPostPreview extends RendererContext {
             // Wrap galleries with classes into div with gallery-wrapper CSS class
             preparedText = preparedText.replace(/<div class="gallery([\s\S]*?)"[\s\S]*?<\/div>?/gmi, function(matches, classes) {
                 return '<div class="gallery-wrapper' + classes + '">' + matches.replace(classes, '') + '</div>';
+            });
+            // Wrap cards with classes into div with cards-wrapper CSS class
+            preparedText = preparedText.replace(/<div class="cards([\s\S]*?)"[\s\S]*?<\/div>?/gmi, function(matches, classes) {
+                return '<div class="cards-wrapper' + classes + '">' + matches.replace(classes, '') + '</div>';
             });
         }
 

@@ -66,6 +66,7 @@ import DatePopup from './post-editor/DatePopup';
 import LinkPopup from './post-editor/LinkPopup';
 import LinkToolbar from './post-editor/LinkToolbar';
 import GalleryPopup from './post-editor/GalleryPopup';
+import CardsPopup from './post-editor/CardsPopup';
 import Editor from './post-editor/Editor';
 import TopBarAppBar from './TopBarAppBar';
 import PostEditorTopBar from './post-editor/TopBar';

@@ -232,6 +232,19 @@ class EditorBridge {
 
                     window.app.galleryPopupUpdated(this.galleryPopupUpdated.bind(this));
                 }
+
+                if(
+                    clickedElement.tagName === 'DIV' &&
+                    clickedElement.getAttribute('class') &&
+                    clickedElement.getAttribute('class').indexOf('cards') !== -1
+                ) {
+                    window.app.updateCardsPopup({
+                        postID: this.postID,
+                        cardsElement: clickedElement
+                    });
+
+                    window.app.cardsPopupUpdated(this.cardsPopupUpdated.bind(this));
+                }
             });
 
             let linkToolbar = $('#link-toolbar');
@@ -321,6 +334,13 @@ class EditorBridge {
                 editor.insertContent('<div class="gallery" data-is-empty="true" contenteditable="false" data-translation="' + window.app.translate('image.addImages') + '"></div>');
             }
         });
+        editor.ui.registry.addButton('cards', {
+            icon: 'cards',
+            tooltip: window.app.translate('editor.insertCards'),
+            onAction: function () {
+                editor.insertContent('<div class="cards" data-is-empty="true" contenteditable="false" data-translation="' + window.app.translate('image.addCards') + '"></div>');
+            }
+        });
     }
 
     extensionsPath () {
@@ -341,7 +361,14 @@ class EditorBridge {
             response.gallery.setAttribute('data-is-empty', response.html === '&nbsp;');
         }
     }
+    cardsPopupUpdated (response) {
+        this.hideToolbarsOnCopyOrScroll();
 
+        if(response) {
+            response.cards.innerHTML = response.html;
+            response.cards.setAttribute('data-is-empty', response.html === '&nbsp;');
+        }
+    }
     getTinyMCECSSFiles () {
         let pathToEditorCSS = this.extensionsPath() + 'assets/css/editor.css';
         let customEditorCSS = pathToEditorCSS;
@@ -513,6 +540,9 @@ class EditorBridge {
         if (target.tagName === 'DIV' && target.classList.contains('gallery')) {
             return false;
         }
+        if (target.tagName === 'DIV' && target.classList.contains('cards')) {
+            return false;
+        }
 
         for ( ; target && target !== document; target = target.parentNode) {
             if (target.matches && target.matches('.post__toc')) {
@@ -554,9 +584,21 @@ class EditorBridge {
                 editorArea.addClass('is-hovered');
             }
         });
+        postEditor.on('dragover', () => {
+            if(!this.postEditorInnerDragging && !$('.popup.cards-popup').length) {
+                hoverState = true;
+                editorArea.addClass('is-hovered');
+            }
+        });
 
         tinymceOverlay.on('dragover', e => {
             if(!this.postEditorInnerDragging && !$('.popup.gallery-popup').length) {
+                hoverState = true;
+                editorArea.addClass('is-hovered');
+            }
+        });
+        tinymceOverlay.on('dragover', e => {
+            if(!this.postEditorInnerDragging && !$('.popup.cards-popup').length) {
                 hoverState = true;
                 editorArea.addClass('is-hovered');
             }

@@ -162,6 +162,9 @@ function isImage(image, fullImagePath) {
     if(image === 'gallery') {
         return false;
     }
+    if(image === 'cards') {
+        return false;
+    }
 
     if(path.parse(image).ext === '') {
         return false;
@@ -207,6 +210,9 @@ function getImageType(context, image, catalog) {
     } else if(catalog.substr(-7) === 'gallery') {
         console.log('(i) Gallery image detected (' + image + ')', preparedCatalog);
         imageType = 'galleryImages';
+    } else if(catalog.substr(-7) === 'cards') {
+        console.log('(i) Cards image detected (' + image + ')', preparedCatalog);
+        imageType = 'cardsImages';
     } else if (imageType === 'contentImages') {
         console.log('(i) Content image detected (' + image + ')', preparedCatalog);
     }

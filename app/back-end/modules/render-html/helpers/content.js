@@ -109,10 +109,16 @@ class ContentHelper {
             preparedText = preparedText.replace(/<div class="gallery([\s\S]*?)"[\s\S]*?<\/div>?/gmi, function(matches, classes) {
                 return '<div class="gallery-wrapper' + classes + '">' + matches.replace(classes, '') + '</div>';
             });
+            // Wrap galleries with classes into div with cards-wrapper CSS class
+            preparedText = preparedText.replace(/<div class="cards([\s\S]*?)"[\s\S]*?<\/div>?/gmi, function(matches, classes) {
+                return '<div class="cards-wrapper' + classes + '">' + matches.replace(classes, '') + '</div>';
+            });
         }
 
         // Remove double slashes from the gallery URLs (if they appears)
         preparedText = preparedText.replace(/\/\/gallery\/$/gmi, '/gallery/');
+        // Remove double slashes from the cards images URLs (if they appears)
+        preparedText = preparedText.replace(/\/\/cards\/$/gmi, '/cards/');
 
         // Remove paragraphs around <iframe>'s
         preparedText = preparedText.replace(/\<p\>\<iframe/gmi, '<iframe');
@@ -473,7 +479,7 @@ class ContentHelper {
                 url.toLowerCase().indexOf('.png') === -1 &&
                 url.toLowerCase().indexOf('.webp') === -1
             ) &&
-            url.toLowerCase().indexOf('/gallery/') === -1
+            (url.toLowerCase().indexOf('/gallery/') === -1 || url.toLowerCase().indexOf('/cards/') === -1 )
         ) {
             if(ContentHelper.getContentImageSizes(themeConfig)) {
                 return matches +
@@ -722,6 +728,29 @@ class ContentHelper {
      */
     static setWebpCompatibility (forceWebp, text) {
         text = text.replace(/\<figure class="gallery__item">[\s\S]*?<a[\s\S]*?href="(.*?)"[\s\S]+?>[\s\S]*?<img[\s\S]*?src="(.*?)"/gmi, (matches, linkUrl, imgUrl) => {
+            if (linkUrl && imgUrl) {
+                if (
+                    forceWebp && 
+                    ContentHelper.getImageType(linkUrl) === 'webp-compatible' && 
+                    !ContentHelper.isWebpImage(imgUrl)
+                ) {
+                    let imgExtension = ContentHelper.getImageExtension(imgUrl);
+                    let newImgUrl = imgUrl.substr(0, imgUrl.length + (-1 * imgExtension.length)) + '.webp';
+                    matches = matches.replace(imgUrl, newImgUrl);
+                } else if (
+                    !forceWebp && 
+                    ContentHelper.getImageType(linkUrl) === 'webp-compatible' && 
+                    ContentHelper.isWebpImage(imgUrl)
+                ) {
+                    let imgExtension = ContentHelper.getImageExtension(linkUrl);
+                    let newImgUrl = imgUrl.substr(0, imgUrl.length - 5) + imgExtension;
+                    matches = matches.replace(imgUrl, newImgUrl);
+                }
+            }
+
+            return matches;
+        });
+        text = text.replace(/\<figure class="cards__item">[\s\S]*?<a[\s\S]*?href="(.*?)"[\s\S]+?>[\s\S]*?<img[\s\S]*?src="(.*?)"/gmi, (matches, linkUrl, imgUrl) => {
             if (linkUrl && imgUrl) {
                 if (
                     forceWebp && 

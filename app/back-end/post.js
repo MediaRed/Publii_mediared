@@ -781,7 +781,9 @@ class Post extends Model {
      * Clean up post content from wrong code
      */
     cleanUpContent (content) {
-        return content.replace(/\<figure\sclass=\"post__image\spost__image\s/gmi, '<figure class="post__image ');
+        content.replace(/\<figure\sclass=\"post__image\spost__image\s/gmi, '<figure class="post__image ');
+        content.replace(/\<figure\sclass=\"post__card\spost__card\s/gmi, '<figure class="post__card ');
+        return content;
     }
 }
 
