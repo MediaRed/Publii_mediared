@@ -101,7 +101,7 @@ function afterPack() {
 }
 function install() {
     // Copy assets
-    return src(['assets/**'])
+    return src(['app/src/assets/**'])
     .pipe(gulpcopy(paths.build + 'assets', { prefix: 2 }));
 }
 // BrowserSync
