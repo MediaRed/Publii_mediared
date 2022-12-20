@@ -10,14 +10,21 @@ function render (blockData) {
   for (let i = 0; i < blockData.content.images.length; i++) {
     let img = blockData.content.images[i];
     let caption = '';
-    let backgroundImage = {backgroundImage: 'url(${require(img.thumbnailSrc)})'};
-    console.log("bg", backgroundImage);
     if (img.caption.trim() !== '') {
       caption = `<figcaption>${img.caption}</figcaption>`;
     }
-    images += `<figure class="cards__item" :style="${backgroundImage}" >
+    images += `<figure class="cards__item" :style="{width: ${p}%}" >
       <a class="card_link" href="${img.target}" data-size="${img.dimensions}">
-        <img class="card_image" src="${img.thumbnailSrc}" height="${img.height}" width="${img.width}" alt="${img.alt}" />
+        <img 
+          class="card_image" 
+          {{#if @config.site.responsiveImages}}
+              {{responsiveImageAttributes 'tagImage' srcset.cards sizes.cards}}
+          {{/if}}
+          {{ lazyload "eager" }}
+          src="${img.thumbnailSrc}" 
+          height="${img.height}" 
+          width="${img.width}" 
+          alt="${img.alt}" />
         <h3 class="card-title">${img.title}</h3>
         ${caption}
       </a>
