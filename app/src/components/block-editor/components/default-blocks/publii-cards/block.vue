@@ -21,8 +21,8 @@
         :style="{ backgroundImage: `url(${image.src})` }"
         @click="navigate(image)"
         >
-        <h3>{{image.title}}</h3>
-        <figcaption>{{image.caption}}</figcaption>
+        <h3 class="card-title">{{image.title}}</h3>
+        <figcaption class="card-caption">{{image.caption}}</figcaption>
         <button
           class="publii-block-cards-item-delete"
           @click.stop.prevent="removeImage(index)">
@@ -382,17 +382,15 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-height: 25vh;
-  max-height: 40vh;
-  max-width:  100%;
   object-fit: cover;
+  height: 30vh;
+  width: 100%;
 }
-.publii-block-cards-item h3, .publii-block-card-title {
-    text-align: center;
-    width: 100%;
-    position: relative;
+.publii-block-cards-item h3, .publii-block-card-title, .editor > .editor-inner > .wrapper > div h3 {
     z-index: 100;
     color: #FFF;
+    text-align: center;
+    width: 100%;
     text-shadow: 0px 11px 10px rgba(81,67,21,0.8);
     text-shadow: 0 1px 2px #75b663,
      1px 3px 1px #5ea04b, 
@@ -401,10 +399,9 @@ export default {
     6px 9px 1px #477939,
     '-moz-transform: scaleY(-1)';
 }
-.publii-block-cards-item figcaption, .publii-block-cards-item-image figcaption {
-  text-align: center;
+.publii-block-cards-item figcaption, .publii-block-cards-item-image figcaption, .editor > .editor-inner > .wrapper > div figcaption {
+    text-align: center;
     width: 100%;
-    position: relative;
     z-index: 100;
     color: #FFF;
     text-shadow: 0px 11px 10px rgba(81,67,21,0.8);
