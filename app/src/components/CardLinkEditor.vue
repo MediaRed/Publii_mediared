@@ -20,20 +20,20 @@
                 :style="{ backgroundImage: `url(${image.thumbnailSrc})` }"
                 >
                 <h1 class="publii-block-card-title" >{{image.title}}</h1>
+                <figcaption>{{image.caption}}</figcaption>
             </div>
-            <input type="text" v-model="image.title" :placeholder="$t('editor.enterTitle')"/>
-            <textarea required="required" v-model="image.body" rows="10" :placeholder="$t('editor.enterBody')"/>
+           
             <label
-                :class="{ 'is-invalid': errors.indexOf('label') > -1 }"
-                key="card-item-editor-field-label">
-                <span>{{ $t('card.label') }}</span>
+                :class="{ 'is-invalid': errors.indexOf('title') > -1 }"
+                key="card-item-editor-field-title">
+                <span>{{ $t('editor.enterTitle') }}</span>
                 <input
-                    v-model="image.label"
+                    v-model="image.title"
                     :spellcheck="$store.state.currentSite.config.spellchecking"
-                    @keyup="cleanError('label')"
+                    @keyup="cleanError('title')"
                     type="text">
             </label>
-
+            <textarea required="required" v-model="image.caption" rows="5" :placeholder="$t('editor.enterBody')"/>
             <label
                 :class="{ 'is-invalid': errors.indexOf('type') > -1 }"
                 key="card-item-editor-field-type">

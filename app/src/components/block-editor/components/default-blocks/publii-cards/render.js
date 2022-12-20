@@ -9,10 +9,7 @@ function render (blockData) {
   
   for (let i = 0; i < blockData.content.images.length; i++) {
     let img = blockData.content.images[i];
-    let caption = '';
-    if (img.caption.trim() !== '') {
-      caption = `<figcaption>${img.caption}</figcaption>`;
-    }
+
     images += `<figure class="cards__item" :style="{width: ${p}%}" >
       <a class="card_link" href="${img.target}" data-size="${img.dimensions}">
         <img 
@@ -26,7 +23,14 @@ function render (blockData) {
           width="${img.width}" 
           alt="${img.alt}" />
         <h3 class="card-title">${img.title}</h3>
-        ${caption}
+        <figcaption class="card-caption">{{${img.caption}}}</figcaption>
+        <p>Type: {{${img.type}}}</p>
+        <p>internalLink: {{${img.internalLink}}}</p>
+        <p>externalLink: {{${img.externalLink}}}</p>
+        <p>postPage: {{${img.postPage}}}</p>
+        <p>tagPage: {{${img.tagPage}}}</p>
+        <p>authorPage: {{${img.authorPage}}}</p>
+        <p>target: {{${img.target}}}</p>
       </a>
     </figure>`;
   }

@@ -22,7 +22,7 @@
         @click="navigate(image)"
         >
         <h3>{{image.title}}</h3>
-
+        <figcaption>{{image.caption}}</figcaption>
         <button
           class="publii-block-cards-item-delete"
           @click.stop.prevent="removeImage(index)">
@@ -372,7 +372,7 @@ export default {
   outline: none;
   position: relative;
   background: var(--color-secondary);
-  color: var(--color-8);
+  color: var(--color-headers);
   font-family: var(--font-base);
   font-size: 14px;
   text-align: left;
@@ -381,11 +381,39 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.75;
+  flex-direction: column;
   min-height: 25vh;
   max-height: 40vh;
   max-width:  100%;
   object-fit: cover;
+}
+.publii-block-cards-item h3, .publii-block-card-title {
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 100;
+    color: #FFF;
+    text-shadow: 0px 11px 10px rgba(81,67,21,0.8);
+    text-shadow: 0 1px 2px #75b663,
+     1px 3px 1px #5ea04b, 
+    2px 5px 1px #5b9c49, 
+    4px 7px 1px #518b41, 
+    6px 9px 1px #477939,
+    '-moz-transform: scaleY(-1)';
+}
+.publii-block-cards-item figcaption, .publii-block-cards-item-image figcaption {
+  text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 100;
+    color: #FFF;
+    text-shadow: 0px 11px 10px rgba(81,67,21,0.8);
+    text-shadow: 0 1px 2px #75b663,
+     1px 3px 1px #5ea04b, 
+    2px 5px 1px #5b9c49, 
+    4px 7px 1px #518b41, 
+    6px 9px 1px #477939,
+    '-moz-transform: scaleY(-1)';
 }
 .publii-block-card-item-body {
   display: flex;
