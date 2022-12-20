@@ -1,7 +1,4 @@
-/*
- * Put your custom CSS code here
- */
- .cards-wrapper {
+.cards-wrapper {
     display: flex;
     margin: -1rem;
     outline: none;
@@ -41,15 +38,15 @@
     	z-index: 3
 }
 .cards__item a > h3, .card-title {
-  	  text-align: center;
+  		text-align: center;
+  		width: 100%;
       position: absolute;
-  	  top: 25%;
-  	  left: 25%;
-      z-index: 100;
-  	  color: var(--color-header);
-      text-shadow: 3px 3px 20px val(--color-header),
-      -2px 1px 30px val(--color-header);
-  	  -moz-transform: scaleY(-1);
+  		top: 0;
+  		left: 0;
+    	z-index: 100;
+  		color: #FFF;
+      text-shadow: 0px 11px 10px rgba(81,67,21,0.8);
+  		-moz-transform: scaleY(-1);
 }
 .card-title-ref {
    -o-transform: scaleY(-1);

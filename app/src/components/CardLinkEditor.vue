@@ -49,7 +49,7 @@
             </label>
 
             <label
-                v-if="type === 'internal'"
+                v-if="image.type === 'internal'"
                 :class="{ 'is-invalid': errors.indexOf('internalLink') > -1 }"
                 key="card-item-editor-field-internal">
                 <span>{{ $t('card.internalLink') }}</span>
@@ -61,7 +61,7 @@
             </label>
 
             <label
-                v-if="type === 'external'"
+                v-if="image.type === 'external'"
                 :class="{ 'is-invalid': errors.indexOf('externalLink') > -1 }"
                 key="card-item-editor-field-external">
                 <span>{{ $t('card.externalURL') }}</span>
@@ -73,7 +73,7 @@
             </label>
 
             <label
-                v-if="type === 'tag'"
+                v-if="image.type === 'tag'"
                 :class="{ 'is-invalid': errors.indexOf('tagPage') > -1 }"
                 key="card-item-editor-field-tag">
                 <span>{{ $t('tag.tagPage') }}</span>
@@ -90,7 +90,7 @@
             </label>
 
             <label
-                v-if="type === 'author'"
+                v-if="image.type === 'author'"
                 :class="{ 'is-invalid': errors.indexOf('authorPage') > -1 }"
                 key="card-item-editor-field-author">
                 <span>{{ $t('author.authorPage') }}</span>
@@ -107,7 +107,7 @@
             </label>
 
             <label
-                v-if="type === 'post'"
+                v-if="image.type === 'post'"
                 :class="{ 'is-invalid': errors.indexOf('postPage') > -1 }"
                 key="card-item-editor-field-post">
                 <span>{{ $t('post.postPage') }}</span>
