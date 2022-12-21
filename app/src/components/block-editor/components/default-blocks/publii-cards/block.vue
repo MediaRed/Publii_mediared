@@ -439,6 +439,7 @@ export default {
   transition: 0.3s;
   display: flex;
   flex-direction: column;
+  gap: .75em;
   border-radius: 5px;
   margin-right: 1em;
   width: 100%;
@@ -479,6 +480,7 @@ export default {
   margin: -1rem;
   outline: none;
   position: relative;
+  gap: .75em;
 
   &-empty-state {
     color: var(--gray-3);
