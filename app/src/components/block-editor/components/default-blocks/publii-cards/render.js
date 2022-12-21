@@ -11,7 +11,7 @@ let defaultSiteConfig = JSON.parse(JSON.stringify(defaultAstCurrentSiteConfig));
 let inputDir = "/home/tom/build/Publii_mediared/";
 let configPath = path.join(inputDir, 'site.config.json');
 let siteConfig = JSON.parse(fs.readFileSync(configPath));
-const previewURL = "file:///home/tom/Documents/Publii/mediared/preview";
+const previewURL = siteConfig.advanced.preview;
 siteConfig = UtilsHelper.mergeObjects(defaultSiteConfig, siteConfig);
 let preview = (render.previewMode === true) ? true: false;
 const getHrefFromLink = (img) => {

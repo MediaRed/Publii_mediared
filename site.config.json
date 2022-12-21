@@ -1,7 +1,7 @@
 {
     "advanced": {
-        "urls": "file:///home/tom/Documents/Publii/mediared/preview",
-        "preview": "file:///home/tom/Documents/Publii/mediared/preview"
+        "urls": "file:///home/tom/Documents/Publii/sites/mediared/preview",
+        "preview": "file:///home/tom/Documents/Publii/sites/mediared/preview"
     },
     "domain": "https://www.mediared.uy"
 }
