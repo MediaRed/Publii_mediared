@@ -156,6 +156,9 @@ export default {
       if (this.blockType === 'publii-cards' && this.blockContentIsEmpty) {
         blocks = blocks.filter(block => block.blockName !== 'publii-cards');
       }
+       if (this.blockType === 'publii-videos' && this.blockContentIsEmpty) {
+        blocks = blocks.filter(block => block.blockName !== 'publii-videos');
+      }
 
       if (this.blockFilterPhrase.length) {
         blocks = blocks.filter(block => block.blockName.replace('publii-', '').indexOf(this.blockFilterPhrase.toLocaleLowerCase()) > -1);
@@ -201,6 +204,11 @@ export default {
             blockName: 'publii-cards',
             icon: 'cards',
             label: 'editor.cards'
+        },
+             {
+            blockName: 'publii-videos',
+            icon: 'videos',
+            label: 'editor.videos'
         },
         {
             blockName: 'publii-list',
@@ -535,6 +543,11 @@ export default {
         width: calc(100% - 64px) !important;
       }
       .publii-block-cards-uploader-loader-overlay {
+        height: 250px;
+        top: 61px;
+        width: calc(100% - 64px) !important;
+      }
+      .publii-block-videos-uploader-loader-overlay {
         height: 250px;
         top: 61px;
         width: calc(100% - 64px) !important;

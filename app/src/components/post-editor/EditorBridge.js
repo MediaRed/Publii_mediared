@@ -232,6 +232,18 @@ class EditorBridge {
 
                     window.app.galleryPopupUpdated(this.galleryPopupUpdated.bind(this));
                 }
+                if(
+                    clickedElement.tagName === 'DIV' &&
+                    clickedElement.getAttribute('class') &&
+                    clickedElement.getAttribute('class').indexOf('videos') !== -1
+                ) {
+                    window.app.updateVideosPopup({
+                        postID: this.postID,
+                        videosElement: clickedElement
+                    });
+
+                    window.app.videosPopupUpdated(this.videosPopupUpdated.bind(this));
+                }
 
                 if(
                     clickedElement.tagName === 'DIV' &&
@@ -341,8 +353,15 @@ class EditorBridge {
                 editor.insertContent('<div class="cards" data-is-empty="true" contenteditable="false" data-translation="' + window.app.translate('image.addCards') + '"></div>');
             }
         });
+        editor.ui.registry.addButton('videos', {
+            icon: 'videos',
+            tooltip: window.app.translate('editor.insertVideos'),
+            onAction: function () {
+                editor.insertContent('<div class="videos" data-is-empty="true" contenteditable="false" data-translation="' + window.app.translate('video.addVideo') + '"></div>');
+            }
+        });
     }
-
+    
     extensionsPath () {
         return [
             'file:///',
@@ -359,6 +378,14 @@ class EditorBridge {
         if(response) {
             response.gallery.innerHTML = response.html;
             response.gallery.setAttribute('data-is-empty', response.html === '&nbsp;');
+        }
+    }
+    videosPopupUpdated (response) {
+        this.hideToolbarsOnCopyOrScroll();
+
+        if(response) {
+            response.videos.innerHTML = response.html;
+            response.videos.setAttribute('data-is-empty', response.html === '&nbsp;');
         }
     }
     cardsPopupUpdated (response) {
@@ -540,6 +567,9 @@ class EditorBridge {
         if (target.tagName === 'DIV' && target.classList.contains('gallery')) {
             return false;
         }
+        if (target.tagName === 'DIV' && target.classList.contains('videos')) {
+            return false;
+        }
         if (target.tagName === 'DIV' && target.classList.contains('cards')) {
             return false;
         }
@@ -585,6 +615,12 @@ class EditorBridge {
             }
         });
         postEditor.on('dragover', () => {
+            if(!this.postEditorInnerDragging && !$('.popup.videos-popup').length) {
+                hoverState = true;
+                editorArea.addClass('is-hovered');
+            }
+        });
+        postEditor.on('dragover', () => {
             if(!this.postEditorInnerDragging && !$('.popup.cards-popup').length) {
                 hoverState = true;
                 editorArea.addClass('is-hovered');
@@ -593,6 +629,12 @@ class EditorBridge {
 
         tinymceOverlay.on('dragover', e => {
             if(!this.postEditorInnerDragging && !$('.popup.gallery-popup').length) {
+                hoverState = true;
+                editorArea.addClass('is-hovered');
+            }
+        });
+        tinymceOverlay.on('dragover', e => {
+            if(!this.postEditorInnerDragging && !$('.popup.videos-popup').length) {
                 hoverState = true;
                 editorArea.addClass('is-hovered');
             }

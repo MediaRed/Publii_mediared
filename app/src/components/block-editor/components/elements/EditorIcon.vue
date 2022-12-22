@@ -35,6 +35,7 @@ export default {
         case 'image': return 16;
         case 'gallery': return 26;
         case 'cards': return 26;
+        case 'videos': return 18;
         case 'unordered-list': return 16;
         case 'quote': return 13;
         case 'code': return 14;
@@ -103,6 +104,7 @@ export default {
         case 'image': return 12;
         case 'gallery': return 14;
         case 'cards': return 14;
+        case 'videos': return 14;
         case 'unordered-list': return 12;
         case 'quote': return 11;
         case 'code': return 12;
