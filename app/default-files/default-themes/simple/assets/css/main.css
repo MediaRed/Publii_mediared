@@ -1655,11 +1655,13 @@ textarea {
   margin-right: 0.5666666667rem;
   width: 1.7rem;
 }
-.post__entry {
-  margin-top: calc(2.55rem + 1.5vw);
+.post__page {
+  margin: calc(3rem + 1.5vw);
 }
-.post__entry > :nth-child(1) {
-  margin-top: 0;
+@media all and (min-width: 56.25em) {
+  .post__entry {
+    margin-top: 0;
+  }
 }
 .post__entry a:not(.btn):not([type=button]):not([type=submit]):not(button):not(.post__toc a):not(.gallery__item a) {
   color: var(--link-color-hover);
