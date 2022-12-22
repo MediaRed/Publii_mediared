@@ -63,6 +63,7 @@
         "vue-prism-editor": "0.6.1",
         "vue-router": "3.5.3",
         "vue-template-compiler": "^2.7.14",
+        "vue-video-player": "^4.0.0",
         "vuedraggable": "2.24.3",
         "vuex": "3.1.1",
         "xregexp": "2.0.0"
@@ -1530,6 +1531,20 @@
       "resolved": "https://registry.npmjs.org/aws4/-/aws4-1.11.0.tgz",
       "integrity": "sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA=="
     },
+    "node_modules/babel-runtime": {
+      "version": "6.26.0",
+      "resolved": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-6.26.0.tgz",
+      "integrity": "sha512-ITKNuq2wKlW1fJg9sSW52eepoYgZBggvOAHC0u/CYu/qxQ9EVzThCgR69BnSXLHjy2f7SY5zaQ4yt7H9ZVxY2g==",
+      "dependencies": {
+        "core-js": "^2.4.0",
+        "regenerator-runtime": "^0.11.0"
+      }
+    },
+    "node_modules/babel-runtime/node_modules/regenerator-runtime": {
+      "version": "0.11.1",
+      "resolved": "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz",
+      "integrity": "sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg=="
+    },
     "node_modules/balanced-match": {
       "version": "1.0.2",
       "resolved": "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz",
@@ -2350,6 +2365,13 @@
       "integrity": "sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==",
       "dev": true
     },
+    "node_modules/core-js": {
+      "version": "2.6.12",
+      "resolved": "https://registry.npmjs.org/core-js/-/core-js-2.6.12.tgz",
+      "integrity": "sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==",
+      "deprecated": "core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.",
+      "hasInstallScript": true
+    },
     "node_modules/core-util-is": {
       "version": "1.0.2",
       "resolved": "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz",
@@ -2842,7 +2864,6 @@
       "version": "0.1.13",
       "resolved": "https://registry.npmjs.org/encoding/-/encoding-0.1.13.tgz",
       "integrity": "sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==",
-      "dev": true,
       "optional": true,
       "dependencies": {
         "iconv-lite": "^0.6.2"
@@ -2881,6 +2902,14 @@
       "integrity": "sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==",
       "dependencies": {
         "is-arrayish": "^0.2.1"
+      }
+    },
+    "node_modules/es5-shim": {
+      "version": "4.6.7",
+      "resolved": "https://registry.npmjs.org/es5-shim/-/es5-shim-4.6.7.tgz",
+      "integrity": "sha512-jg21/dmlrNQI7JyyA2w7n+yifSxBng0ZralnSfVZjoCawgNTCnS+yBCyVM9DL5itm7SUnDGgv7hcq2XCZX4iRQ==",
+      "engines": {
+        "node": ">=0.4.0"
       }
     },
     "node_modules/es6-error": {
@@ -3720,7 +3749,6 @@
       "version": "0.6.3",
       "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.6.3.tgz",
       "integrity": "sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==",
-      "dev": true,
       "optional": true,
       "dependencies": {
         "safer-buffer": ">= 2.1.2 < 3.0.0"
@@ -3798,6 +3826,11 @@
       "engines": {
         "node": ">=8"
       }
+    },
+    "node_modules/individual": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/individual/-/individual-2.0.0.tgz",
+      "integrity": "sha512-pWt8hBCqJsUWI/HtcfWod7+N9SgAqyPEaF7JQjwzjn5vGrpg6aQ5qeAFQ7dx//UH4J1O+7xqew+gCeeFt6xN/g=="
     },
     "node_modules/infer-owner": {
       "version": "1.0.4",
@@ -5804,6 +5837,14 @@
         "node": ">=8.0"
       }
     },
+    "node_modules/rust-result": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/rust-result/-/rust-result-1.0.0.tgz",
+      "integrity": "sha512-6cJzSBU+J/RJCF063onnQf0cDUOHs9uZI1oroSGnHOph+CQTIJ5Pp2hK5kEQq1+7yE/EEWfulSNXAQ2jikPthA==",
+      "dependencies": {
+        "individual": "^2.0.0"
+      }
+    },
     "node_modules/safe-buffer": {
       "version": "5.2.1",
       "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz",
@@ -5822,6 +5863,14 @@
           "url": "https://feross.org/support"
         }
       ]
+    },
+    "node_modules/safe-json-parse": {
+      "version": "4.0.0",
+      "resolved": "https://registry.npmjs.org/safe-json-parse/-/safe-json-parse-4.0.0.tgz",
+      "integrity": "sha512-RjZPPHugjK0TOzFrLZ8inw44s9bKox99/0AZW9o/BEQVrJfhI+fIHMErnPyRa89/yRXUUr93q+tiN6zhoVV4wQ==",
+      "dependencies": {
+        "rust-result": "^1.0.0"
+      }
     },
     "node_modules/safer-buffer": {
       "version": "2.1.2",
@@ -6593,6 +6642,12 @@
       "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.4.1.tgz",
       "integrity": "sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA=="
     },
+    "node_modules/tsml": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/tsml/-/tsml-1.0.1.tgz",
+      "integrity": "sha512-3KmepnH9SUsoOVtg013CRrL7c+AK7ECaquAsJdvu4288EDJuraqBlP4PDXT/rLEJ9YDn4jqLAzRJsnFPx+V6lg==",
+      "deprecated": "no longer maintained"
+    },
     "node_modules/tunnel": {
       "version": "0.0.6",
       "resolved": "https://registry.npmjs.org/tunnel/-/tunnel-0.0.6.tgz",
@@ -6873,6 +6928,70 @@
         "extsprintf": "^1.2.0"
       }
     },
+    "node_modules/video.js": {
+      "version": "6.13.0",
+      "resolved": "https://registry.npmjs.org/video.js/-/video.js-6.13.0.tgz",
+      "integrity": "sha512-36/JR/GhPQSZj0o+GNbhcEYv/b0SkV9SQsjlodAnzMQYN0TA7VhmqrKPYMCi1NGRYu7S9W3OaFCFoUxkYfSVlg==",
+      "dependencies": {
+        "babel-runtime": "^6.9.2",
+        "global": "4.3.2",
+        "safe-json-parse": "4.0.0",
+        "tsml": "1.0.1",
+        "videojs-font": "2.1.0",
+        "videojs-ie8": "1.1.2",
+        "videojs-vtt.js": "0.12.6",
+        "xhr": "2.4.0"
+      }
+    },
+    "node_modules/video.js/node_modules/global": {
+      "version": "4.3.2",
+      "resolved": "https://registry.npmjs.org/global/-/global-4.3.2.tgz",
+      "integrity": "sha512-/4AybdwIDU4HkCUbJkZdWpe4P6vuw/CUtu+0I1YlLIPe7OlUO7KNJ+q/rO70CW2/NW6Jc6I62++Hzsf5Alu6rQ==",
+      "dependencies": {
+        "min-document": "^2.19.0",
+        "process": "~0.5.1"
+      }
+    },
+    "node_modules/video.js/node_modules/process": {
+      "version": "0.5.2",
+      "resolved": "https://registry.npmjs.org/process/-/process-0.5.2.tgz",
+      "integrity": "sha512-oNpcutj+nYX2FjdEW7PGltWhXulAnFlM0My/k48L90hARCOJtvBbQXc/6itV2jDvU5xAAtonP+r6wmQgCcbAUA==",
+      "engines": {
+        "node": ">= 0.6.0"
+      }
+    },
+    "node_modules/video.js/node_modules/xhr": {
+      "version": "2.4.0",
+      "resolved": "https://registry.npmjs.org/xhr/-/xhr-2.4.0.tgz",
+      "integrity": "sha512-TUbBsdAuJbX8olk9hsDwGK8P1ri1XlV+PdEWkYw+HQQbpkiBR8PLgD1F3kQDPBs9l4Px34hP9rCYAZOCCAENbw==",
+      "dependencies": {
+        "global": "~4.3.0",
+        "is-function": "^1.0.1",
+        "parse-headers": "^2.0.0",
+        "xtend": "^4.0.0"
+      }
+    },
+    "node_modules/videojs-font": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/videojs-font/-/videojs-font-2.1.0.tgz",
+      "integrity": "sha512-zFqWpLrXf1q8NtYx5qtZhMC6SLUFScDmR6j+UGPogobxR21lvXShhnzcNNMdOxJUuFLiToJ/BPpFUQwX4xhpvA=="
+    },
+    "node_modules/videojs-ie8": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/videojs-ie8/-/videojs-ie8-1.1.2.tgz",
+      "integrity": "sha512-0Zb2T4MLkpfZbeGMK/Z93b8Lrepr+rLFoHgQV1CoDeFqXvH7b+Vsd/VHoILGxQrgCSHFQ7mAODR6oyMjuiD4/g==",
+      "dependencies": {
+        "es5-shim": "^4.5.1"
+      }
+    },
+    "node_modules/videojs-vtt.js": {
+      "version": "0.12.6",
+      "resolved": "https://registry.npmjs.org/videojs-vtt.js/-/videojs-vtt.js-0.12.6.tgz",
+      "integrity": "sha512-XFXeGBQiljnElMhwCcZst0RDbZn2n8LU7ZScXryd3a00OaZsHAjdZu/7/RdSr7Z1jHphd45FnOvOQkGK4YrWCQ==",
+      "dependencies": {
+        "global": "^4.3.1"
+      }
+    },
     "node_modules/vue": {
       "version": "2.6.14",
       "resolved": "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz",
@@ -6924,6 +7043,14 @@
       "dependencies": {
         "de-indent": "^1.0.2",
         "he": "^1.2.0"
+      }
+    },
+    "node_modules/vue-video-player": {
+      "version": "4.0.6",
+      "resolved": "https://registry.npmjs.org/vue-video-player/-/vue-video-player-4.0.6.tgz",
+      "integrity": "sha512-kmHIOnk5cUpXbh2fPkAIxrBds2NZQQnTO3m79iy1bp6c+1EdcgxbFnL39T9If0wf8eCj2fOaWVsdmFFK6adyZg==",
+      "dependencies": {
+        "video.js": "^6.2.4"
       }
     },
     "node_modules/vuedraggable": {
