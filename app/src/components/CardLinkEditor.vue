@@ -131,14 +131,6 @@
                     type="text" />
             </label>
 
-            <label key="card-item-editor-field-cssclass">
-                <span>{{ $t('card.classCSS') }}</span>
-                <input
-                    v-model="image.cssClass"
-                    spellcheck="false"
-                    type="text" />
-            </label>
-
             <label key="card-item-editor-field-target">
                 <span>{{ $t('ui.linkTarget') }}:</span>
                 <v-select
@@ -148,14 +140,6 @@
                     :custom-label="customTargetLabels"
                     :show-labels="false"
                     :placeholder="$t('card.selectLinkTarget')"></v-select>
-            </label>
-
-            <label key="card-item-editor-field-rel">
-                <span>{{ $t('link.linkRelAttribute') }}:</span>
-                <input
-                    v-model="image.rel"
-                    spellcheck="false"
-                    type="text" />
             </label>
         </div>
     </div>
