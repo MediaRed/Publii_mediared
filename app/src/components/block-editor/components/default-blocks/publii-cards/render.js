@@ -8,7 +8,7 @@ const fs = require('fs');
 const pourcent = (columns) => parseFloat(100/columns).toFixed(2);
 let defaultSiteConfig = JSON.parse(JSON.stringify(defaultAstCurrentSiteConfig));
 // Site config
-let inputDir = "/home/tom/build/Publii_mediared/";
+let inputDir = "";
 let configPath = path.join(inputDir, 'site.config.json');
 let siteConfig = JSON.parse(fs.readFileSync(configPath));
 const previewURL = siteConfig.advanced.preview;
@@ -16,8 +16,8 @@ siteConfig = UtilsHelper.mergeObjects(defaultSiteConfig, siteConfig);
 let preview = (render.previewMode === true) ? true: false;
 const getHrefFromLink = (img) => {
   let href='';
-  siteConfig.domain = (!preview) ? previewURL : siteConfig.domain; 
-  let endUrl = "/index.html";
+  siteConfig.domain = (preview) ? previewURL : siteConfig.domain; 
+  let endUrl = (preview) ? "/index.html" :"";
   //console.log("menuURLHelper", new menuURLHelper({type: img.type}))
   //let test = URLHelper.createPaginationPermalink(siteConfig.domain, siteConfig.advanced.urls, nextPage, 'home', false, addIndexHtml);
   switch(img.type) {
