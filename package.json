@@ -139,5 +139,8 @@
   },
   "appImage": {
     "license": "license.txt"
+  },
+  "dependencies": {
+    "youtube-vue": "^2.0.10"
   }
 }
