@@ -23,7 +23,7 @@
         @click="navigate(image)"
         >
         <img
-          v-if="image.isInside"
+          v-if="image.isInside === false"
             :key="'card-image-' + index"
             :src="image.src"
             :height="image.height"
