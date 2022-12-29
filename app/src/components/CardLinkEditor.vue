@@ -14,13 +14,14 @@
                 @click.prevent="hide()">
                 &times;
             </span>
-            <div class="publii-block-card-item-image" 
+            <div class="publii-block-card-item-image"
+                :class="{ circular: image.isCircle}"
                 flex 
                 items-end 
                 :style="{ backgroundImage: `url(${image.thumbnailSrc})` }"
                 >
-                <h1 class="publii-block-card-title" >{{image.title}}</h1>
-                <figcaption>{{image.caption}}</figcaption>
+                    <h1 v-if="image.isInside" class="publii-block-card-title" >{{image.title}}</h1>
+                    <figcaption v-if="image.isInside">{{image.caption}}</figcaption>
             </div>
            
             <label
@@ -35,6 +36,34 @@
             </label>
             <textarea required="required" v-model="image.caption" rows="5" :placeholder="$t('editor.enterBody')"/>
             <label
+                :class="{ 'is-invalid': errors.indexOf('isLink') > -1 }"
+                key="card-item-editor-field-isLink">
+                <span>{{ $t('editor.enterIsLink') }}</span>
+                <input
+                    v-model="image.isLink"
+                    @keyup="cleanError('isLink')"
+                    type="checkbox">
+            </label>
+            <label
+                :class="{ 'is-invalid': errors.indexOf('isInside') > -1 }"
+                key="card-item-editor-field-isInside">
+                <span>{{ $t('editor.enterIsInside') }}</span>
+                <input
+                    v-model="image.isInside"
+                    @keyup="cleanError('isInside')"
+                    type="checkbox">
+            </label>
+            <label
+                :class="{ 'is-invalid': errors.indexOf('isCircle') > -1 }"
+                key="card-item-editor-field-isCircle">
+                <span>{{ $t('editor.enterIsCircle') }}</span>
+                <input
+                    v-model="image.isCircle"
+                    @keyup="cleanError('isCircle')"
+                    type="checkbox">
+            </label>
+            <label
+                v-if="image.isLink === true"
                 :class="{ 'is-invalid': errors.indexOf('type') > -1 }"
                 key="card-item-editor-field-type">
                 <span>{{ $t('card.type') }}</span>
@@ -49,7 +78,7 @@
             </label>
 
             <label
-                v-if="image.type === 'internal'"
+                v-if="image.isLink === true && image.type === 'internal'"
                 :class="{ 'is-invalid': errors.indexOf('internalLink') > -1 }"
                 key="card-item-editor-field-internal">
                 <span>{{ $t('card.internalLink') }}</span>
@@ -61,7 +90,7 @@
             </label>
 
             <label
-                v-if="image.type === 'external'"
+                v-if="image.isLink === true && image.type === 'external'"
                 :class="{ 'is-invalid': errors.indexOf('externalLink') > -1 }"
                 key="card-item-editor-field-external">
                 <span>{{ $t('card.externalURL') }}</span>
@@ -73,7 +102,7 @@
             </label>
 
             <label
-                v-if="image.type === 'tag'"
+                v-if="image.isLink === true && image.type === 'tag'"
                 :class="{ 'is-invalid': errors.indexOf('tagPage') > -1 }"
                 key="card-item-editor-field-tag">
                 <span>{{ $t('tag.tagPage') }}</span>
@@ -90,7 +119,7 @@
             </label>
 
             <label
-                v-if="image.type === 'author'"
+                v-if="image.isLink === true && image.type === 'author'"
                 :class="{ 'is-invalid': errors.indexOf('authorPage') > -1 }"
                 key="card-item-editor-field-author">
                 <span>{{ $t('author.authorPage') }}</span>
@@ -107,7 +136,7 @@
             </label>
 
             <label
-                v-if="image.type === 'post'"
+                v-if="image.isLink === true && image.type === 'post'"
                 :class="{ 'is-invalid': errors.indexOf('postPage') > -1 }"
                 key="card-item-editor-field-post">
                 <span>{{ $t('post.postPage') }}</span>
@@ -123,7 +152,7 @@
                     :placeholder="$t('post.selectPostPage')"></v-select>
             </label>
 
-            <label key="card-item-editor-field-title">
+            <label  v-if="image.isLink === true" key="card-item-editor-field-title">
                 <span>{{ $t('link.linkTitleAttribute') }}</span>
                 <input
                     v-model="image.title"
@@ -131,7 +160,7 @@
                     type="text" />
             </label>
 
-            <label key="card-item-editor-field-target">
+            <label v-if="image.isLink === true"  key="card-item-editor-field-target">
                 <span>{{ $t('ui.linkTarget') }}:</span>
                 <v-select
                     v-model="image.target"
@@ -165,6 +194,9 @@ export default {
             label: '',
             title: '',
             image: this.image,
+            isLink: false,
+            isInside: false,
+            isCircle: false,
             type: '',
             target: '_self',
             rel: '',
@@ -279,6 +311,9 @@ export default {
             this.label = '';
             this.title = '';
             this.type = '';
+            this.isLink = false;
+            this.isInside= false;
+            this.isCircle= false;
             this.target = '_self';
             this.rel = '';
             this.cssClass = '';
@@ -357,6 +392,9 @@ export default {
                 title: this.title,
                 image: this.image,
                 type: this.type,
+                isLink: this.isLink,
+                isInside: this.isInside,
+                isCircle: this.isCircle,
                 target: this.target,
                 rel: this.rel,
                 link: this.getLinkValue(),
@@ -392,6 +430,9 @@ export default {
                 title: this.title,
                 image: this.image,
                 type: this.type,
+                isLink: this.isLink,
+                isInside:this.isInside,
+                isCircle: this.isCircle,
                 target: this.target,
                 rel: this.rel,
                 link: this.getLinkValue(),
@@ -479,6 +520,11 @@ export default {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+.circular {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    max-width: unset;
 }
 .card-options {
     display: flex;

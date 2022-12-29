@@ -18,10 +18,17 @@
         v-for="(image, index) of content.images"
         :key="'card-item-' + index"
         class="publii-block-cards-item"
-        :style="{ backgroundImage: `url(${image.src})` }"
+        :class="[image.isInside === true ? {circular: image.isCircle} : '']"
+        :style="[image.isInside === true ? {backgroundImage: `url(${image.src})` } : '']"
         @click="navigate(image)"
         >
-        <h3 class="card-title">{{image.title}}</h3>
+        <img
+            :key="'card-image-' + index"
+            :src="image.src"
+            :height="image.height"
+            :width="image.width" 
+            :class="{circular: image.isCircle}" />
+        <h3  class="card-title">{{image.isInside}} {{image.title}}</h3>
         <figcaption class="card-caption">{{image.caption}}</figcaption>
         <button
           class="publii-block-cards-item-delete"
@@ -358,6 +365,12 @@ export default {
 @import '../../../../../scss/variables.scss';
 @import '../../../../../scss/mixins.scss';
 
+.circular {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    width: auto;
+    max-height: inherit;
+}
 
 .publii-block-cards-list {
   display: flex;
@@ -383,7 +396,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   object-fit: cover;
-  height: 30vh;
+  height: inherit;
   width: 100%;
 }
 .publii-block-cards-item h3, .publii-block-card-title, .editor > .editor-inner > .wrapper > div h3 {
@@ -429,10 +442,12 @@ export default {
   height: auto;
 }
 .publii-block-card-item-image > img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
   height: inherit;
   object-fit: cover;
+}
+.publii-block-card-item-image > img.circular {
+  height: inherit;
+  aspect-ratio: 1;
 }
 .publii-block-card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -497,7 +512,7 @@ export default {
 
     & > img {
       display: block;
-      height: 30vh;
+      height: auto;
       max-width: 100%;
       object-fit: cover;
       width: 100%;

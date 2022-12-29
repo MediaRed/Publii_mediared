@@ -5,7 +5,7 @@ const UtilsHelper = require('../../../../../../back-end/helpers/utils');
 const URLHelper = require('../../../../../../back-end/modules/render-html/helpers/url');
 const path = require('path');
 const fs = require('fs');
-const pourcent = (columns) => parseFloat(100/columns).toFixed(2);
+const pourcent = (columns, max) =>  (max < columns) ? parseFloat(100/max).toFixed(2) : parseFloat(100/columns).toFixed(2) ;
 let defaultSiteConfig = JSON.parse(JSON.stringify(defaultAstCurrentSiteConfig));
 // Site config
 let inputDir = "";
@@ -49,33 +49,30 @@ function render (blockData) {
   let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
   let cssClasses = ['cards-wrapper', blockData.config.advanced.cssClasses, 'cards-wrapper--' + blockData.config.imageAlign].filter(item => item && item.trim() !== '' && item !== 'cards-wrapper--center');
   cssClasses = cssClasses.length ? ' class="' + cssClasses.join(' ') + '"' : '';
-  let p = pourcent(parseInt(blockData.config.columns));
+  let p = pourcent(parseInt(blockData.config.columns), blockData.content.images.length);
   let images = ``;
   
   for (let i = 0; i < blockData.content.images.length; i++) {
     let img = blockData.content.images[i];
-    const href = getHrefFromLink(img);
-    images += `<figure class="cards__item" :style="{width: ${p}%}" >
-      <a class="card_link" href="${href}" data-size="${img.dimensions}">
-        <img 
-          class="card_image" 
-          {{#if @config.site.responsiveImages}}
-              {{responsiveImageAttributes 'tagImage' srcset.cards sizes.cards}}
-          {{/if}}
-          {{ lazyload "eager" }}
-          src="${img.thumbnailSrc}" 
-          height="${img.height}" 
-          width="${img.width}" 
-          alt="${img.alt}" />
-        <h3 class="card-title">${img.title}</h3>
-        <figcaption class="card-caption">{{${img.caption}}}</figcaption>
-        <p>Type: {{${img.type}}}</p>
-        <p>internalLink: {{${img.internalLink}}}</p>
-        <p>externalLink: {{${img.externalLink}}}</p>
-        <p>postPage: {{${img.postPage}}}</p>
-        <p>tagPage: {{${img.tagPage}}}</p>
-        <p>authorPage: {{${img.authorPage}}}</p>
-        <p>target: {{${img.target}}}</p>
+    const href = (img.isLink) ? getHrefFromLink(img) : "";
+    const circular = (img.isCircle) ? " circular" : "";
+    const inside = (img.isInside) ? "internal" : "external";
+    images += `<figure class="cards__item ${inside}" :style="{width: ${p}%}" >
+      <a class="card_link ${inside}" href="${href}" data-size="${img.dimensions}">
+        <div class="card_wrapper" :class="{heigh: ${img.height}, overflow: hidden}">
+          <img 
+            class="card_image ${inside} ${circular}"
+            {{#if @config.site.responsiveImages}}
+                {{responsiveImageAttributes 'tagImage' srcset.cards sizes.cards}}
+            {{/if}}
+            {{ lazyload "eager" }}
+            src="${img.thumbnailSrc}" 
+            height="${img.height}" 
+            width="${img.width}" 
+            alt="${img.alt}" />
+        </div>
+        <h3 class="card-title ${inside}">${img.title}</h3>
+        <figcaption class="card-caption ${inside}">{{${img.caption}}}</figcaption>
       </a>
     </figure>`;
   }
