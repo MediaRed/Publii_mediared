@@ -19,7 +19,7 @@
         :key="'card-item-' + index"
         class="publii-block-cards-item"
         :class="[image.isInside === true ? {circular: image.isCircle} : '']"
-        :style="[image.isInside === true ? {backgroundImage: `url(${image.src})` } : '']"
+        :style="[image.isInside === true ? {backgroundRepeat: no-repeat, backgroundImage: `url(${image.src})` } : '']"
         @click="navigate(image)"
         >
         <img
