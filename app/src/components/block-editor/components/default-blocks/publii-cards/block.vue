@@ -28,7 +28,7 @@
             :height="image.height"
             :width="image.width" 
             :class="{circular: image.isCircle}" />
-        <h3  class="card-title">{{image.isInside}} {{image.title}}</h3>
+        <h3  class="card-title">{{image.title}}</h3>
         <figcaption class="card-caption">{{image.caption}}</figcaption>
         <button
           class="publii-block-cards-item-delete"
