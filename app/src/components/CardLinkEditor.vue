@@ -34,34 +34,70 @@
                     @keyup="cleanError('title')"
                     type="text">
             </label>
+            <label
+                v-if="image.isInside === false"
+                :class="{ 'is-invalid': errors.indexOf('subtitle') > -1 }"
+                key="card-item-editor-field-subtitle">
+                <span>{{ $t('editor.enterSubtitle') }}</span>
+                <input
+                    v-model="image.subtitle"
+                    :spellcheck="false"
+                    @keyup="cleanError('subtitle')"
+                    type="text">
+            </label>
             <textarea required="required" v-model="image.caption" rows="5" :placeholder="$t('editor.enterBody')"/>
             <label
-                :class="{ 'is-invalid': errors.indexOf('isLink') > -1 }"
-                key="card-item-editor-field-isLink">
-                <span>{{ $t('editor.enterIsLink') }}</span>
-                <input
-                    v-model="image.isLink"
-                    @keyup="cleanError('isLink')"
-                    type="checkbox">
-            </label>
-            <label
-                :class="{ 'is-invalid': errors.indexOf('isInside') > -1 }"
-                key="card-item-editor-field-isInside">
-                <span>{{ $t('editor.enterIsInside') }}</span>
-                <input
-                    v-model="image.isInside"
-                    @keyup="cleanError('isInside')"
-                    type="checkbox">
-            </label>
-            <label
+                class="switch"
                 :class="{ 'is-invalid': errors.indexOf('isCircle') > -1 }"
                 key="card-item-editor-field-isCircle">
-                <span>{{ $t('editor.enterIsCircle') }}</span>
                 <input
+                    class="checkbox"
                     v-model="image.isCircle"
                     @keyup="cleanError('isCircle')"
-                    type="checkbox">
+                    type="checkbox" />
+                <span class="slider"></span>
+                <span class="placeholder">{{ $t('editor.enterIsCircle') }}</span>
             </label>
+            <label
+                v-if="image.isCircle === false"
+                :class="{ 'is-invalid': errors.indexOf('imageRatio') > -1 }"
+                key="card-item-editor-field-imageRatio">
+                <span>{{ $t('editor.enterImageRatio') }}</span>
+                <input
+                    v-model="image.imageRatio"
+                    :spellcheck="false"
+                    @keyup="cleanError('imageRatio')"
+                    type="text">
+            </label>
+            <label 
+                class="switch"
+                :class="{ 'is-invalid': errors.indexOf('isInside') > -1 }"
+                key="card-item-editor-field-isInside">
+                <input   
+                    class="checkbox"
+                    v-model="image.isInside"
+                    @keyup="cleanError('isInside')"
+                    type="checkbox"/>
+                
+                <span class="slider"></span>
+                <span class="placeholder">{{ $t('editor.enterIsInside') }}</span>
+            </label> 
+            <label
+                class="switch"
+                :class="{ 'is-invalid': errors.indexOf('isLink') > -1 }"
+                key="card-item-editor-field-isLink">
+                <input
+                    class="checkbox"
+                    v-model="image.isLink"
+                    @keyup="cleanError('isLink')"
+                    type="checkbox" />
+                <span class="slider"></span>
+                <span class="placeholder">{{ $t('editor.enterIsLink') }}</span>
+            </label>
+            
+           
+            
+           
             <label
                 v-if="image.isLink === true"
                 :class="{ 'is-invalid': errors.indexOf('type') > -1 }"
@@ -171,6 +207,7 @@
                     :placeholder="$t('card.selectLinkTarget')"></v-select>
             </label>
         </div>
+        <div></div>
     </div>
 </template>
 
@@ -194,8 +231,8 @@ export default {
             label: '',
             title: '',
             image: this.image,
-            isLink: false,
-            isInside: false,
+            isLink: 0,
+            isInside: 0,
             isCircle: false,
             type: '',
             target: '_self',
@@ -311,9 +348,9 @@ export default {
             this.label = '';
             this.title = '';
             this.type = '';
-            this.isLink = false;
-            this.isInside= false;
-            this.isCircle= false;
+            this.isLink = 0;
+            this.isInside= 0;
+            this.isCircle= 0;
             this.target = '_self';
             this.rel = '';
             this.cssClass = '';
@@ -478,6 +515,78 @@ export default {
 
 <style lang="scss" scoped>
 @import '../scss/variables.scss';
+
+.switch input
+{
+  display: none;
+}
+
+.switch 
+{
+  display: inline-block;
+  width: 60px; /*=w*/
+  height: 30px; /*=h*/
+  margin: 4px;
+  transform: translateY(50%);
+  position: relative;
+}
+.placeholder {
+    position: inherit;
+    margin-left: 7rem;
+}
+.slider
+{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 30px;
+  box-shadow: 0 0 0 2px var(--headings-color), 0 0 4px var(--headings-color);
+  cursor: pointer;
+  border: 4px solid transparent;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.slider:before
+{
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--headings-color);
+  border-radius: 30px;
+  transform: translateX(-30px); /*translateX(-(w-h))*/
+  transition: 0.2s;
+}
+
+input:checked + .slider:before
+{
+  transform: translateX(30px); /*translateX(w-h)*/
+  background-color: limeGreen;
+}
+
+input:checked + .slider
+{
+  box-shadow: 0 0 0 2px limeGreen, 0 0 8px limeGreen;
+}
+
+.switch200 .slider:before
+{
+  width: 200%;
+  transform: translateX(-82px); /*translateX(-(w-h))*/
+}
+
+.switch200 input:checked + .slider:before
+{
+  background-color: red;
+}
+
+.switch200 input:checked + .slider
+{
+  box-shadow: 0 0 0 2px red, 0 0 8px red;
+}
 
 .publii-block-card-title {
     text-align: center;

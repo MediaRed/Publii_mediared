@@ -72,6 +72,7 @@ function render (blockData) {
             alt="${img.alt}" />
         </div>
         <h3 class="card-title ${inside}">${img.title}</h3>
+        <h6  class="card-subtitle ${inside}">${img.subtitle}</h6>
         <figcaption class="card-caption ${inside}">{{${img.caption}}}</figcaption>
       </a>
     </figure>`;

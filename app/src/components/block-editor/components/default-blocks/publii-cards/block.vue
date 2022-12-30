@@ -30,6 +30,7 @@
             :width="image.width" 
             :class="{circular: image.isCircle}" />
         <h3  class="card-title">{{image.title}}</h3>
+        <h6  class="card-subtitle">{{image.subtitle}}</h6>
         <figcaption class="card-caption">{{image.caption}}</figcaption>
         <button
           class="publii-block-cards-item-delete"
