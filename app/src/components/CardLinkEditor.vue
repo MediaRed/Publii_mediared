@@ -20,8 +20,8 @@
                 items-end 
                 :style="{ backgroundImage: `url(${image.thumbnailSrc})` }"
                 >
-                    <h1 v-if="image.isInside" class="publii-block-card-title" >{{image.title}}</h1>
-                    <figcaption v-if="image.isInside">{{image.caption}}</figcaption>
+                    <h1 v-if="image.isInside === true" class="publii-block-card-title" >{{image.title}}</h1>
+                    <figcaption v-if="image.isInside === true">{{image.caption}}</figcaption>
             </div>
            
             <label
@@ -35,7 +35,7 @@
                     type="text">
             </label>
             <label
-                v-if="image.isInside === false"
+                v-if="image.isInside === false || !image.isInside"
                 :class="{ 'is-invalid': errors.indexOf('subtitle') > -1 }"
                 key="card-item-editor-field-subtitle">
                 <span>{{ $t('editor.enterSubtitle') }}</span>
