@@ -49,6 +49,7 @@ function render (blockData) {
   let id = blockData.config.advanced.id ? ' id="' + blockData.config.advanced.id + '"' : '';
   let cssClasses = ['cards-wrapper', blockData.config.advanced.cssClasses, 'cards-wrapper--' + blockData.config.imageAlign].filter(item => item && item.trim() !== '' && item !== 'cards-wrapper--center');
   cssClasses = cssClasses.length ? ' class="' + cssClasses.join(' ') + '"' : '';
+  const col = (blockData.content.images.length < parseInt(blockData.config.columns)) ? blockData.content.images.length : parseInt(blockData.config.columns);
   let p = pourcent(parseInt(blockData.config.columns), blockData.content.images.length);
   let images = ``;
   
@@ -57,7 +58,7 @@ function render (blockData) {
     const href = (img.isLink) ? getHrefFromLink(img) : "";
     const circular = (img.isCircle) ? " circular" : "";
     const inside = (img.isInside) ? "internal" : "external";
-    images += `<figure class="cards__item ${inside}" :style="{width: ${p}%}" >
+    images += `<figure class="cards__item ${inside} col${col}" :style="{width: ${p}%}" >
       <a class="card_link ${inside}" href="${href}" data-size="${img.dimensions}">
         <div class="card_wrapper" :class="{heigh: ${img.height}, overflow: hidden}">
           <img 
