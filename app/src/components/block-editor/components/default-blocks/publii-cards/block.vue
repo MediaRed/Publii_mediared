@@ -19,7 +19,7 @@
         :key="'card-item-' + index"
         class="publii-block-cards-item"
         :class="[image.isInside === true ? {circular: image.isCircle} : '']"
-        :style="[image.isInside === true ? {backgroundRepeat: no-repeat, backgroundImage: `url(${image.src})` } : '']"
+        :style="[image.isInside === true ? {width: (100/parseInt(config.columns)-2)+'%' , backgroundRepeat: no-repeat, backgroundImage: `url(${image.src})` } : {width: (100/parseInt(config.columns) -2)+'%'}]"
         @click="navigate(image)"
         >
         <img
@@ -498,6 +498,7 @@ export default {
   outline: none;
   position: relative;
   gap: .75em;
+  flex-wrap: wrap;
 
   &-empty-state {
     color: var(--gray-3);
