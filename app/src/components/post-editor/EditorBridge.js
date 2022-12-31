@@ -235,6 +235,18 @@ class EditorBridge {
                 if(
                     clickedElement.tagName === 'DIV' &&
                     clickedElement.getAttribute('class') &&
+                    clickedElement.getAttribute('class').indexOf('cards') !== -1
+                ) {
+                    window.app.updateCardsPopup({
+                        postID: this.postID,
+                        cardElement: clickedElement
+                    });
+
+                    window.app.cardsPopupUpdated(this.cardsPopupUpdated.bind(this));
+                }
+                if(
+                    clickedElement.tagName === 'DIV' &&
+                    clickedElement.getAttribute('class') &&
                     clickedElement.getAttribute('class').indexOf('videos') !== -1
                 ) {
                     window.app.updateVideosPopup({
@@ -243,19 +255,6 @@ class EditorBridge {
                     });
 
                     window.app.videosPopupUpdated(this.videosPopupUpdated.bind(this));
-                }
-
-                if(
-                    clickedElement.tagName === 'DIV' &&
-                    clickedElement.getAttribute('class') &&
-                    clickedElement.getAttribute('class').indexOf('cards') !== -1
-                ) {
-                    window.app.updateCardsPopup({
-                        postID: this.postID,
-                        cardsElement: clickedElement
-                    });
-
-                    window.app.cardsPopupUpdated(this.cardsPopupUpdated.bind(this));
                 }
             });
 
@@ -378,6 +377,14 @@ class EditorBridge {
         if(response) {
             response.gallery.innerHTML = response.html;
             response.gallery.setAttribute('data-is-empty', response.html === '&nbsp;');
+        }
+    }
+    cardsPopupUpdated (response) {
+        this.hideToolbarsOnCopyOrScroll();
+
+        if(response) {
+            response.cards.innerHTML = response.html;
+            response.cards.setAttribute('data-is-empty', response.html === '&nbsp;');
         }
     }
     videosPopupUpdated (response) {

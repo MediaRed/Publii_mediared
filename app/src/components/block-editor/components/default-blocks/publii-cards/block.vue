@@ -29,9 +29,9 @@
             :height="image.height"
             :width="image.width" 
             :class="{circular: image.isCircle}" />
-        <h3  class="card-title">{{image.title}}</h3>
-        <h6  class="card-subtitle">{{image.subtitle}}</h6>
-        <figcaption class="card-caption">{{image.caption}}</figcaption>
+        <h3  v-if="image.title" class="card-title">{{image.title}}</h3>
+        <h6  v-if="image.isInside === false || !image.isInside" class="card-subtitle">{{image.subtitle}}</h6>
+        <figcaption v-if="image.caption" class="card-caption">{{image.caption}}</figcaption>
         <button
           class="publii-block-cards-item-delete"
           @click.stop.prevent="removeImage(index)">
@@ -51,7 +51,7 @@
       <div
         v-for="(image, index) of content.images"
         :key="'card-item-' + index"
-        class="publii-block-card" >
+        class="publii-block-card" :style="{width: (100/parseInt(config.columns)-parseInt(config.columns))+'%'}">
           <card-link-editor
             ref="card-link-editor"
             v-bind:image="image"
@@ -98,7 +98,7 @@
 
     <top-menu
       ref="top-menu"
-      :config="topMenuConfig"
+      :config="linkEditorConfig"
       :advancedConfig="configForm" />
   </div>
 </template>
@@ -168,33 +168,13 @@ export default {
           options: [1, 2, 3, 4, 5, 6, 7, 8]
         },
         {
-          activeState: function () { return this.config.imageAlign === 'center'; },
-          onClick: function () { this.alignImage('center'); },
-          icon: 'center',
-          tooltip: this.$t('image.centeredImage')
-        },
-        {
-          activeState: function () { return this.config.imageAlign === 'wide'; },
-          onClick: function () { this.alignImage('wide'); },
-          icon: 'wide',
-          tooltip: this.$t('image.wideImage')
-        },
-        {
-          activeState: function () { return this.config.imageAlign === 'full'; },
-          onClick: function () { this.alignImage('full'); },
-          icon: 'full',
-          tooltip: this.$t('image.fullWidthImage')
-        }
-      ],
-      topMenuConfig: [
-        {
           type: 'select',
-          label: this.$t('image.columns'),
-          configKey: 'columns',
+          label: this.$t('image.aspect-ratio'),
+          configKey: 'aspect_ratio',
           clearable: false,
           searchable: false,
           cssClasses: 'is-narrow',
-          options: [1, 2, 3, 4, 5, 6, 7, 8]
+          options: ['21 / 9', '16 / 9', '4 / 3', 'Square', 'Circular', 'Custom']
         },
         {
           activeState: function () { return this.config.imageAlign === 'center'; },
@@ -214,7 +194,6 @@ export default {
           icon: 'full',
           tooltip: this.$t('image.fullWidthImage')
         }
-      
       ]
     }
   },
@@ -370,10 +349,24 @@ export default {
 .circular {
     aspect-ratio: 1;
     border-radius: 50%;
-    width: auto;
     max-height: inherit;
+    width: fit-content;
 }
-
+.placeholder {
+  font-size: .5em;
+  display: flex;
+  width: max-content;
+}
+.wrapper-ui-top-menu .multiselect__tags {
+  min-width: 10rem;
+}
+.wrapper-ui-top-menu .multiselect__tags > span.multiselect__single {
+  display: inline;
+  min-width: 10rem;
+}
+.multiselect__content-wrapper > ul.multiselect__content , .editor > .editor-inner > .wrapper > div ul, .editor > .editor-inner > .wrapper > div ol {
+  padding: 0 !important;
+}
 .publii-block-cards-list {
   display: flex;
   flex-direction: row;
@@ -443,6 +436,9 @@ export default {
   width: 100%;
   height: auto;
 }
+.publii-block-card-item-image.circular {
+  width: fit-content;
+}
 .publii-block-card-item-image > img {
   height: inherit;
   object-fit: cover;
@@ -455,11 +451,13 @@ export default {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: .75em;
   border-radius: 5px;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
   margin-right: 1em;
-  width: 100%;
 }
 .publii-block-card > textarea {
   background: var(--input-bg);

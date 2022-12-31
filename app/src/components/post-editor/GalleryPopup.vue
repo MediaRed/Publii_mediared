@@ -138,7 +138,7 @@
 <script>
 import Vue from 'vue';
 import Draggable from 'vuedraggable';
-
+console.log("GalleryPopup");
 export default {
     name: 'gallery-popup',
     components: {

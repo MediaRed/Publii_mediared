@@ -233,7 +233,7 @@ export default {
             image: this.image,
             isLink: 0,
             isInside: 0,
-            isCircle: false,
+            isCircle: 0,
             type: '',
             target: '_self',
             rel: '',
@@ -298,6 +298,9 @@ export default {
             console.log("image", params.image);
             this.label = params.label || '';
             this.title = params.title || '';
+            this.isLink= params.isLink || 0;
+            this.isInside = params.isInside || 0;
+            this.isCircle = params.isCircle || 0;
             this.image = params.image || '';
             this.cssClass = params.cssClass || '';
             this.target = params.target || '_self';

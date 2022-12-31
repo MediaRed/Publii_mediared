@@ -96,6 +96,18 @@
                         <option :value="8">{{ $t('image.eightColumns') }}</option>
                     </select>
                 </label>
+                <label>
+                    {{ $t('image.aspect-ratio') }}:
+                    <select
+                        v-model="aspect_ratio"
+                        class="cards-popup-config-aspect-ratio">
+                        <option :value="1">{{ $t('image.ratio21_9') }}</option>
+                        <option :value="2">{{ $t('image.ratio16_9') }}</option>
+                        <option :value="3">{{ $t('image.ratio4_3') }}</option>
+                        <option :value="4">{{ $t('image.ratioSquare') }}</option>
+                        <option :value="5">{{ $t('image.ratioCustom') }}</option>
+                    </select>
+                </label>
 
                 <label>
                     {{ $t('image.align') }}:
@@ -138,7 +150,7 @@
 <script>
 import Vue from 'vue';
 import Draggable from 'vuedraggable';
-
+console.log("CardsPopup");
 export default {
     name: 'cards-popup',
     components: {
