@@ -18,19 +18,19 @@
         v-for="(image, index) of content.images"
         :key="'card-item-' + index"
         class="publii-block-cards-item"
-        :class="[image.isInside === true ? {circular: image.isCircle} : '']"
-        :style="[image.isInside === true ? {width: (100/parseInt(config.columns)-2)+'%' , backgroundRepeat: no-repeat, backgroundImage: `url(${image.src})` } : {width: (100/parseInt(config.columns) -2)+'%'}]"
+        :class="[config.isInside === true ? {circular: config.isCircle} : '']"
+        :style="[config.isInside === true ? {width: (100/parseInt(config.columns) - config.columns)+'%' , backgroundRepeat: no-repeat, backgroundImage: `url(${image.src})` } : {width: (100/parseInt(config.columns) - config.columns)+'%'}]"
         @click="navigate(image)"
         >
         <img
-          v-if="image.isInside === false"
+          v-if="config.isInside === false"
             :key="'card-image-' + index"
             :src="image.src"
             :height="image.height"
             :width="image.width" 
-            :class="{circular: image.isCircle}" />
+            :class="{circular: config.isCircle}" />
         <h3  v-if="image.title" class="card-title">{{image.title}}</h3>
-        <h6  v-if="image.isInside === false || !image.isInside" class="card-subtitle">{{image.subtitle}}</h6>
+        <h6  v-if="config.isInside === false || !config.isInside" class="card-subtitle">{{image.subtitle}}</h6>
         <figcaption v-if="image.caption" class="card-caption">{{image.caption}}</figcaption>
         <button
           class="publii-block-cards-item-delete"
@@ -55,6 +55,7 @@
           <card-link-editor
             ref="card-link-editor"
             v-bind:image="image"
+            v-bind:config="config"
             :config="linkEditorConfig"
             :advancedConfig="configForm" />
       </div>
@@ -175,6 +176,46 @@ export default {
           searchable: false,
           cssClasses: 'is-narrow',
           options: ['21 / 9', '16 / 9', '4 / 3', 'Square', 'Circular', 'Custom']
+        },
+        {
+          activeState: function () { return this.config.aspect_ratio === this.value; },
+          type: 'input',
+          label: this.$t('image.aspect-ratio'),
+          configKey: 'aspect_ratio',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+          value: this.aspect_ratio
+        },
+        {
+          activeState: function () { return this.config.isCircle === this.value; },
+          type: 'switch',
+          label: this.$t('image.isCircle'),
+          configKey: 'isCircle',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+          value: this.isCircle
+        },
+        {
+          activeState: function () { return this.config.isInside === this.value; },
+          type: 'switch',
+          label: this.$t('image.isInside'),
+          configKey: 'isInside',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+          value: this.isInside
+        },
+        {
+          activeState: function () { return this.config.aspect_ratio === this.value; },
+          type: 'input',
+          label: this.$t('image.aspect-ratio'),
+          configKey: 'aspect_ratio',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+          value: this.aspect_ratio
         },
         {
           activeState: function () { return this.config.imageAlign === 'center'; },

@@ -105,10 +105,58 @@
                         <option :value="2">{{ $t('image.ratio16_9') }}</option>
                         <option :value="3">{{ $t('image.ratio4_3') }}</option>
                         <option :value="4">{{ $t('image.ratioSquare') }}</option>
-                        <option :value="5">{{ $t('image.ratioCustom') }}</option>
+                        <option :value="5">{{ $t('image.ratioCircular') }}</option>
+                        <option :value="6">{{ $t('image.ratioCustom') }}</option>
                     </select>
                 </label>
-
+                <label
+                    v-if="aspect_ratio === 6"
+                    :class="{ 'is-invalid': errors.indexOf('aspect_ratio') > -1 }"
+                    key="custom-aspect-ratio">
+                    <span>{{ $t('image.custom-aspect-ratio') }}</span>
+                    <inputs
+                        v-model="aspect_ratio"
+                        @keyup="cleanError('aspect_ratio')"
+                        spellcheck="false"
+                        type="text" />
+                </label>
+                <label
+                    class="switch"
+                    :class="{ 'is-invalid': errors.indexOf('isCircle') > -1 }"
+                    key="card-item-editor-field-isCircle">
+                    <input
+                        class="checkbox"
+                        v-model="isCircle"
+                        @keyup="cleanError('isCircle')"
+                        type="checkbox" />
+                    <span class="slider"></span>
+                    <span class="placeholder">{{ $t('editor.enterIsCircle') }}</span>
+                </label>
+                <label 
+                    class="switch"
+                    :class="{ 'is-invalid': errors.indexOf('isInside') > -1 }"
+                    key="card-item-editor-field-isInside">
+                    <input   
+                        class="checkbox"
+                        v-model="isInside"
+                        @keyup="cleanError('isInside')"
+                        type="checkbox"/>
+                    
+                    <span class="slider"></span>
+                    <span class="placeholder">{{ $t('editor.enterIsInside') }}</span>
+                </label> 
+                <label
+                    class="switch"
+                    :class="{ 'is-invalid': errors.indexOf('isLink') > -1 }"
+                    key="card-item-editor-field-isLink">
+                    <input
+                        class="checkbox"
+                        v-model="isLink"
+                        @keyup="cleanError('isLink')"
+                        type="checkbox" />
+                    <span class="slider"></span>
+                    <span class="placeholder">{{ $t('editor.enterIsLink') }}</span>
+                </label>
                 <label>
                     {{ $t('image.align') }}:
                     <select
@@ -150,7 +198,7 @@
 <script>
 import Vue from 'vue';
 import Draggable from 'vuedraggable';
-console.log("CardsPopup");
+
 export default {
     name: 'cards-popup',
     components: {
@@ -361,7 +409,77 @@ export default {
 h1 {
     text-align: center;
 }
+.switch input
+{
+  display: none;
+}
 
+.switch 
+{
+  display: inline-block;
+  width: 60px; /*=w*/
+  height: 30px; /*=h*/
+  margin: 4px;
+  transform: translateY(50%);
+  position: relative;
+}
+.placeholder {
+    position: inherit;
+    margin-left: 7rem;
+}
+.slider
+{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 30px;
+  box-shadow: 0 0 0 2px var(--headings-color), 0 0 4px var(--headings-color);
+  cursor: pointer;
+  border: 4px solid transparent;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.slider:before
+{
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--headings-color);
+  border-radius: 30px;
+  transform: translateX(-30px); /*translateX(-(w-h))*/
+  transition: 0.2s;
+}
+
+input:checked + .slider:before
+{
+  transform: translateX(30px); /*translateX(w-h)*/
+  background-color: limeGreen;
+}
+
+input:checked + .slider
+{
+  box-shadow: 0 0 0 2px limeGreen, 0 0 8px limeGreen;
+}
+
+.switch200 .slider:before
+{
+  width: 200%;
+  transform: translateX(-82px); /*translateX(-(w-h))*/
+}
+
+.switch200 input:checked + .slider:before
+{
+  background-color: red;
+}
+
+.switch200 input:checked + .slider
+{
+  box-shadow: 0 0 0 2px red, 0 0 8px red;
+}
 .cards-popup {
     max-width: 70rem;
     min-width: 70rem;

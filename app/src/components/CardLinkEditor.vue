@@ -46,54 +46,7 @@
                     type="text">
             </label>
             <textarea required="required" v-model="image.caption" rows="5" :placeholder="$t('editor.enterBody')"/>
-            <label
-                class="switch"
-                :class="{ 'is-invalid': errors.indexOf('isCircle') > -1 }"
-                key="card-item-editor-field-isCircle">
-                <input
-                    class="checkbox"
-                    v-model="image.isCircle"
-                    @keyup="cleanError('isCircle')"
-                    type="checkbox" />
-                <span class="slider"></span>
-                <span class="placeholder">{{ $t('editor.enterIsCircle') }}</span>
-            </label>
-            <label
-                v-if="image.isCircle === false"
-                :class="{ 'is-invalid': errors.indexOf('imageRatio') > -1 }"
-                key="card-item-editor-field-imageRatio">
-                <span>{{ $t('editor.enterImageRatio') }}</span>
-                <input
-                    v-model="image.imageRatio"
-                    :spellcheck="false"
-                    @keyup="cleanError('imageRatio')"
-                    type="text">
-            </label>
-            <label 
-                class="switch"
-                :class="{ 'is-invalid': errors.indexOf('isInside') > -1 }"
-                key="card-item-editor-field-isInside">
-                <input   
-                    class="checkbox"
-                    v-model="image.isInside"
-                    @keyup="cleanError('isInside')"
-                    type="checkbox"/>
-                
-                <span class="slider"></span>
-                <span class="placeholder">{{ $t('editor.enterIsInside') }}</span>
-            </label> 
-            <label
-                class="switch"
-                :class="{ 'is-invalid': errors.indexOf('isLink') > -1 }"
-                key="card-item-editor-field-isLink">
-                <input
-                    class="checkbox"
-                    v-model="image.isLink"
-                    @keyup="cleanError('isLink')"
-                    type="checkbox" />
-                <span class="slider"></span>
-                <span class="placeholder">{{ $t('editor.enterIsLink') }}</span>
-            </label>
+
             
            
             
@@ -219,9 +172,14 @@ export default {
         image: {
             type: Object,
             required: true
+        },
+        config: {
+            type: Array,
+            required: true
         }
     },
     data () {
+        console.log('config',this.config);
         return {
             isVisible: false,
             id: '',
@@ -231,9 +189,10 @@ export default {
             label: '',
             title: '',
             image: this.image,
-            isLink: 0,
-            isInside: 0,
-            isCircle: 0,
+            config: this.config,
+            isLink: this.config.isLink,
+            isInside: this.config.isInside,
+            isCircle: this.config.isCircle,
             type: '',
             target: '_self',
             rel: '',
@@ -296,6 +255,7 @@ export default {
                 this.cardID = '';
             }
             console.log("image", params.image);
+            this.config = params.config || [] ;
             this.label = params.label || '';
             this.title = params.title || '';
             this.isLink= params.isLink || 0;
@@ -351,9 +311,9 @@ export default {
             this.label = '';
             this.title = '';
             this.type = '';
-            this.isLink = 0;
-            this.isInside= 0;
-            this.isCircle= 0;
+            this.isLink = this.config.isLink;
+            this.isInside= this.config.isInside;
+            this.isCircle= this.config.isCircle;
             this.target = '_self';
             this.rel = '';
             this.cssClass = '';
@@ -371,7 +331,9 @@ export default {
         },
         validate() {
             this.errors = [];
-
+            if(!this.config) {
+                this.errors.push('config');
+            }
             if(this.label === '') {
                 this.errors.push('label');
             }
@@ -519,77 +481,7 @@ export default {
 <style lang="scss" scoped>
 @import '../scss/variables.scss';
 
-.switch input
-{
-  display: none;
-}
 
-.switch 
-{
-  display: inline-block;
-  width: 60px; /*=w*/
-  height: 30px; /*=h*/
-  margin: 4px;
-  transform: translateY(50%);
-  position: relative;
-}
-.placeholder {
-    position: inherit;
-    margin-left: 7rem;
-}
-.slider
-{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 30px;
-  box-shadow: 0 0 0 2px var(--headings-color), 0 0 4px var(--headings-color);
-  cursor: pointer;
-  border: 4px solid transparent;
-  overflow: hidden;
-  transition: 0.2s;
-}
-
-.slider:before
-{
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-color: var(--headings-color);
-  border-radius: 30px;
-  transform: translateX(-30px); /*translateX(-(w-h))*/
-  transition: 0.2s;
-}
-
-input:checked + .slider:before
-{
-  transform: translateX(30px); /*translateX(w-h)*/
-  background-color: limeGreen;
-}
-
-input:checked + .slider
-{
-  box-shadow: 0 0 0 2px limeGreen, 0 0 8px limeGreen;
-}
-
-.switch200 .slider:before
-{
-  width: 200%;
-  transform: translateX(-82px); /*translateX(-(w-h))*/
-}
-
-.switch200 input:checked + .slider:before
-{
-  background-color: red;
-}
-
-.switch200 input:checked + .slider
-{
-  box-shadow: 0 0 0 2px red, 0 0 8px red;
-}
 
 .publii-block-card-title {
     text-align: center;

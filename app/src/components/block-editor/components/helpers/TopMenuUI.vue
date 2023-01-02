@@ -46,6 +46,15 @@
             :searchable="uiElement.searchable"
             v-model="$parent.config[uiElement.configKey]" />
         </template>
+        <template v-else-if="uiElement.type === 'input' && $parent.config[uiElement.configKey] && $parent.config[uiElement.configKey] === 'Custom' ">
+          <input
+            :key="'top-menu-element-' + index"
+            :class="uiElement.cssClasses"
+            :options="uiElement.options"
+            :clearable="uiElement.clearable"
+            :searchable="uiElement.searchable"
+            v-model="$parent.config[uiElement.configKey]" />
+        </template>
       </template>
       <button
         v-if="$parent.$parent.blockType !== 'publii-readmore'"
