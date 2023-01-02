@@ -15,13 +15,13 @@
                 &times;
             </span>
             <div class="publii-block-card-item-image"
-                :class="{ circular: image.isCircle}"
+                :class="{ circular: config.isCircle}"
                 flex 
                 items-end 
-                :style="{ backgroundImage: `url(${image.thumbnailSrc})` }"
+                :style="{ backgroundImage: `url(${image.thumbnailSrc})`, aspectRatio:  `${config.aspectRatio}`}"
                 >
-                    <h1 v-if="image.isInside === true" class="publii-block-card-title" >{{image.title}}</h1>
-                    <figcaption v-if="image.isInside === true">{{image.caption}}</figcaption>
+                    <h1 v-if="config.isInside === true" class="publii-block-card-title" >{{image.title}}</h1>
+                    <figcaption v-if="config.isInside === true">{{image.caption}}</figcaption>
             </div>
            
             <label
@@ -35,7 +35,7 @@
                     type="text">
             </label>
             <label
-                v-if="image.isInside === false || !image.isInside"
+                v-if="config.isInside === false || !config.isInside"
                 :class="{ 'is-invalid': errors.indexOf('subtitle') > -1 }"
                 key="card-item-editor-field-subtitle">
                 <span>{{ $t('editor.enterSubtitle') }}</span>
@@ -46,13 +46,8 @@
                     type="text">
             </label>
             <textarea required="required" v-model="image.caption" rows="5" :placeholder="$t('editor.enterBody')"/>
-
-            
-           
-            
-           
             <label
-                v-if="image.isLink === true"
+                v-if="config.isLink === true"
                 :class="{ 'is-invalid': errors.indexOf('type') > -1 }"
                 key="card-item-editor-field-type">
                 <span>{{ $t('card.type') }}</span>
@@ -67,7 +62,7 @@
             </label>
 
             <label
-                v-if="image.isLink === true && image.type === 'internal'"
+                v-if="config.isLink === true && image.type === 'internal'"
                 :class="{ 'is-invalid': errors.indexOf('internalLink') > -1 }"
                 key="card-item-editor-field-internal">
                 <span>{{ $t('card.internalLink') }}</span>
@@ -79,7 +74,7 @@
             </label>
 
             <label
-                v-if="image.isLink === true && image.type === 'external'"
+                v-if="config.isLink === true && image.type === 'external'"
                 :class="{ 'is-invalid': errors.indexOf('externalLink') > -1 }"
                 key="card-item-editor-field-external">
                 <span>{{ $t('card.externalURL') }}</span>
@@ -91,7 +86,7 @@
             </label>
 
             <label
-                v-if="image.isLink === true && image.type === 'tag'"
+                v-if="config.isLink === true && image.type === 'tag'"
                 :class="{ 'is-invalid': errors.indexOf('tagPage') > -1 }"
                 key="card-item-editor-field-tag">
                 <span>{{ $t('tag.tagPage') }}</span>
@@ -108,7 +103,7 @@
             </label>
 
             <label
-                v-if="image.isLink === true && image.type === 'author'"
+                v-if="config.isLink === true && image.type === 'author'"
                 :class="{ 'is-invalid': errors.indexOf('authorPage') > -1 }"
                 key="card-item-editor-field-author">
                 <span>{{ $t('author.authorPage') }}</span>
@@ -125,7 +120,7 @@
             </label>
 
             <label
-                v-if="image.isLink === true && image.type === 'post'"
+                v-if="config.isLink === true && image.type === 'post'"
                 :class="{ 'is-invalid': errors.indexOf('postPage') > -1 }"
                 key="card-item-editor-field-post">
                 <span>{{ $t('post.postPage') }}</span>
@@ -141,7 +136,7 @@
                     :placeholder="$t('post.selectPostPage')"></v-select>
             </label>
 
-            <label  v-if="image.isLink === true" key="card-item-editor-field-title">
+            <label  v-if="config.isLink === true" key="card-item-editor-field-title">
                 <span>{{ $t('link.linkTitleAttribute') }}</span>
                 <input
                     v-model="image.title"
@@ -149,7 +144,7 @@
                     type="text" />
             </label>
 
-            <label v-if="image.isLink === true"  key="card-item-editor-field-target">
+            <label v-if="config.isLink === true"  key="card-item-editor-field-target">
                 <span>{{ $t('ui.linkTarget') }}:</span>
                 <v-select
                     v-model="image.target"
@@ -193,6 +188,7 @@ export default {
             isLink: this.config.isLink,
             isInside: this.config.isInside,
             isCircle: this.config.isCircle,
+            aspectRatio: this.config.aspectRatio,
             type: '',
             target: '_self',
             rel: '',
@@ -499,12 +495,11 @@ export default {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.publii-block-cards-item {
+.publii-block-card-item {
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.75;
-  min-height: 25vh !important;
   max-width:  100%;
   object-fit: cover;
 }
@@ -513,11 +508,9 @@ export default {
     align-items: center;
     justify-content: center;
     opacity: 0.75;
-    min-height: 25vh;
-    max-height: 40vh;
     max-width:  100%;
+    min-height: 20vh;
     object-fit: cover;
-    aspect-ratio: 6 / 2;
     width: 100%;
     background-repeat: no-repeat;
     -webkit-background-size: cover;

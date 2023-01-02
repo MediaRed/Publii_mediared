@@ -34,6 +34,28 @@
             </span>
           </button>
         </template>
+        <template v-if="uiElement.type === 'switch'">
+          <label
+                class="switch"
+                :key="'top-menu-element-label-' + index"
+                >
+                <input
+                    :key="'top-menu-element-label-input-checkbox' + index"
+                    class="checkbox"
+                    :class="{'checked':$parent.config[uiElement.configKey]}"
+                    v-model="$parent.config[uiElement.configKey]"
+                    :checked="$parent.config[uiElement.configKey]"
+                    :options="uiElement.options"
+                    :clearable="uiElement.clearable"
+                    :searchable="uiElement.searchable"
+                    v-on:change="$parent.config[uiElement.configKey] = $event.target.value"
+                    v-on:input="$parent.config[uiElement.configKey] = $event.target.value"
+                    @input="updateConfig(uiElement.configKey,$event.target.value)" 
+                    type="checkbox" />
+                <span class="slider"></span>
+                <span class="placeholder">{{ uiElement.label }}</span>
+            </label>
+        </template>
         <template v-else-if="uiElement.type === 'select'">
           <label :key="'top-menu-element-label-' + index">
             {{ uiElement.label }}
@@ -44,6 +66,7 @@
             :options="uiElement.options"
             :clearable="uiElement.clearable"
             :searchable="uiElement.searchable"
+            @input="updateConfig(uiElement.configKey,$event)" 
             v-model="$parent.config[uiElement.configKey]" />
         </template>
         <template v-else-if="uiElement.type === 'input' && $parent.config[uiElement.configKey] && $parent.config[uiElement.configKey] === 'Custom' ">
@@ -55,6 +78,7 @@
             :searchable="uiElement.searchable"
             v-model="$parent.config[uiElement.configKey]" />
         </template>
+
       </template>
       <button
         v-if="$parent.$parent.blockType !== 'publii-readmore'"
@@ -188,6 +212,29 @@ export default {
 
       return false;
     },
+    updateConfig (field, value) {
+      // check aspect ratio if isCircle
+        // set aspect ratio to 1
+      if (field === "isCircle") {
+        this.$parent.config.aspect_ratio = (field === "isCircle" && value === "on")  ? "Circle" : "16 / 9";
+        this.$parent.config[field] = (this.$parent.config[field] && this.$parent.config[field] === false) ? true : false;
+      }
+      // check isCircle if aspet-ratio is circle
+      if ( field === "aspect_ratio") {
+        console.log("aspect-ratio");
+        this.$parent.config.isCircle = (value === "Circle") ? 1 : 0;
+        this.$parent.config[field] = value;
+      }
+      if ( field === "isLink") {
+        console.log("is link");
+        this.$parent.config.isLink = (this.$parent.config[field] && this.$parent.config[field] === false) ? true : false;
+      }
+      if ( field === "inInside") {
+        this.$parent.config.isInside = (this.$parent.config[field] && this.$parent.config[field] === false) ? true : false;
+      }
+      console.log("field", field);
+      console.log("value", value);
+    },
     getSetting (fieldName) {
       let index = this.advancedConfig.findIndex(field => field.name === fieldName);
       return this.advancedConfig[index];
@@ -202,6 +249,8 @@ export default {
 
 <style lang="scss">
 @import '../../../../scss/variables.scss';
+
+
 
 .wrapper-ui-top-menu {
   font-family: var(--font-base);
@@ -272,7 +321,75 @@ export default {
          fill: var(--white);
       }
   }
+  .switch input
+  {
+    display: none;
+  }
+  .switch 
+  {
+    display: inline-flex;
+    width: 10rem; /*=w*/
+    height: 2.5rem; /*=h*/
+    margin: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    position: relative;
+    transform: translateY(0%); /*translateX(-(w-h))*/
+    background: var(--bg-secondary);
+  }
+  .placeholder {
+      position: inherit;
+      margin-left: 1em;
+  }
+  .slider
+  {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 30px;
+    width: 100%;
+    box-shadow: 0 0 0 1px var(--input-border-color), 0 0 4px var(--input-border-color);
+    cursor: pointer;
+    border: 1px solid transparent;
+    overflow: hidden;
+    transition: 0.2s;
+  }
+  .slider:before
+  {
+    position: relative;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: var(--input-border-color);
+    border-radius: 30px;
+    transform: translateX(-30px); /*translateX(-(w-h))*/
+    transition: 0.2s;
+  }
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
 
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+  .wrapper-ui-top-menu .slider input:checked + .slider:before
+  {
+    transform: translateX(30px); /*translateX(w-h)*/
+    background-color: limeGreen;
+  }
+  .wrapper-ui-top-menu .slider input:checked + .slider
+  {
+    box-shadow: 0 0 0 2px limeGreen, 0 0 8px limeGreen;
+  }
+  
   .multiselect {
     font-size: 13px;
     min-height: auto;

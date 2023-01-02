@@ -356,6 +356,7 @@
         "ratioSquare": "Square",
         "ratioCustom": "Custom",
         "isCircular": "The image is circular",
+        "isCircle": "The image is circular",
         "dropFeaturedImageOr": "Soltar imagen destacada aquí o",
         "dropToUploadPhotoOr": "Suelta para subir tu foto o",
         "eightColumns": "8 columnas",

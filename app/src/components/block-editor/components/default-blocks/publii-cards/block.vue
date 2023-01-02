@@ -150,6 +150,10 @@ export default {
       config: {
         imageAlign: 'center',
         columns: 3,
+        isCircle: false,
+        isInside: false,
+        isLink: false,
+        aspect_ratio: "16/9",
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
           id: this.getAdvancedConfigDefaultValue('id')
@@ -169,46 +173,60 @@ export default {
           options: [1, 2, 3, 4, 5, 6, 7, 8]
         },
         {
+          activeState: function () { return this.config.aspect_ratio === this.value; },
+          onClick: function () { this.config.aspect_ratio === this.value },
           type: 'select',
           label: this.$t('image.aspect-ratio'),
           configKey: 'aspect_ratio',
           clearable: false,
           searchable: false,
           cssClasses: 'is-narrow',
-          options: ['21 / 9', '16 / 9', '4 / 3', 'Square', 'Circular', 'Custom']
+          options: ['21 / 9', '16 / 9', '4 / 3', 'Square', 'Circle', 'Custom']
         },
         {
           activeState: function () { return this.config.aspect_ratio === this.value; },
+          onClick: function () { this.config.aspect_ratio === this.value },
           type: 'input',
           label: this.$t('image.aspect-ratio'),
           configKey: 'aspect_ratio',
           clearable: false,
           searchable: false,
           cssClasses: 'is-narrow',
-          value: this.aspect_ratio
         },
         {
           activeState: function () { return this.config.isCircle === this.value; },
+          onClick: function () { this.config.isCircle === this.value },
           type: 'switch',
           label: this.$t('image.isCircle'),
           configKey: 'isCircle',
           clearable: false,
           searchable: false,
           cssClasses: 'is-narrow',
-          value: this.isCircle
         },
         {
           activeState: function () { return this.config.isInside === this.value; },
+          onClick: function () { this.config.isInside === this.value },
           type: 'switch',
           label: this.$t('image.isInside'),
           configKey: 'isInside',
           clearable: false,
           searchable: false,
           cssClasses: 'is-narrow',
-          value: this.isInside
+        },
+        {
+          activeState: function () { return this.config.isLink === this.value; },
+          onClick: function () { this.config.isLink === this.value },
+          type: 'switch',
+          label: this.$t('image.isLink'),
+          configKey: 'isLink',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+          value: this.isLink
         },
         {
           activeState: function () { return this.config.aspect_ratio === this.value; },
+          onClick: function () { this.config.aspect_ratio === this.value },
           type: 'input',
           label: this.$t('image.aspect-ratio'),
           configKey: 'aspect_ratio',
