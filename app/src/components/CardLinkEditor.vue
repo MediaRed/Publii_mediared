@@ -18,7 +18,7 @@
                 :class="{ circular: cardConfig.isCircle}"
                 flex 
                 items-end 
-                style="{backgroundImage: `url(${image.thumbnailSrc})`, aspectRatio: `${cardConfig.aspectRatio}`}"
+                style="{backgroundImage: `url(${image.thumbnailSrc})`, aspectRatio: ${cardConfig.aspectRatio}}"
                 >
                     <h1 v-if="cardConfig.isInside === true" class="publii-block-card-title" >{{image.title}}</h1>
                     <figcaption v-if="cardConfig.isInside === true">{{image.caption}}</figcaption>
