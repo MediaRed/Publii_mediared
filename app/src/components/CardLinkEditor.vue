@@ -3,10 +3,10 @@
         :key="'card-item-view-' + id"
         class="card-options-container">
         <div class="card-options">
-            <h2>
+            <h6>
                 <template v-if="cardItemID !== ''">{{ $t('card.editCardItem') }}</template>
                 <template v-if="cardItemID === ''">{{ $t('card.addNewCardItem') }}</template>
-            </h2>
+            </h6>
 
             <span
                 class="options-sidebar-close"
@@ -260,6 +260,7 @@ export default {
             this.isLink= params.isLink || 0;
             this.isInside = params.isInside || 0;
             this.isCircle = params.isCircle || 0;
+            this.aspectRatio = params.aspectRatio || 1;
             this.image = params.image || '';
             this.cssClass = params.cssClass || '';
             this.target = params.target || '_self';
@@ -313,6 +314,7 @@ export default {
             this.isLink = this.cardConfig.isLink;
             this.isInside= this.cardConfig.isInside;
             this.isCircle= this.cardConfig.isCircle;
+            this.aspectRatio = this.cardConfig.aspectRatio;
             this.target = '_self';
             this.rel = '';
             this.cssClass = '';
@@ -396,6 +398,7 @@ export default {
                 isLink: this.isLink,
                 isInside: this.isInside,
                 isCircle: this.isCircle,
+                aspectRatio: this.aspectRatio,
                 target: this.target,
                 rel: this.rel,
                 link: this.getLinkValue(),
@@ -434,6 +437,7 @@ export default {
                 isLink: this.isLink,
                 isInside:this.isInside,
                 isCircle: this.isCircle,
+                aspectRatio: this.aspectRatio,
                 target: this.target,
                 rel: this.rel,
                 link: this.getLinkValue(),

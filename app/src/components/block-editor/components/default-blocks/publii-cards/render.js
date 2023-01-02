@@ -55,12 +55,12 @@ function render (blockData) {
   
   for (let i = 0; i < blockData.content.images.length; i++) {
     let img = blockData.content.images[i];
-    const href = (img.isLink) ? getHrefFromLink(img) : "";
-    const circular = (img.isCircle) ? " circular" : "";
-    const inside = (img.isInside) ? "internal" : "external";
+    const href = (blockData.config.isLink) ? getHrefFromLink(img) : "";
+    const circular = (blockData.config.isCircle) ? " circular" : "";
+    const inside = (blockData.config.isInside) ? "internal" : "external";
     images += `<figure class="cards__item ${inside} col${col}" >
       <a class="card_link ${inside}" href="${href}" data-size="${img.dimensions}">
-        <div class="card_wrapper ${circular}" :class="{heigh: ${img.height}, overflow: hidden}">
+        <div class="card_wrapper ${circular}" :class="{heigh: ${img.height}, overflow: hidden, aspect-ratio: ${config.aspectRatio}}">
           <img 
             class="card_image ${inside} ${circular}"
             {{#if @config.site.responsiveImages}}
