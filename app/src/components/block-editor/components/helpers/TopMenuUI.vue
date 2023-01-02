@@ -217,20 +217,20 @@ export default {
         // set aspect ratio to 1
       if (field === "isCircle") {
         this.$parent.config.aspect_ratio = (field === "isCircle" && value === "on")  ? "Circle" : "16 / 9";
-        this.$parent.config[field] = (this.$parent.config[field] && this.$parent.config[field] === false) ? true : false;
+        this.$parent.config[field] = (this.$parent.config[field] && this.$parent.config[field] === "off") ? "on" : "off";
       }
       // check isCircle if aspet-ratio is circle
       if ( field === "aspect_ratio") {
         console.log("aspect-ratio");
-        this.$parent.config.isCircle = (value === "Circle") ? 1 : 0;
+        this.$parent.config.isCircle = (value === "Circle") ? "on" : "off";
         this.$parent.config[field] = value;
       }
       if ( field === "isLink") {
         console.log("is link");
-        this.$parent.config.isLink = (this.$parent.config[field] && this.$parent.config[field] === false) ? true : false;
+        this.$parent.config.isLink = (this.$parent.config[field] && this.$parent.config[field] === "off") ? "on" : "off";
       }
       if ( field === "inInside") {
-        this.$parent.config.isInside = (this.$parent.config[field] && this.$parent.config[field] === false) ? true : false;
+        this.$parent.config.isInside = (this.$parent.config[field] && this.$parent.config[field] === "off") ? "on" : "off";
       }
       console.log("field", field);
       console.log("value", value);

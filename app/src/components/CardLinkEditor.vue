@@ -15,13 +15,13 @@
                 &times;
             </span>
             <div class="publii-block-card-item-image"
-                :class="{ circular: config.isCircle}"
+                :class="{ circular: cardConfig.isCircle}"
                 flex 
                 items-end 
-                :style="{ backgroundImage: `url(${image.thumbnailSrc})`, aspectRatio:  `${config.aspectRatio}`}"
+                style="{backgroundImage: `url(${image.thumbnailSrc})`, aspectRatio: `${cardConfig.aspectRatio}`}"
                 >
-                    <h1 v-if="config.isInside === true" class="publii-block-card-title" >{{image.title}}</h1>
-                    <figcaption v-if="config.isInside === true">{{image.caption}}</figcaption>
+                    <h1 v-if="cardConfig.isInside === true" class="publii-block-card-title" >{{image.title}}</h1>
+                    <figcaption v-if="cardConfig.isInside === true">{{image.caption}}</figcaption>
             </div>
            
             <label
@@ -35,7 +35,7 @@
                     type="text">
             </label>
             <label
-                v-if="config.isInside === false || !config.isInside"
+                v-if="cardConfig.isInside === false || !cardConfig.isInside"
                 :class="{ 'is-invalid': errors.indexOf('subtitle') > -1 }"
                 key="card-item-editor-field-subtitle">
                 <span>{{ $t('editor.enterSubtitle') }}</span>
@@ -47,7 +47,7 @@
             </label>
             <textarea required="required" v-model="image.caption" rows="5" :placeholder="$t('editor.enterBody')"/>
             <label
-                v-if="config.isLink === true"
+                v-if="cardConfig.isLink === true"
                 :class="{ 'is-invalid': errors.indexOf('type') > -1 }"
                 key="card-item-editor-field-type">
                 <span>{{ $t('card.type') }}</span>
@@ -62,7 +62,7 @@
             </label>
 
             <label
-                v-if="config.isLink === true && image.type === 'internal'"
+                v-if="cardConfig.isLink === true && image.type === 'internal'"
                 :class="{ 'is-invalid': errors.indexOf('internalLink') > -1 }"
                 key="card-item-editor-field-internal">
                 <span>{{ $t('card.internalLink') }}</span>
@@ -74,7 +74,7 @@
             </label>
 
             <label
-                v-if="config.isLink === true && image.type === 'external'"
+                v-if="cardConfig.isLink === true && image.type === 'external'"
                 :class="{ 'is-invalid': errors.indexOf('externalLink') > -1 }"
                 key="card-item-editor-field-external">
                 <span>{{ $t('card.externalURL') }}</span>
@@ -86,7 +86,7 @@
             </label>
 
             <label
-                v-if="config.isLink === true && image.type === 'tag'"
+                v-if="cardConfig.isLink === true && image.type === 'tag'"
                 :class="{ 'is-invalid': errors.indexOf('tagPage') > -1 }"
                 key="card-item-editor-field-tag">
                 <span>{{ $t('tag.tagPage') }}</span>
@@ -103,7 +103,7 @@
             </label>
 
             <label
-                v-if="config.isLink === true && image.type === 'author'"
+                v-if="cardConfig.isLink === true && image.type === 'author'"
                 :class="{ 'is-invalid': errors.indexOf('authorPage') > -1 }"
                 key="card-item-editor-field-author">
                 <span>{{ $t('author.authorPage') }}</span>
@@ -120,7 +120,7 @@
             </label>
 
             <label
-                v-if="config.isLink === true && image.type === 'post'"
+                v-if="cardConfig.isLink === true && image.type === 'post'"
                 :class="{ 'is-invalid': errors.indexOf('postPage') > -1 }"
                 key="card-item-editor-field-post">
                 <span>{{ $t('post.postPage') }}</span>
@@ -136,7 +136,7 @@
                     :placeholder="$t('post.selectPostPage')"></v-select>
             </label>
 
-            <label  v-if="config.isLink === true" key="card-item-editor-field-title">
+            <label  v-if="cardConfig.isLink === true" key="card-item-editor-field-title">
                 <span>{{ $t('link.linkTitleAttribute') }}</span>
                 <input
                     v-model="image.title"
@@ -144,7 +144,7 @@
                     type="text" />
             </label>
 
-            <label v-if="config.isLink === true"  key="card-item-editor-field-target">
+            <label v-if="cardConfig.isLink === true"  key="card-item-editor-field-target">
                 <span>{{ $t('ui.linkTarget') }}:</span>
                 <v-select
                     v-model="image.target"
@@ -155,7 +155,6 @@
                     :placeholder="$t('card.selectLinkTarget')"></v-select>
             </label>
         </div>
-        <div></div>
     </div>
 </template>
 
@@ -171,10 +170,14 @@ export default {
         config: {
             type: Array,
             required: true
+        },
+        cardConfig: {
+            type: Object,
+            required: true
         }
     },
     data () {
-        console.log('config',this.config);
+        console.log('card config',this.cardConfig);
         return {
             isVisible: false,
             id: '',
@@ -184,11 +187,11 @@ export default {
             label: '',
             title: '',
             image: this.image,
-            config: this.config,
-            isLink: this.config.isLink,
-            isInside: this.config.isInside,
-            isCircle: this.config.isCircle,
-            aspectRatio: this.config.aspectRatio,
+            config: this.cardcardConfig,
+            isLink: this.cardConfig.isLink,
+            isInside: this.cardConfig.isInside,
+            isCircle: this.cardConfig.isCircle,
+            aspectRatio: this.cardConfig.aspectRatio,
             type: '',
             target: '_self',
             rel: '',
@@ -251,7 +254,7 @@ export default {
                 this.cardID = '';
             }
             console.log("image", params.image);
-            this.config = params.config || [] ;
+            this.cardConfig = params.cardConfig || [] ;
             this.label = params.label || '';
             this.title = params.title || '';
             this.isLink= params.isLink || 0;
@@ -307,9 +310,9 @@ export default {
             this.label = '';
             this.title = '';
             this.type = '';
-            this.isLink = this.config.isLink;
-            this.isInside= this.config.isInside;
-            this.isCircle= this.config.isCircle;
+            this.isLink = this.cardConfig.isLink;
+            this.isInside= this.cardConfig.isInside;
+            this.isCircle= this.cardConfig.isCircle;
             this.target = '_self';
             this.rel = '';
             this.cssClass = '';
@@ -327,8 +330,8 @@ export default {
         },
         validate() {
             this.errors = [];
-            if(!this.config) {
-                this.errors.push('config');
+            if(!this.cardConfig) {
+                this.errors.push('cardConfig');
             }
             if(this.label === '') {
                 this.errors.push('label');

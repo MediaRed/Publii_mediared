@@ -1,4 +1,5 @@
 <template>
+ 
   <div
     :class="{ 'publii-block-cards-wrapper': true, 'is-empty': isEmpty }"
     @dragover.stop.prevent="dragOver"
@@ -55,7 +56,7 @@
           <card-link-editor
             ref="card-link-editor"
             v-bind:image="image"
-            v-bind:config="config"
+            v-bind:cardConfig="config"
             :config="linkEditorConfig"
             :advancedConfig="configForm" />
       </div>
@@ -96,7 +97,10 @@
       class="publii-block-cards-uploader-loader-overlay">
       <span class="publii-block-cards-uploader-loader"></span>
     </div>
-
+    <div>isCircle : {{config.isCircle}}</div>
+    <div>isLink : {{config.isLink}}</div>
+    <div>isInside : {{config.isInside}}</div>
+    <div>Aspect ratio : {{config.aspectRatio}}</div>
     <top-menu
       ref="top-menu"
       :config="linkEditorConfig"
@@ -177,7 +181,7 @@ export default {
           onClick: function () { this.config.aspect_ratio === this.value },
           type: 'select',
           label: this.$t('image.aspect-ratio'),
-          configKey: 'aspect_ratio',
+          configKey: 'aspectRatio',
           clearable: false,
           searchable: false,
           cssClasses: 'is-narrow',
@@ -188,7 +192,7 @@ export default {
           onClick: function () { this.config.aspect_ratio === this.value },
           type: 'input',
           label: this.$t('image.aspect-ratio'),
-          configKey: 'aspect_ratio',
+          configKey: 'aspectRatio',
           clearable: false,
           searchable: false,
           cssClasses: 'is-narrow',
