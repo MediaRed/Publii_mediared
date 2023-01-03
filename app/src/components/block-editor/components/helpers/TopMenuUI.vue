@@ -44,13 +44,7 @@
                     class="checkbox"
                     :class="{'checked':$parent.config[uiElement.configKey]}"
                     v-model="$parent.config[uiElement.configKey]"
-                    :checked="$parent.config[uiElement.configKey]"
-                    :options="uiElement.options"
-                    :clearable="uiElement.clearable"
-                    :searchable="uiElement.searchable"
-                    v-on:change="$parent.config[uiElement.configKey] = $event.target.value"
-                    v-on:input="$parent.config[uiElement.configKey] = $event.target.value"
-                    @input="updateConfig(uiElement.configKey,$event.target.value)" 
+                    v-on:change="updateConfig(uiElement.configKey,$event.target.value)"
                     type="checkbox" />
                 <span class="slider"></span>
                 <span class="placeholder">{{ uiElement.label }}</span>
@@ -229,7 +223,7 @@ export default {
         console.log("is link");
         this.$parent.config.isLink = (this.$parent.config[field] && this.$parent.config[field] === "off") ? "on" : "off";
       }
-      if ( field === "inInside") {
+      if ( field === "isInside") {
         this.$parent.config.isInside = (this.$parent.config[field] && this.$parent.config[field] === "off") ? "on" : "off";
       }
       console.log("field", field);
