@@ -20,7 +20,7 @@
         :key="'card-item-' + index"
         class="publii-block-cards-item"
         :class="[config.isInside === true ? {circular: config.isCircle} : '']"
-        :style="[config.isInside === true ? {width: (100/parseInt(config.columns) - config.columns)+'%' , backgroundRepeat: no-repeat, backgroundImage: `url(${image.src})` } : {width: (100/parseInt(config.columns) - config.columns)+'%'}]"
+        :style="[config.isInside === true ? {width: (100/parseInt(config.columns) - config.columns)+'%' , backgroundRepeat: no-repeat, backgroundImage: `url(${image.src})` , aspectRatio: config.aspectRatio} : {width: (100/parseInt(config.columns) - config.columns)+'%', aspectRatio: config.aspectRatio}]"
         @click="navigate(image)"
         >
         <img
@@ -764,6 +764,7 @@ export default {
   .publii-block-cards[data-cols="#{$i}"] .publii-block-cards-item {
     flex-grow: 1;
     width: calc(100% / #{$i});
+    min-height: 25vh;
   }
 }
 
