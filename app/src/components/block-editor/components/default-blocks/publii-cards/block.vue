@@ -185,7 +185,7 @@ export default {
           clearable: false,
           searchable: false,
           cssClasses: 'is-narrow',
-          options: ['21 / 9', '16 / 9', '4 / 3', 'Square', 'Circle', 'Custom']
+          options: [`unset`,'21 / 9', '16 / 9', '4 / 3', 'Square', 'Circle', 'Custom']
         },
         {
           activeState: function () { return this.config.aspect_ratio === this.value; },
@@ -500,6 +500,7 @@ export default {
   height: auto;
 }
 .publii-block-card-item-image.circular {
+  flex-direction: column;
   width: fit-content;
 }
 .publii-block-card-item-image > img {

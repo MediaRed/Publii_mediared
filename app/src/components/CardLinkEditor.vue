@@ -527,10 +527,10 @@ export default {
     -o-background-size: cover;
     background-size: cover;
 }
-.circular {
-    aspect-ratio: 1;
+.publii-block-card-item-image.circular {
     border-radius: 50%;
     max-width: unset;
+    width: inherit;
 }
 .card-options {
     display: flex;

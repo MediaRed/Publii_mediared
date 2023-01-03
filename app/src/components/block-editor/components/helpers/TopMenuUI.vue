@@ -44,7 +44,7 @@
                     class="checkbox"
                     :class="{'checked':$parent.config[uiElement.configKey]}"
                     v-model="$parent.config[uiElement.configKey]"
-                    v-on:change="updateConfig(uiElement.configKey,$event.target.value)"
+                    v-on:input="updateConfig(uiElement.configKey,$event.target.value)"
                     type="checkbox" />
                 <span class="slider"></span>
                 <span class="placeholder">{{ uiElement.label }}</span>
@@ -70,7 +70,7 @@
             :options="uiElement.options"
             :clearable="uiElement.clearable"
             :searchable="uiElement.searchable"
-            v-model="$parent.config[uiElement.configKey]" />
+            v-model="$parent.config['aspectRatioCustom']" />
         </template>
 
       </template>
@@ -209,22 +209,22 @@ export default {
     updateConfig (field, value) {
       // check aspect ratio if isCircle
         // set aspect ratio to 1
+        
       if (field === "isCircle") {
-        this.$parent.config.aspect_ratio = (field === "isCircle" && value === "on")  ? "Circle" : "16 / 9";
-        this.$parent.config[field] = (this.$parent.config[field] && this.$parent.config[field] === "off") ? "on" : "off";
+        this.$parent.config.aspectRatio = (field === "isCircle" && value === false)  ? "Circle" : `unset`;
+        this.$parent.config[field] = (this.$parent.config[field] && this.$parent.config[field] === "off") ? true : false;
       }
       // check isCircle if aspet-ratio is circle
-      if ( field === "aspect_ratio") {
-        console.log("aspect-ratio");
-        this.$parent.config.isCircle = (value === "Circle") ? "on" : "off";
+      if ( field === "aspectRatio") {
+        this.$parent.config.isCircle = (value === "Circle") ? true : false;
         this.$parent.config[field] = value;
       }
       if ( field === "isLink") {
         console.log("is link");
-        this.$parent.config.isLink = (this.$parent.config[field] && this.$parent.config[field] === "off") ? "on" : "off";
+        this.$parent.config.isLink = (this.$parent.config[field] && this.$parent.config[field]  === "off") ? true : false;
       }
       if ( field === "isInside") {
-        this.$parent.config.isInside = (this.$parent.config[field] && this.$parent.config[field] === "off") ? "on" : "off";
+        this.$parent.config.isInside = (this.$parent.config[field] && this.$parent.config[field] === "off") ? true : false;
       }
       console.log("field", field);
       console.log("value", value);
