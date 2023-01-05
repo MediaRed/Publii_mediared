@@ -215,7 +215,7 @@ export default {
         const active = (this.$parent.config[field] && this.$parent.config[field] === false);
         const aspectRatio = active ? 'Circle' : `unset`;
         const isCircle = active ? true : false;
-        this.$parent.config.aspectRatio = aspectRatio;
+        this.$parent.config["aspectRatio"] = aspectRatio;
         this.$parent.config[field] = isCircle;
         
         console.log("isCircle stored value",this.$parent.config[field] );
