@@ -211,9 +211,15 @@ export default {
         // set aspect ratio to 1
         
       if (field === "isCircle") {
-        this.$parent.config[field] = (this.$parent.config[field] && this.$parent.config[field] === "off") ? true : false;
-        this.$parent.config.aspectRatio = (value === (this.$parent.config[field] === "on"))  ? 'Circle' : `unset`;
-      }
+        const active = (this.$parent.config[field] && this.$parent.config[field] === false);
+        const aspectRatio = active ? 'Circle' : `unset`;
+        const isCircle = active ? true : false;
+        this.$parent.config.aspectRatio = aspectRatio;
+        this.$parent.config[field] = isCircle;
+        
+        console.log("isCircle stored value",this.$parent.config[field] );
+        console.log("aspect ratio stored value",this.$parent.config.aspectRatio )
+      } 
       // check isCircle if aspet-ratio is circle
       if ( field === "aspectRatio") {
         this.$parent.config.isCircle = (value === "Circle") ? true : false;
@@ -334,6 +340,8 @@ export default {
   .placeholder {
       position: inherit;
       margin-left: 1em;
+      font-size: .8em;
+      align-items: center;
   }
   .slider
   {
