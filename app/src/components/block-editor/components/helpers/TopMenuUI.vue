@@ -211,6 +211,7 @@ export default {
         // set aspect ratio to 1
         
       if (field === "isCircle") {
+        console.log("config", this.$parent.config);
         const active = (this.$parent.config[field] && this.$parent.config[field] === false);
         const aspectRatio = active ? 'Circle' : `unset`;
         const isCircle = active ? true : false;

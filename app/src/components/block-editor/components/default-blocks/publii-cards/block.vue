@@ -157,7 +157,7 @@ export default {
         isCircle: false,
         isInside: false,
         isLink: false,
-        aspect_ratio: "16/9",
+        aspectRatio: "16/9",
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
           id: this.getAdvancedConfigDefaultValue('id')
@@ -177,8 +177,8 @@ export default {
           options: [1, 2, 3, 4, 5, 6, 7, 8]
         },
         {
-          activeState: function () { return this.config.aspect_ratio === this.value; },
-          onClick: function () { this.config.aspect_ratio === this.value },
+          activeState: function () { return this.config.aspectRatio === this.value; },
+          onClick: function () { this.config.aspectRatio === this.value },
           type: 'select',
           label: this.$t('image.aspect-ratio'),
           configKey: 'aspectRatio',
@@ -188,8 +188,8 @@ export default {
           options: [`unset`,'21 / 9', '16 / 9', '4 / 3', 'Square', 'Circle', 'Custom']
         },
         {
-          activeState: function () { return this.config.aspect_ratio === this.value; },
-          onClick: function () { this.config.aspect_ratio === this.value },
+          activeState: function () { return this.config.aspectRatio === this.value; },
+          onClick: function () { this.config.aspectRatio === this.value },
           type: 'input',
           label: this.$t('image.aspect-ratio'),
           configKey: 'aspectRatio',
@@ -229,15 +229,15 @@ export default {
           value: this.isLink
         },
         {
-          activeState: function () { return this.config.aspect_ratio === this.value; },
-          onClick: function () { this.config.aspect_ratio === this.value },
+          activeState: function () { return this.config.aspectRatio === this.value; },
+          onClick: function () { this.config.aspectRatio === this.value },
           type: 'input',
           label: this.$t('image.aspect-ratio'),
-          configKey: 'aspect_ratio',
+          configKey: 'aspectRatio',
           clearable: false,
           searchable: false,
           cssClasses: 'is-narrow',
-          value: this.aspect_ratio
+          value: this.aspectRatio
         },
         {
           activeState: function () { return this.config.imageAlign === 'center'; },
