@@ -45,13 +45,13 @@ CFLAGS_CC_Debug := \
 	-std=gnu++14
 
 INCS_Debug := \
-	-I/home/tom/.electron-gyp/19.1.9/include/node \
-	-I/home/tom/.electron-gyp/19.1.9/src \
-	-I/home/tom/.electron-gyp/19.1.9/deps/openssl/config \
-	-I/home/tom/.electron-gyp/19.1.9/deps/openssl/openssl/include \
-	-I/home/tom/.electron-gyp/19.1.9/deps/uv/include \
-	-I/home/tom/.electron-gyp/19.1.9/deps/zlib \
-	-I/home/tom/.electron-gyp/19.1.9/deps/v8/include
+	-I/home/ivo/.electron-gyp/19.1.9/include/node \
+	-I/home/ivo/.electron-gyp/19.1.9/src \
+	-I/home/ivo/.electron-gyp/19.1.9/deps/openssl/config \
+	-I/home/ivo/.electron-gyp/19.1.9/deps/openssl/openssl/include \
+	-I/home/ivo/.electron-gyp/19.1.9/deps/uv/include \
+	-I/home/ivo/.electron-gyp/19.1.9/deps/zlib \
+	-I/home/ivo/.electron-gyp/19.1.9/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=bindings' \
@@ -93,13 +93,13 @@ CFLAGS_CC_Release := \
 	-std=gnu++14
 
 INCS_Release := \
-	-I/home/tom/.electron-gyp/19.1.9/include/node \
-	-I/home/tom/.electron-gyp/19.1.9/src \
-	-I/home/tom/.electron-gyp/19.1.9/deps/openssl/config \
-	-I/home/tom/.electron-gyp/19.1.9/deps/openssl/openssl/include \
-	-I/home/tom/.electron-gyp/19.1.9/deps/uv/include \
-	-I/home/tom/.electron-gyp/19.1.9/deps/zlib \
-	-I/home/tom/.electron-gyp/19.1.9/deps/v8/include
+	-I/home/ivo/.electron-gyp/19.1.9/include/node \
+	-I/home/ivo/.electron-gyp/19.1.9/src \
+	-I/home/ivo/.electron-gyp/19.1.9/deps/openssl/config \
+	-I/home/ivo/.electron-gyp/19.1.9/deps/openssl/openssl/include \
+	-I/home/ivo/.electron-gyp/19.1.9/deps/uv/include \
+	-I/home/ivo/.electron-gyp/19.1.9/deps/zlib \
+	-I/home/ivo/.electron-gyp/19.1.9/deps/v8/include
 
 OBJS :=
 
