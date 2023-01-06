@@ -25,11 +25,11 @@
                     <h1 
                         v-if="cardConfig.isInside === true" 
                         class="publii-block-card-title"
-                        :style="{color: `${cardConfig.titleColor}`}"
+                        v-bind:style="{color: `${cardConfig.titleColor}`}"
                     >{{image.title}}</h1>
                     <figcaption 
                         v-if="cardConfig.isInside === true"
-                        :style="{color: `${cardConfig.titleColor}`}"
+                        v-bind:style="{color: `${cardConfig.titleColor}`}"
                         >{{image.caption}}</figcaption>
             </div>
            
@@ -56,7 +56,7 @@
                     @keyup="cleanError('subtitle')"
                     type="text">
             </label>
-            <textarea required="required" v-model="image.caption" rows="5" :placeholder="$t('editor.enterBody')"/>
+            <textarea required="required" v-bind:style="{color: `${cardConfig.titleColor}`}" v-model="image.caption" rows="5" :placeholder="$t('editor.enterBody')"/>
             <label
                 v-if="cardConfig.isLink === true"
                 :class="{ 'is-invalid': errors.indexOf('type') > -1 }"

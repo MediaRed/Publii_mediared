@@ -162,6 +162,8 @@ export default {
         isInside: false,
         isLink: false,
         aspectRatio: "16/9",
+        setColors: false,
+        setImages: false,
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
           id: this.getAdvancedConfigDefaultValue('id')

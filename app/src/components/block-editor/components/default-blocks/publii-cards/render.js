@@ -60,9 +60,11 @@ function render (blockData) {
     const inside = (blockData.config.isInside) ? "internal" : "external";
     const inline = (blockData.config.isCircle) ? {height: img.height} : "";
     const bg = {backgroundColor: blockData.config.bgColor};
-    images += `<figure class="cards__item ${inside} col${col}" :style="${bg}">
-      <a class="card_link ${inside}" :class="${inline}" ${href} data-size="${img.dimensions}">
-        <div class="card_wrapper ${circular}" :class="{height: ${img.height}, overflow: hidden, aspect-ratio: ${blockData.config.aspectRatio}}">
+    console.log("bg", bg);
+    const aspectRatio = (blockData.config.aspectRatio && (blockData.config.aspectRatio === 'Circle' || blockData.config.aspectRatio === 'Square')) ? 1 : blockData.config.aspectRatio;
+    images += `<figure class="cards__item ${inside} col${col}" >
+      <a class="card_link ${inside}" :class="${inline}" ${href} data-size="${img.dimensions}" style="background-color: ${blockData.config.bgColor}">
+        <div class="card_wrapper ${circular}" v-bind:style="{ height: ${img.height}, overflow: 'hidden', aspectRatio: '${aspectRatio}'}">
           <img 
             class="card_image ${inside} ${circular}"
             {{#if @config.site.responsiveImages}}
@@ -74,9 +76,9 @@ function render (blockData) {
             width="${img.width}" 
             alt="${img.alt}" />
         </div>
-        <h3 class="card-title ${inside}" :style="{color: ${blockData.config.titleColor}}">${img.title}</h3>
-        <h6  class="card-subtitle ${inside}" :style="{color: ${blockData.config.titleColor}}">${img.subtitle}</h6>
-        <figcaption class="card-caption ${inside}" :style="{color: ${blockData.config.titleColor}}">{{${img.caption}}}</figcaption>
+        <h3 class="card-title ${inside}" style="color: ${blockData.config.titleColor}">${img.title}</h3>
+        <h6  class="card-subtitle ${inside}" style="color: ${blockData.config.titleColor}">${img.subtitle}</h6>
+        <figcaption class="card-caption ${inside}" style="color: ${blockData.config.titleColor}">{{${img.caption}}}</figcaption>
       </a>
     </figure>`;
   }
