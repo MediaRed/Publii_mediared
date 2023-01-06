@@ -2,7 +2,7 @@
     <div
         :key="'card-item-view-' + id"
         class="card-options-container">
-        <div class="card-options">
+        <div class="card-options" :style="{backgroundColor: cardConfig.bgColor}">
             <h6>
                 <template v-if="cardItemID !== ''">{{ $t('card.editCardItem') }}</template>
                 <template v-if="cardItemID === ''">{{ $t('card.addNewCardItem') }}</template>
@@ -19,17 +19,17 @@
                 :class="{ circular: cardConfig.isCircle}"
                 flex 
                 items-end 
-                :style="{ backgroundColor: '${cardConfig.bgColor}', backgroundImage: `url(${image.thumbnailSrc})`, aspectRatio: `${(cardConfig.aspectRatio === 'Circle') ? 1 : cardConfig.aspectRatio}`}"
+                :style="{ backgroundColor: `${cardConfig.bgColor}`, backgroundImage: `url(${image.thumbnailSrc})`, aspectRatio: `${(cardConfig.aspectRatio === 'Circle') ? 1 : cardConfig.aspectRatio}`}"
 
                 >
                     <h1 
                         v-if="cardConfig.isInside === true" 
                         class="publii-block-card-title"
-                        :style="{color: '${cardConfig.titleColor}'}"
+                        :style="{color: `${cardConfig.titleColor}`}"
                     >{{image.title}}</h1>
                     <figcaption 
                         v-if="cardConfig.isInside === true"
-                        :style="{color: '${cardConfig.titleColor}'}"
+                        :style="{color: `${cardConfig.titleColor}`}"
                         >{{image.caption}}</figcaption>
             </div>
            
@@ -39,6 +39,7 @@
                 <span>{{ $t('editor.enterTitle') }}</span>
                 <input
                     v-model="image.title"
+                    :style="{color: `${cardConfig.titleColor}`}"
                     :spellcheck="$store.state.currentSite.config.spellchecking"
                     @keyup="cleanError('title')"
                     type="text">
@@ -49,6 +50,7 @@
                 key="card-item-editor-field-subtitle">
                 <span>{{ $t('editor.enterSubtitle') }}</span>
                 <input
+                    :style="{color: `${cardConfig.titleColor}`}"
                     v-model="image.subtitle"
                     :spellcheck="false"
                     @keyup="cleanError('subtitle')"
@@ -58,6 +60,7 @@
             <label
                 v-if="cardConfig.isLink === true"
                 :class="{ 'is-invalid': errors.indexOf('type') > -1 }"
+
                 key="card-item-editor-field-type">
                 <span>{{ $t('card.type') }}</span>
                 <v-select

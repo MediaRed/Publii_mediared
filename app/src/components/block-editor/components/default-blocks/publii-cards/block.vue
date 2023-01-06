@@ -20,7 +20,7 @@
         :key="'card-item-' + index"
         class="publii-block-cards-item"
         :class="[config.isInside === true ? {circular: config.isCircle} : '']"
-        :style="[config.isInside === true ? {width: (100/parseInt(config.columns) - config.columns)+'%' , backgroundRepeat: no-repeat, backgroundColor: '${config.bgColor}',backgroundImage: `url(${image.src})` , aspectRatio: config.aspectRatio} : {width: (100/parseInt(config.columns) - config.columns)+'%', aspectRatio: config.aspectRatio}]"
+        :style="[config.isInside === true ? {width: (100/parseInt(config.columns) - config.columns)+'%' , backgroundRepeat: no-repeat, backgroundColor: config.bgColor ,backgroundImage: `url(${image.src})` , aspectRatio: config.aspectRatio} : {width: (100/parseInt(config.columns) - config.columns)+'%', aspectRatio: config.aspectRatio}]"
         @click="navigate(image)"
         >
         <img
@@ -30,9 +30,9 @@
             :height="image.height"
             :width="image.width" 
             :class="{circular: config.isCircle}" />
-        <h3  v-if="image.title" class="card-title" :style="{color: '${config.titleColor}'}">{{image.title}}</h3>
-        <h6  v-if="config.isInside === false || !config.isInside" class="card-subtitle" :style="{color: '${config.titleColor}'}">{{image.subtitle}}</h6>
-        <figcaption v-if="image.caption" class="card-caption" :style="{color: '${config.titleColor}'}">{{image.caption}}</figcaption>
+        <h3  v-if="image.title" class="card-title" :style="{color: config.titleColor}">{{image.title}}</h3>
+        <h6  v-if="config.isInside === false || !config.isInside" class="card-subtitle" :style="{color: config.titleColor}">{{image.subtitle}}</h6>
+        <figcaption v-if="image.caption" class="card-caption" :style="{color: config.titleColor}">{{image.caption}}</figcaption>
         <button
           class="publii-block-cards-item-delete"
           @click.stop.prevent="removeImage(index)">
@@ -52,7 +52,7 @@
       <div
         v-for="(image, index) of content.images"
         :key="'card-item-' + index"
-        class="publii-block-card" :style="{width: (100/parseInt(config.columns)-parseInt(config.columns))+'%'}">
+        class="publii-block-card" :style="{backgroundColor: config.bgColor, width: (100/parseInt(config.columns)-parseInt(config.columns))+'%'}">
           <card-link-editor
             ref="card-link-editor"
             v-bind:image="image"

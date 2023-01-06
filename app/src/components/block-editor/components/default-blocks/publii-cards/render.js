@@ -59,7 +59,8 @@ function render (blockData) {
     const circular = (blockData.config.isCircle) ? " circular" : "";
     const inside = (blockData.config.isInside) ? "internal" : "external";
     const inline = (blockData.config.isCircle) ? {height: img.height} : "";
-    images += `<figure class="cards__item ${inside} col${col}" >
+    const bg = {backgroundColor: blockData.config.bgColor};
+    images += `<figure class="cards__item ${inside} col${col}" :style="${bg}">
       <a class="card_link ${inside}" :class="${inline}" ${href} data-size="${img.dimensions}">
         <div class="card_wrapper ${circular}" :class="{height: ${img.height}, overflow: hidden, aspect-ratio: ${blockData.config.aspectRatio}}">
           <img 
@@ -73,9 +74,9 @@ function render (blockData) {
             width="${img.width}" 
             alt="${img.alt}" />
         </div>
-        <h3 class="card-title ${inside}">${img.title}</h3>
-        <h6  class="card-subtitle ${inside}">${img.subtitle}</h6>
-        <figcaption class="card-caption ${inside}">{{${img.caption}}}</figcaption>
+        <h3 class="card-title ${inside}" :style="{color: ${blockData.config.titleColor}}">${img.title}</h3>
+        <h6  class="card-subtitle ${inside}" :style="{color: ${blockData.config.titleColor}}">${img.subtitle}</h6>
+        <figcaption class="card-caption ${inside}" :style="{color: ${blockData.config.titleColor}}">{{${img.caption}}}</figcaption>
       </a>
     </figure>`;
   }
