@@ -129,7 +129,9 @@
         "textSeparator": "Text separator",
         "externalURL": "External URL  (https://url.com)",
         "selectLinkTarget": "Select link target",
-        "editCardItem": "Edit card item"
+        "editCardItem": "Edit card item",
+        "setImages": "Images",
+        "setColors": "Colors"
     },
     "editor": {
         "addHeading": "Add heading",
@@ -359,6 +361,9 @@
         "isCircle": "The image is circular",
         "isInside": "Inside",
         "isLink": "Link",
+        "bgColor": "Background color",
+        "titleColor": "Title color",
+        "shadowColor": "Text shadow color",
         "dropFeaturedImageOr": "Drop featured image here or",
         "dropToUploadPhotoOr": "Drop to upload your photo or",
         "eightColumns": "8 columns",

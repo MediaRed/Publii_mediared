@@ -35,26 +35,52 @@
           </button>
         </template>
         <template v-if="uiElement.type === 'switch'">
-          <label
-                class="switch"
-                :key="'top-menu-element-label-' + index"
-                >
-                <input
-                    :key="'top-menu-element-label-input-checkbox' + index"
-                    class="checkbox"
-                    :class="{'checked':$parent.config[uiElement.configKey]}"
-                    v-model="$parent.config[uiElement.configKey]"
-                    v-on:input="updateConfig(uiElement.configKey,$event.target.value)"
-                    type="checkbox" />
-                <span class="slider"></span>
-                <span class="placeholder">{{ uiElement.label }}</span>
-            </label>
+          <div 
+           v-if="$parent.config.setImages === true || ['isLink', 'isInside', 'setImages','setColors'].some(key => key === uiElement.configKey)"
+          >
+            <label
+                  class="switch"
+                  :key="'top-menu-element-label-' + index"
+                  >
+                  <input
+                      :key="'top-menu-element-label-input-checkbox' + index"
+                      class="checkbox"
+                      :class="{'checked':$parent.config[uiElement.configKey]}"
+                      v-model="$parent.config[uiElement.configKey]"
+                      v-on:input="updateConfig(uiElement.configKey,$event.target.value)"
+                      type="checkbox" />
+                  <span class="slider"></span>
+                  <span class="placeholder">{{ uiElement.label }}</span>
+              </label>
+          </div>
         </template>
         <template v-else-if="uiElement.type === 'select'">
+          <div 
+           v-if="$parent.config.setImages === true || uiElement.configKey === 'columns'" 
+          >
+            <label :key="'top-menu-element-label-' + index">
+              {{ uiElement.label }}
+            </label>
+            <vue-select
+              :key="'top-menu-element-' + index"
+              :class="uiElement.cssClasses"
+              :options="uiElement.options"
+              :clearable="uiElement.clearable"
+              :searchable="uiElement.searchable"
+              @input="updateConfig(uiElement.configKey,$event)" 
+              v-model="$parent.config[uiElement.configKey]" />
+            </div>
+        </template>
+        <template v-else-if="uiElement.type === 'color'">
+          <div 
+           v-if="$parent.config.setColors === true"
+          >
           <label :key="'top-menu-element-label-' + index">
             {{ uiElement.label }}
           </label>
-          <vue-select
+          <color-picker
+            class="color cards-colorpicker"
+            type="colorpicker"
             :key="'top-menu-element-' + index"
             :class="uiElement.cssClasses"
             :options="uiElement.options"
@@ -62,8 +88,13 @@
             :searchable="uiElement.searchable"
             @input="updateConfig(uiElement.configKey,$event)" 
             v-model="$parent.config[uiElement.configKey]" />
+          </div>
+          
         </template>
         <template v-else-if="uiElement.type === 'input' && $parent.config[uiElement.configKey] && $parent.config[uiElement.configKey] === 'Custom' ">
+          <div 
+           v-if="$parent.config.setImages === true" 
+          >
           <input
             :key="'top-menu-element-' + index"
             :class="uiElement.cssClasses"
@@ -71,6 +102,7 @@
             :clearable="uiElement.clearable"
             :searchable="uiElement.searchable"
             v-model="$parent.config['aspectRatioCustom']" />
+          </div>
         </template>
 
       </template>
@@ -138,6 +170,9 @@ export default {
     },
     isVisible () {
       return this.$parent.$parent.uiOpened;
+    },
+    toggleSetColors () {
+      return this.$parent.config.setColors = (this.$parent.config.setColors === true) ? false : true;
     },
     settingsAreChanged () {
       if (!this.advancedConfig) {
@@ -321,6 +356,9 @@ export default {
          svg {
          fill: var(--white);
       }
+  }
+  .cards-colorpicker {
+    width: 6em;
   }
   .switch input
   {

@@ -19,11 +19,18 @@
                 :class="{ circular: cardConfig.isCircle}"
                 flex 
                 items-end 
-                :style="{ backgroundImage: `url(${image.thumbnailSrc})`, aspectRatio: `${cardConfig.aspectRatio}`}"
+                :style="{ backgroundColor: '${cardConfig.bgColor}', backgroundImage: `url(${image.thumbnailSrc})`, aspectRatio: `${(cardConfig.aspectRatio === 'Circle') ? 1 : cardConfig.aspectRatio}`}"
 
                 >
-                    <h1 v-if="cardConfig.isInside === true" class="publii-block-card-title" >{{image.title}}</h1>
-                    <figcaption v-if="cardConfig.isInside === true">{{image.caption}}</figcaption>
+                    <h1 
+                        v-if="cardConfig.isInside === true" 
+                        class="publii-block-card-title"
+                        :style="{color: '${cardConfig.titleColor}'}"
+                    >{{image.title}}</h1>
+                    <figcaption 
+                        v-if="cardConfig.isInside === true"
+                        :style="{color: '${cardConfig.titleColor}'}"
+                        >{{image.caption}}</figcaption>
             </div>
            
             <label
@@ -194,6 +201,9 @@ export default {
             isInside: this.cardConfig.isInside,
             isCircle: this.cardConfig.isCircle,
             aspectRatio: this.cardConfig.aspectRatio,
+            bgColor: (this.cardConfig.bgColor) ? this.cardConfig.bgColor : 'transparent',
+            titleColor: (this.cardConfig.titleColor) ? this.cardConfig.titleColor : '#FFFFFF',
+            shadowColor: (this.cardConfig.shadowColor) ? this.cardConfig.shadowColor : 'rgb(81 67 21 / 80%)',
             type: '',
             target: '_self',
             rel: '',
@@ -263,6 +273,9 @@ export default {
             this.isInside = params.isInside || 0;
             this.isCircle = params.isCircle || 0;
             this.aspectRatio = params.aspectRatio || 1;
+            this.bgColor = params.bgColor || 'transparent';
+            this.titleColor = params.titleColor || '#FFFFFF';
+            this.shadowColor = params.shadowColor || '';
             this.image = params.image || '';
             this.cssClass = params.cssClass || '';
             this.target = params.target || '_self';
@@ -317,6 +330,9 @@ export default {
             this.isInside= this.cardConfig.isInside;
             this.isCircle= this.cardConfig.isCircle;
             this.aspectRatio = this.cardConfig.aspectRatio;
+            this.bgColor = this.cardConfig.bgColor;
+            this.titleColor = this.cardConfig.titleColor;
+            this.shadowColor = this.cardConfig.shadowColor;
             this.target = '_self';
             this.rel = '';
             this.cssClass = '';
@@ -401,6 +417,9 @@ export default {
                 isInside: this.isInside,
                 isCircle: this.isCircle,
                 aspectRatio: this.aspectRatio,
+                bgColor: this.bgColor,
+                titleColor: this.titleColor,
+                shadowColor: this.shadowColor,
                 target: this.target,
                 rel: this.rel,
                 link: this.getLinkValue(),
@@ -440,6 +459,9 @@ export default {
                 isInside:this.isInside,
                 isCircle: this.isCircle,
                 aspectRatio: this.aspectRatio,
+                bgColor: this.bgColor,
+                titleColor: this.titleColor,
+                shadowColor: this.shadowColor,
                 target: this.target,
                 rel: this.rel,
                 link: this.getLinkValue(),
@@ -530,6 +552,7 @@ export default {
 .publii-block-card-item-image.circular {
     border-radius: 50%;
     max-width: unset;
+    aspect-ratio: 1;
     width: inherit;
 }
 .card-options {

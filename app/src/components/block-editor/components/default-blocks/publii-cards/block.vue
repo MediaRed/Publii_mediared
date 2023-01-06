@@ -20,7 +20,7 @@
         :key="'card-item-' + index"
         class="publii-block-cards-item"
         :class="[config.isInside === true ? {circular: config.isCircle} : '']"
-        :style="[config.isInside === true ? {width: (100/parseInt(config.columns) - config.columns)+'%' , backgroundRepeat: no-repeat, backgroundImage: `url(${image.src})` , aspectRatio: config.aspectRatio} : {width: (100/parseInt(config.columns) - config.columns)+'%', aspectRatio: config.aspectRatio}]"
+        :style="[config.isInside === true ? {width: (100/parseInt(config.columns) - config.columns)+'%' , backgroundRepeat: no-repeat, backgroundColor: '${config.bgColor}',backgroundImage: `url(${image.src})` , aspectRatio: config.aspectRatio} : {width: (100/parseInt(config.columns) - config.columns)+'%', aspectRatio: config.aspectRatio}]"
         @click="navigate(image)"
         >
         <img
@@ -30,9 +30,9 @@
             :height="image.height"
             :width="image.width" 
             :class="{circular: config.isCircle}" />
-        <h3  v-if="image.title" class="card-title">{{image.title}}</h3>
-        <h6  v-if="config.isInside === false || !config.isInside" class="card-subtitle">{{image.subtitle}}</h6>
-        <figcaption v-if="image.caption" class="card-caption">{{image.caption}}</figcaption>
+        <h3  v-if="image.title" class="card-title" :style="{color: '${config.titleColor}'}">{{image.title}}</h3>
+        <h6  v-if="config.isInside === false || !config.isInside" class="card-subtitle" :style="{color: '${config.titleColor}'}">{{image.subtitle}}</h6>
+        <figcaption v-if="image.caption" class="card-caption" :style="{color: '${config.titleColor}'}">{{image.caption}}</figcaption>
         <button
           class="publii-block-cards-item-delete"
           @click.stop.prevent="removeImage(index)">
@@ -97,10 +97,14 @@
       class="publii-block-cards-uploader-loader-overlay">
       <span class="publii-block-cards-uploader-loader"></span>
     </div>
+
     <div>isCircle : {{config.isCircle}}</div>
     <div>isLink : {{config.isLink}}</div>
     <div>isInside : {{config.isInside}}</div>
     <div>Aspect ratio : {{config.aspectRatio}}</div>
+    <div>Bg color : {{config.bgColor}}</div>
+    <div>Title color : {{config.titleColor}}</div>
+    <div>Text shadow color : {{config.shadowColor}}</div>
     <top-menu
       ref="top-menu"
       :config="linkEditorConfig"
@@ -176,6 +180,58 @@ export default {
           cssClasses: 'is-narrow',
           options: [1, 2, 3, 4, 5, 6, 7, 8]
         },
+        {
+          activeState: function () { return this.config.setColors === this.value; },
+          onClick: function () { this.config.setColors === this.value },
+          type: 'switch',
+          label: this.$t('card.setColors'),
+          configKey: 'setColors',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+        },
+        {
+          activeState: function () { return this.config.bgColor === this.value; },
+          onClick: function () { this.config.bgColor === this.value },
+          type: 'color',
+          label: this.$t('image.bgColor'),
+          configKey: 'bgColor',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+        },
+        {
+          activeState: function () { return this.config.titleColor === this.value; },
+          onClick: function () { this.config.titleColor === this.value },
+          type: 'color',
+          label: this.$t('image.titleColor'),
+          configKey: 'titleColor',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+        },
+        {
+          activeState: function () { return this.config.shadowColor === this.value; },
+          onClick: function () { this.config.shadowColor === this.value },
+          type: 'color',
+          label: this.$t('image.shadowColor'),
+          configKey: 'shadowColor',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+        },
+        {
+          activeState: function () { return this.config.setImage === this.value; },
+          onClick: function () { this.config.setImage === this.value },
+          type: 'switch',
+          label: this.$t('card.setImages'),
+          configKey: 'setImages',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+        },
+       
+        
         {
           activeState: function () { return this.config.aspectRatio === this.value; },
           onClick: function () { this.config.aspectRatio === this.value },
