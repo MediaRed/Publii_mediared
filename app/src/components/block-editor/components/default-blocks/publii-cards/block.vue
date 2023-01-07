@@ -29,7 +29,9 @@
             :src="image.src"
             :height="image.height"
             :width="image.width" 
-            :class="{circular: config.isCircle}" />
+            :class="{circular: config.isCircle}"
+            :style="{aspectRatio: (config.aspectRatio === 'Circle' || config.aspectRatio === 'Square') ? 1 : config.aspectRatio}"
+            />
         <h3  v-if="image.title" class="card-title" :style="{color: config.titleColor}">{{image.title}}</h3>
         <h6  v-if="config.isInside === false || !config.isInside" class="card-subtitle" :style="{color: config.titleColor}">{{image.subtitle}}</h6>
         <figcaption v-if="image.caption" class="card-caption" :style="{color: config.titleColor}">{{image.caption}}</figcaption>
