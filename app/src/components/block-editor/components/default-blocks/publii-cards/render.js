@@ -60,6 +60,7 @@ function render (blockData) {
     const inside = (blockData.config.isInside) ? "internal" : "external";
     const inline = (blockData.config.isCircle) ? {height: img.height} : "";
     const bg = {backgroundColor: blockData.config.bgColor};
+    const sub = (img.subtitle && img.subtitle !== "") ? `<h6  class="card-subtitle ${inside}" style="color: ${blockData.config.titleColor}">${img.subtitle}</h6>` : ``;
     console.log("bg", bg);
     const aspectRatio = (blockData.config.aspectRatio && (blockData.config.aspectRatio === 'Circle' || blockData.config.aspectRatio === 'Square')) ? 1 : blockData.config.aspectRatio;
     images += `<figure class="cards__item ${inside} col${col}" >
@@ -77,7 +78,7 @@ function render (blockData) {
             alt="${img.alt}" />
         </div>
         <h3 class="card-title ${inside}" style="color: ${blockData.config.titleColor}">${img.title}</h3>
-        <h6  class="card-subtitle ${inside}" style="color: ${blockData.config.titleColor}">${img.subtitle}</h6>
+        ${sub}
         <figcaption class="card-caption ${inside}" style="color: ${blockData.config.titleColor}">{{${img.caption}}}</figcaption>
       </a>
     </figure>`;
