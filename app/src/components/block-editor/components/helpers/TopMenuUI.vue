@@ -37,6 +37,7 @@
         <template v-if="uiElement.type === 'switch'">
           <div 
            v-if="$parent.config.setImages === true || ['isLink', 'isInside', 'setImages','setColors'].some(key => key === uiElement.configKey)"
+           class="switch-container"
           >
             <label
                   class="switch"
@@ -47,7 +48,7 @@
                       class="checkbox"
                       :class="{'checked':$parent.config[uiElement.configKey]}"
                       v-model="$parent.config[uiElement.configKey]"
-                      v-on:input="updateConfig(uiElement.configKey,$event.target.value)"
+                      v-on:change="updateConfig(uiElement.configKey,$event.target.value)"
                       type="checkbox" />
                   <span class="slider"></span>
                   <span class="placeholder">{{ uiElement.label }}</span>
@@ -56,6 +57,7 @@
         </template>
         <template v-else-if="uiElement.type === 'select'">
           <div 
+          class="label-container"
            v-if="$parent.config.setImages === true || uiElement.configKey === 'columns'" 
           >
             <label :key="'top-menu-element-label-' + index">
@@ -73,6 +75,7 @@
         </template>
         <template v-else-if="uiElement.type === 'color'">
           <div 
+          class="color-label"
            v-if="$parent.config.setColors === true"
           >
           <label :key="'top-menu-element-label-' + index">
@@ -268,6 +271,16 @@ export default {
       if ( field === "isInside") {
         this.$parent.config.isInside = (this.$parent.config[field] && this.$parent.config[field] === "off") ? true : false;
       }
+      if ( field === "setImages") {
+        const active = (this.$parent.config[field] && this.$parent.config[field] === false);
+        this.$parent.config.setImages = (active) ? true : false;
+        this.$parent.config.setColors = (active) ? false : this.$parent.config.setColors;
+      }
+      if ( field === "setColors") {
+        const active = (this.$parent.config[field] && this.$parent.config[field] === false);
+        this.$parent.config.setColors = (active) ? true : false;
+        this.$parent.config.setImages = (active) ? false : this.$parent.config.setImages;
+      }
       console.log("field", field);
       console.log("value", value);
     },
@@ -359,6 +372,19 @@ export default {
   }
   .cards-colorpicker {
     width: 6em;
+  }
+  .color-input[type=colorpicker]s {
+    margin: 0;
+    padding: 0;
+    font-size: .8em;
+  }
+  .switch-container , .select-container , .color-label {
+    margin: 0;
+    padding: 1em;
+    flex: 50%;
+  }
+  .color-label {
+    padding: 0;
   }
   .switch input
   {
