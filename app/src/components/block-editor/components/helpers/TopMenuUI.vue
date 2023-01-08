@@ -272,12 +272,12 @@ export default {
         this.$parent.config.isInside = (this.$parent.config[field] && this.$parent.config[field] === "off") ? true : false;
       }
       if ( field === "setImages") {
-        const active = (this.$parent.config[field] && this.$parent.config[field] === false);
+        const active = (this.$parent.config[field] || this.$parent.config[field] === false);
         this.$parent.config.setImages = (active) ? true : false;
         this.$parent.config.setColors = (active) ? false : this.$parent.config.setColors;
       }
       if ( field === "setColors") {
-        const active = (this.$parent.config[field] && this.$parent.config[field] === false);
+        const active = (this.$parent.config[field] || this.$parent.config[field] === false);
         this.$parent.config.setColors = (active) ? true : false;
         this.$parent.config.setImages = (active) ? false : this.$parent.config.setImages;
       }
@@ -381,7 +381,6 @@ export default {
   .switch-container , .select-container , .color-label {
     margin: 0;
     padding: 1em;
-    flex: 50%;
   }
   .color-label {
     padding: 0;
@@ -389,6 +388,15 @@ export default {
   .switch input
   {
     display: none;
+  }
+  .label-container {
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
   }
   .switch 
   {

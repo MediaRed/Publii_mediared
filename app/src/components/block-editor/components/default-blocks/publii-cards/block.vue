@@ -99,14 +99,17 @@
       class="publii-block-cards-uploader-loader-overlay">
       <span class="publii-block-cards-uploader-loader"></span>
     </div>
-
-    <div>isCircle : {{config.isCircle}}</div>
-    <div>isLink : {{config.isLink}}</div>
-    <div>isInside : {{config.isInside}}</div>
-    <div>Aspect ratio : {{config.aspectRatio}}</div>
-    <div>Bg color : {{config.bgColor}}</div>
-    <div>Title color : {{config.titleColor}}</div>
-    <div>Text shadow color : {{config.shadowColor}}</div>
+    <div class="config-debug">
+      <div>setImages : {{config.setImages}}</div>
+      <div>setColors : {{config.setColors}}</div>
+      <div>isCircle : {{config.isCircle}}</div>
+      <div>isLink : {{config.isLink}}</div>
+      <div>isInside : {{config.isInside}}</div>
+      <div>Aspect ratio : {{config.aspectRatio}}</div>
+      <div>Bg color : {{config.bgColor}}</div>
+      <div>Title color : {{config.titleColor}}</div>
+      <div>Text shadow color : {{config.shadowColor}}</div>
+    </div>
     <top-menu
       ref="top-menu"
       :config="linkEditorConfig"
@@ -469,6 +472,21 @@ export default {
 @import '../../../../../scss/variables.scss';
 @import '../../../../../scss/mixins.scss';
 
+.config-debug {
+  position: absolute;
+  top: 5rem;
+  left: 5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flew-wrap: wrap;
+  flex-direction: column;
+}
+.config-debug > div {
+  justify-content: space-between;
+  flex: 25%;
+  flew-wrap: wrap;
+}
 .circular {
     aspect-ratio: 1;
     border-radius: 50%;
