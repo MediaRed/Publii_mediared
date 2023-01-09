@@ -46,12 +46,12 @@
                   <input
                       :key="'top-menu-element-label-input-checkbox' + index"
                       class="checkbox"
-                      :class="{'checked':$parent.config[uiElement.configKey]}"
+                      :class="{'checked': $parent.config[uiElement.configKey]}"
                       v-model="$parent.config[uiElement.configKey]"
                       v-on:change="updateConfig(uiElement.configKey,$event.target.value)"
                       type="checkbox" />
                   <span class="slider"></span>
-                  <span class="placeholder">{{ uiElement.label }}</span>
+                  <span class="placeholder">{{ uiElement.label }} {{ $parent.config[uiElement.configKey]  }}</span>
               </label>
           </div>
         </template>
@@ -247,7 +247,18 @@ export default {
     updateConfig (field, value) {
       // check aspect ratio if isCircle
         // set aspect ratio to 1
-        
+      if (field === "isIcon") {
+        const isIcon = (this.$parent.config[field] && this.$parent.config[field] === true) ? false : true;
+        console.log("##   old value", this.$parent.config[field]);
+        console.log("##   isIcon", isIcon);
+        if (isIcon) {
+          this.$parent.config.isInside = false;
+          this.$parent.config.isCircle = false;
+          this.$parent.config.aspectRatio = `unset`;
+        }
+        //this.$parent.config[field] = isIcon;
+        console.log("isIcon saved", this.$parent.config[field] )
+      }
       if (field === "isCircle") {
         console.log("config", this.$parent.config);
         const active = (this.$parent.config[field] && this.$parent.config[field] === false);

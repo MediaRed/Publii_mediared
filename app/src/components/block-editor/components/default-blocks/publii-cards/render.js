@@ -59,16 +59,17 @@ function render (blockData) {
     const circular = (blockData.config.isCircle) ? " circular" : "";
     const inside = (blockData.config.isInside) ? "internal" : "external";
     const inline = (blockData.config.isCircle) ? {height: img.height} : "";
+    const icon = (blockData.config.isIcon) ? "icon" : "";
     const bg = {backgroundColor: blockData.config.bgColor};
     const sub = (img.subtitle && img.subtitle !== "") ? `<h6  class="card-subtitle ${inside}" style="color: ${blockData.config.titleColor}">${img.subtitle}</h6>` : ``;
     console.log("bg", bg);
     const aspectRatio = (blockData.config.aspectRatio && (blockData.config.aspectRatio === 'Circle' || blockData.config.aspectRatio === 'Square')) ? 1 : blockData.config.aspectRatio;
     images += `<figure class="cards__item ${inside} col${col}" >
       <a class="card_link ${inside}" :class="${inline}" ${href} data-size="${img.dimensions}" style="background-color: ${blockData.config.bgColor}">
-        <div class="card_wrapper ${circular}" :style="{ height: ${img.height}, overflow: 'hidden', aspectRatio: ${aspectRatio}}">
+        <div class="card_wrapper ${circular} ${icon}" :style="{ height: ${img.height}, overflow: 'hidden', aspectRatio: ${aspectRatio}}">
           <img 
-            class="card_image ${inside} ${circular}"
-            {{#if @config.site.responsiveImages}}
+            class="card_image ${inside} ${circular} ${icon}"
+            {{#if @config.site.responsiveImages && !blockData.config.isIcon }}
                 {{responsiveImageAttributes 'tagImage' srcset.cards sizes.cards}}
             {{/if}}
             {{ lazyload "eager" }}

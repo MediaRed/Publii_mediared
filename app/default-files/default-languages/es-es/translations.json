@@ -131,7 +131,8 @@
       "selectLinkTarget": "Seleccionar destino de enlace",
       "editCardItem": "Editar elemento de tarjeta",
       "setImages": "Imagen",
-      "setColors": "Colores"
+      "setColors": "Colores",
+      "isIcon": "Iconos"
     },
     "editor": {
         "addHeading": "Add heading",

@@ -29,8 +29,8 @@
             :src="image.src"
             :height="image.height"
             :width="image.width" 
-            :class="{circular: config.isCircle}"
-            :style="{width: (100/parseInt(config.columns) - config.columns)+'%', aspectRatio: (config.aspectRatio === 'Circle' || config.aspectRatio === 'Square') ? 1 : config.aspectRatio}"
+            :class="{circular: config.isCircle, icon: config.isIcon}"
+            :style="[(config.aspectRatio === 'Circle' || config.aspectRatio === 'Square') ? {aspectRatio:  1} : {aspectRatio: config.aspectRatio}]"
             />
         <h3  v-if="image.title" class="card-title" :style="{color: config.titleColor}">{{image.title}}</h3>
         <h6  v-if="config.isInside === false || !config.isInside" class="card-subtitle" :style="{color: config.titleColor}">{{image.subtitle}}</h6>
@@ -99,17 +99,15 @@
       class="publii-block-cards-uploader-loader-overlay">
       <span class="publii-block-cards-uploader-loader"></span>
     </div>
-    <div class="config-debug">
-      <div>setImages : {{config.setImages}}</div>
-      <div>setColors : {{config.setColors}}</div>
-      <div>isCircle : {{config.isCircle}}</div>
-      <div>isLink : {{config.isLink}}</div>
-      <div>isInside : {{config.isInside}}</div>
-      <div>Aspect ratio : {{config.aspectRatio}}</div>
-      <div>Bg color : {{config.bgColor}}</div>
-      <div>Title color : {{config.titleColor}}</div>
-      <div>Text shadow color : {{config.shadowColor}}</div>
-    </div>
+
+    <div>isCircle : {{config.isCircle}}</div>
+    <div>isIcon : {{config.isIcon}}</div>
+    <div>isLink : {{config.isLink}}</div>
+    <div>isInside : {{config.isInside}}</div>
+    <div>Aspect ratio : {{config.aspectRatio}}</div>
+    <div>Bg color : {{config.bgColor}}</div>
+    <div>Title color : {{config.titleColor}}</div>
+    <div>Text shadow color : {{config.shadowColor}}</div>
     <top-menu
       ref="top-menu"
       :config="linkEditorConfig"
@@ -164,6 +162,7 @@ export default {
         imageAlign: 'center',
         columns: 3,
         isCircle: false,
+        isIcon: false,
         isInside: false,
         isLink: false,
         aspectRatio: "16/9",
@@ -237,8 +236,16 @@ export default {
           searchable: false,
           cssClasses: 'is-narrow',
         },
-       
-        
+        {
+          activeState: function () { return this.config.isIcon === this.value; },
+          onClick: function () { this.config.isIcon === !this.value },
+          type: 'switch',
+          label: this.$t('card.isIcon'),
+          configKey: 'isIcon',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+        },
         {
           activeState: function () { return this.config.aspectRatio === this.value; },
           onClick: function () { this.config.aspectRatio === this.value },
@@ -472,21 +479,6 @@ export default {
 @import '../../../../../scss/variables.scss';
 @import '../../../../../scss/mixins.scss';
 
-.config-debug {
-  position: absolute;
-  top: 5rem;
-  left: 5rem;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flew-wrap: wrap;
-  flex-direction: column;
-}
-.config-debug > div {
-  justify-content: space-between;
-  flex: 25%;
-  flew-wrap: wrap;
-}
 .circular {
     aspect-ratio: 1;
     border-radius: 50%;
