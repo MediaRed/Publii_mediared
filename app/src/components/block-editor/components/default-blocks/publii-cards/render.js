@@ -65,7 +65,7 @@ function render (blockData) {
     const aspectRatio = (blockData.config.aspectRatio && (blockData.config.aspectRatio === 'Circle' || blockData.config.aspectRatio === 'Square')) ? 1 : blockData.config.aspectRatio;
     images += `<figure class="cards__item ${inside} col${col}" >
       <a class="card_link ${inside}" :class="${inline}" ${href} data-size="${img.dimensions}" style="background-color: ${blockData.config.bgColor}">
-        <div class="card_wrapper ${circular}" v-bind:style="{ height: ${img.height}, overflow: 'hidden', aspectRatio: '${aspectRatio}'}">
+        <div class="card_wrapper ${circular}" :style="{ height: ${img.height}, overflow: 'hidden', aspectRatio: ${aspectRatio}}">
           <img 
             class="card_image ${inside} ${circular}"
             {{#if @config.site.responsiveImages}}
