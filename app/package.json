@@ -30,6 +30,7 @@
   "homepage": "https://getpublii.com",
   "dependencies": {
     "@gitbeaker/node": "28.0.4",
+    "@glidejs/glide": "^3.6.0",
     "@google-cloud/storage": "5.8.0",
     "@octokit/rest": "^19.0.5",
     "archiver": "5.3.1",
@@ -69,6 +70,7 @@
     "request": "2.88.0",
     "sass": "^1.56.2",
     "sharp": "0.31.2",
+    "slither-slider": "^2.11.0",
     "slug": "0.9.4",
     "sqlstring": "2.3.3",
     "ssh2-sftp-client": "9.0.4",

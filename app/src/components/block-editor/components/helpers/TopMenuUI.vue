@@ -58,7 +58,7 @@
         <template v-else-if="uiElement.type === 'select'">
           <div 
           class="label-container"
-           v-if="$parent.config.setImages === true || uiElement.configKey === 'columns'" 
+           v-if="$parent.config.setImages === true || uiElement.configKey === 'columns' || uiElement.configKey === 'display'" 
           >
             <label :key="'top-menu-element-label-' + index">
               {{ uiElement.label }}

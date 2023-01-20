@@ -338,8 +338,8 @@ ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /home/ivo/build/Publii_mediared/app/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/home/ivo/.electron-gyp/19.1.3" "-Dnode_gyp_dir=/home/ivo/build/Publii_mediared/app/node_modules/node-gyp" "-Dnode_lib_file=/home/ivo/.electron-gyp/19.1.3/<(target_arch)/node.lib" "-Dmodule_root_dir=/home/ivo/build/Publii_mediared/app" "-Dnode_engine=v8" "--depth=." "-Goutput_dir=." "--generator-output=build" -I/home/ivo/build/Publii_mediared/app/build/config.gypi -I/home/ivo/build/Publii_mediared/app/node_modules/node-gyp/addon.gypi -I/home/ivo/.electron-gyp/19.1.3/include/node/common.gypi "--toplevel-dir=." binding.gyp
-Makefile: $(srcdir)/../../../.electron-gyp/19.1.3/include/node/common.gypi $(srcdir)/node_modules/node-gyp/addon.gypi $(srcdir)/binding.gyp $(srcdir)/build/config.gypi
+cmd_regen_makefile = cd $(srcdir); /home/tom/build/Publii_mediared/app/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/home/tom/.cache/node-gyp/16.13.0" "-Dnode_gyp_dir=/home/tom/build/Publii_mediared/app/node_modules/node-gyp" "-Dnode_lib_file=/home/tom/.cache/node-gyp/16.13.0/<(target_arch)/node.lib" "-Dmodule_root_dir=/home/tom/build/Publii_mediared/app" "-Dnode_engine=v8" "--depth=." "-Goutput_dir=." "--generator-output=build" -I/home/tom/build/Publii_mediared/app/build/config.gypi -I/home/tom/build/Publii_mediared/app/node_modules/node-gyp/addon.gypi -I/home/tom/.cache/node-gyp/16.13.0/include/node/common.gypi "--toplevel-dir=." binding.gyp
+Makefile: $(srcdir)/node_modules/node-gyp/addon.gypi $(srcdir)/binding.gyp $(srcdir)/build/config.gypi $(srcdir)/../../../.cache/node-gyp/16.13.0/include/node/common.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included

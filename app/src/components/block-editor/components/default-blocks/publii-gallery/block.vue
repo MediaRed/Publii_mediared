@@ -14,20 +14,53 @@
       @start="draggingInProgress = true"
       @end="draggingInProgress = false"
       :class="{ 'publii-block-gallery': true, 'is-wide': config.imageAlign === 'wide', 'is-full': config.imageAlign === 'full' }">
-      <div
-        v-for="(image, index) of content.images"
-        :key="'gallery-item-' + index"
-        class="publii-block-gallery-item">
-        <img
-          :src="image.src"
-          :height="image.height"
-          :width="image.width" />
+        <div
+          v-if="config.display !== 'slide'"
+          v-for="(image, index) of content.images"
+          :key="'gallery-item-' + index"
+          class="publii-block-gallery-item"
+          >
+            <img
+              :src="image.src"
+              :height="image.height"
+              :width="image.width" />
 
-        <button
-          class="publii-block-gallery-item-delete"
-          @click.stop.prevent="removeImage(index)">
-          <icon name="trash" />
-        </button>
+            <button
+              class="publii-block-gallery-item-delete"
+              @click.stop.prevent="removeImage(index)">
+              <icon name="trash" />
+            </button>
+      </div>
+      <div class="slider glide"
+        v-if="config.display === 'slide'"
+      >
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides"
+
+          >
+            <li 
+            v-for="(image, index) of content.images"
+            :key="'gallery-item-' + index"
+            class="publii-block-gallery-item glide__slide"
+            >
+              <img
+                :src="image.src"
+                :height="image.height"
+                :width="image.width" />
+
+              <button
+                class="publii-block-gallery-item-delete"
+                @click.stop.prevent="removeImage(index)">
+                <icon name="trash" />
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="glide__arrows" data-glide-el="controls">
+          <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+          <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+        </div>
       </div>
     </draggable>
 
@@ -39,22 +72,23 @@
       @start="draggingInProgress = true"
       @end="draggingInProgress = false"
       class="publii-block-gallery-list">
-      <div
+      <div 
         v-for="(image, index) of content.images"
         :key="'gallery-item-' + index"
         class="publii-block-gallery-list-item">
-        <div class="publii-block-gallery-list-item-image">
-          <img
-            :src="image.thumbnailSrc"
-            :height="image.height"
-            :width="image.width" />
-        </div>
+          <div class="publii-block-gallery-list-item-image">
+            <img
+              :src="image.thumbnailSrc"
+              :height="image.height"
+              :width="image.width" />
+          </div>
 
-        <div class="publii-block-gallery-list-item-config">
-          <input type="text" v-model="image.alt" :placeholder="$t('editor.enterAltText')"/>
-          <input type="text" v-model="image.caption" :placeholder="$t('editor.enterCaption')"/>
-        </div>
+          <div class="publii-block-gallery-list-item-config">
+            <input type="text" v-model="image.alt" :placeholder="$t('editor.enterAltText')"/>
+            <input type="text" v-model="image.caption" :placeholder="$t('editor.enterCaption')"/>
+          </div>
       </div>
+
     </draggable>
 
     <div
@@ -108,6 +142,7 @@ import ContentEditableImprovements from './../../helpers/ContentEditableImprovem
 import EditorIcon from './../../elements/EditorIcon.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
 import Utils from './../../utils/Utils.js';
+import Glide from '@glidejs/glide';
 
 export default {
   name: 'PGallery',
@@ -118,7 +153,7 @@ export default {
   components: {
     'icon': EditorIcon,
     'top-menu': TopMenuUI,
-    'draggable': Draggable
+    'draggable': Draggable,
   },
   watch: {
     '$parent.uiOpened': function (newValue) {
@@ -134,6 +169,7 @@ export default {
     }
   },
   data () {
+    
     return {
       draggingInProgress: false,
       isHovered: false,
@@ -144,6 +180,7 @@ export default {
       config: {
         imageAlign: 'center',
         columns: 3,
+        display: 'slide',
         advanced: {
           cssClasses: this.getAdvancedConfigDefaultValue('cssClasses'),
           id: this.getAdvancedConfigDefaultValue('id')
@@ -161,6 +198,15 @@ export default {
           searchable: false,
           cssClasses: 'is-narrow',
           options: [1, 2, 3, 4, 5, 6, 7, 8]
+        },
+        {
+          type: 'select',
+          label: this.$t('image.display'),
+          configKey: 'display',
+          clearable: false,
+          searchable: false,
+          cssClasses: 'is-narrow',
+          options: ['lightbox', 'slide']
         },
         {
           activeState: function () { return this.config.imageAlign === 'center'; },
@@ -195,6 +241,7 @@ export default {
     this.content = Utils.deepMerge(this.content, this.inputContent);
     this.initFakeFilePicker();
     this.setParentCssClasses(this.config.imageAlign);
+    new Glide('.glide').mount();
   },
   methods: {
     dragOver (e) {
@@ -331,6 +378,52 @@ export default {
 
 @import '../../../../../scss/variables.scss';
 @import '../../../../../scss/mixins.scss';
+
+// Required Core Stylesheet
+@import "@glidejs/glide/src/assets/sass/glide.core.scss";
+
+// Optional Theme Stylesheet
+@import "@glidejs/glide/src/assets/sass/glide.theme.scss";
+
+div.slider { 
+  overflow: hidden; 
+  width: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+div.slider .slide img { 
+  width: inherit; 
+  float: left; 
+}
+div.slider .slide { 
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    width: inherit;
+    margin: 0;
+    left: 0;
+    text-align: left;
+    font-size: 0;
+}
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+.w-100 {
+  width: 100%;
+}
+.ml-auto, .mx-auto {
+  margin-left: auto;
+}
+.mr-auto, .mx-auto {
+  margin-right: auto;
+}
 
 .publii-block-gallery {
   display: flex;
