@@ -27,7 +27,7 @@ function render (blockData) {
                         ${caption}
                    </figure>`;
     } else {
-      images += `<li class="publii-block-gallery-item glide__slide" :key="'gallery-item-${i}'">
+      images += `<li class="publii-block-gallery-item glide__slide col${blockData.config.columns}" :key="'gallery-item-${i}'">
                     <a href="${img.src}" data-size="${img.dimensions}">
                       <img src="${img.thumbnailSrc}" height="${img.height}" width="${img.width}" alt="${img.alt}">
                     </a>
@@ -43,6 +43,9 @@ if(blockData.config.display === 'slide') {
             <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
           </div>
         </div>`;
+  images += `<script>
+      new Glide('.glide').mount();
+    </script>`;
 }
 let html = `
   <div${id} class="${cssClasses}">

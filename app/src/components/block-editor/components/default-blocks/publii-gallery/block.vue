@@ -175,6 +175,7 @@ export default {
       isHovered: false,
       imageUploadInProgress: false,
       imagesQueue: [],
+      slide: null,
       imageUploader: null,
       view: 'preview',
       config: {
@@ -241,7 +242,7 @@ export default {
     this.content = Utils.deepMerge(this.content, this.inputContent);
     this.initFakeFilePicker();
     this.setParentCssClasses(this.config.imageAlign);
-    new Glide('.glide').mount();
+    this.slide = new Glide('.glide').mount();
   },
   methods: {
     dragOver (e) {
