@@ -143,7 +143,7 @@ import EditorIcon from './../../elements/EditorIcon.vue';
 import TopMenuUI from './../../helpers/TopMenuUI.vue';
 import Utils from './../../utils/Utils.js';
 import Glide from '@glidejs/glide';
-
+import isImageUrl from './isImageUrl';
 export default {
   name: 'PGallery',
   mixins: [
@@ -154,6 +154,8 @@ export default {
     'icon': EditorIcon,
     'top-menu': TopMenuUI,
     'draggable': Draggable,
+    Glide,
+    isImageUrl,
   },
   watch: {
     '$parent.uiOpened': function (newValue) {
@@ -177,6 +179,7 @@ export default {
       imagesQueue: [],
       slide: null,
       imageUploader: null,
+      isImageUrl: isImageUrl,
       view: 'preview',
       config: {
         imageAlign: 'center',

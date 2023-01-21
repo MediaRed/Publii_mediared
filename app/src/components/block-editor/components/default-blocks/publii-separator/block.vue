@@ -29,7 +29,7 @@ export default {
     Block
   ],
   components: {
-    'top-menu': TopMenuUI
+    'top-menu': TopMenuUI,
   },
   data () {
     return {
