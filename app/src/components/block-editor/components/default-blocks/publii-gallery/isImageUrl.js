@@ -1,6 +1,11 @@
 function isImageUrl(url) {
-    const imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg"];
-    const extension = url.slice((url.lastIndexOf(".") - 1 >>> 0) + 2); // Get the file extension from the URL
-    console.log("isImageUrl", imageExtensions.includes(extension));
-    return imageExtensions.includes(extension);
+    if (url) {
+        const imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg"];
+        const lastDotIndex = url.lastIndexOf(".");
+        if (lastDotIndex !== -1) {
+            const extension = url.slice(lastDotIndex).toLowerCase();
+            return imageExtensions.some(ext => ext.toLowerCase() === extension);
+        }
+    }
+    return false;
 }
