@@ -155,6 +155,7 @@ export default {
     'top-menu': TopMenuUI,
     'draggable': Draggable,
     isImageUrl,
+    Glide
   },
   watch: {
     '$parent.uiOpened': function (newValue) {
@@ -170,7 +171,6 @@ export default {
     }
   },
   data () {
-    
     return {
       draggingInProgress: false,
       isHovered: false,

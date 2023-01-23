@@ -20,7 +20,7 @@ class BlocksToHtml {
                 console.error(err);
             }
         }
-
+        console.log('blockEditor:outputText', outputText);
         return outputText.join("\n");
     }
 }

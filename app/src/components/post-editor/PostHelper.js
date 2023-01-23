@@ -226,30 +226,30 @@ class PostHelper {
 
     static setWebpCompatibility ($store, text) {
         let forceWebp = !!$store.state.currentSite.config.advanced.forceWebp;
+        console.log('text in PostHelpers', text);
+        // text = text.replace(/\<li class="publii-block-gallery-item glide__slide">[\s\S]*?<a[\s\S]*?href="(.*?)"[\s\S]+?>[\s\S]*?<img[\s\S]*?src="(.*?)"/gmi, (matches, linkUrl, imgUrl) => {
+        //     if (linkUrl && imgUrl) {
+        //         if (
+        //             forceWebp && 
+        //             PostHelper.getImageType(linkUrl) === 'webp-compatible' && 
+        //             !PostHelper.isWebpImage(imgUrl)
+        //         ) {
+        //             let imgExtension = PostHelper.getImageExtension(imgUrl);
+        //             let newImgUrl = imgUrl.substr(0, imgUrl.length + (-1 * imgExtension.length)) + '.webp';
+        //             matches = matches.replace(imgUrl, newImgUrl);
+        //         } else if (
+        //             !forceWebp && 
+        //             PostHelper.getImageType(linkUrl) === 'webp-compatible' && 
+        //             PostHelper.isWebpImage(imgUrl)
+        //         ) {
+        //             let imgExtension = PostHelper.getImageExtension(linkUrl);
+        //             let newImgUrl = imgUrl.substr(0, imgUrl.length - 5) + imgExtension;
+        //             matches = matches.replace(imgUrl, newImgUrl);
+        //         }
+        //     }
 
-        text = text.replace(/\<li class="publii-block-gallery-item glide__slide">[\s\S]*?<a[\s\S]*?href="(.*?)"[\s\S]+?>[\s\S]*?<img[\s\S]*?src="(.*?)"/gmi, (matches, linkUrl, imgUrl) => {
-            if (linkUrl && imgUrl) {
-                if (
-                    forceWebp && 
-                    PostHelper.getImageType(linkUrl) === 'webp-compatible' && 
-                    !PostHelper.isWebpImage(imgUrl)
-                ) {
-                    let imgExtension = PostHelper.getImageExtension(imgUrl);
-                    let newImgUrl = imgUrl.substr(0, imgUrl.length + (-1 * imgExtension.length)) + '.webp';
-                    matches = matches.replace(imgUrl, newImgUrl);
-                } else if (
-                    !forceWebp && 
-                    PostHelper.getImageType(linkUrl) === 'webp-compatible' && 
-                    PostHelper.isWebpImage(imgUrl)
-                ) {
-                    let imgExtension = PostHelper.getImageExtension(linkUrl);
-                    let newImgUrl = imgUrl.substr(0, imgUrl.length - 5) + imgExtension;
-                    matches = matches.replace(imgUrl, newImgUrl);
-                }
-            }
-
-            return matches;
-        });
+        //     return matches;
+        // });
         text = text.replace(/\<figure class="gallery__item">[\s\S]*?<a[\s\S]*?href="(.*?)"[\s\S]+?>[\s\S]*?<img[\s\S]*?src="(.*?)"/gmi, (matches, linkUrl, imgUrl) => {
             if (linkUrl && imgUrl) {
                 if (
