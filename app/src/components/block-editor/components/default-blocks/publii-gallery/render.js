@@ -27,11 +27,11 @@ function render (blockData) {
                         ${caption}
                    </figure>`;
     } else {
-      images += `<li class="publii-block-gallery-item glide__slide col${blockData.config.columns}" style="margin-left: 0;margin-right: 0;" :key="'gallery-item-${i}'">
+      images += `<li class="publii-block-gallery-item glide__slide">
                     <a href="${img.src}" data-size="${img.dimensions}">
                       <img src="${img.thumbnailSrc}" height="${img.height}" width="${img.width}" alt="${img.alt}">
                     </a>
-                  </li>`;
+                </li>`;
     }
 }
 if(blockData.config.display === 'slide') {

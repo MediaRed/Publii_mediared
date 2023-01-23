@@ -60,6 +60,8 @@ class PreviewEvents {
         let self = this;
         let previewMode = true;
         let resultsRetrieved = false;
+        console.log('renderSite in events', this.app.app.getPath('logs'));
+        
         let rendererProcess = childProcess.fork(__dirname + '/../workers/renderer/preview', {
             stdio: [
                 null,
@@ -72,6 +74,7 @@ class PreviewEvents {
         rendererProcess.on('disconnect', function(data) {
             setTimeout(function() {
                 if(!resultsRetrieved) {
+                    
                     let errorDesc = {
                         translation: 'core.rendering.renderingProcessCrashedMsg'
                     };
@@ -79,12 +82,15 @@ class PreviewEvents {
                     let errorTitle = {
                         translation: 'core.rendering.renderingProcessCrashed'
                     };
-
+                    
                     if (data && data.result && data.result[0] && data.result[0].message) {
                         errorTitle = {
                             translation: 'core.rendering.renderingProcessFailed'
                         };
-                        errorDesc = data.result[0].message + "\n\n" + data.result[0].desc;
+                        let lineNumber = data.result[0].lineNumber;  
+                        let charNumber = data.result[0].charNumber; 
+                        errorDesc = data.result[0].message + "\n\n" + `Line ${lineNumber}, Char ${charNumber}: ` + data.result[0].desc;
+                        //errorDesc = data.result[0].message + "\n\n" + data.result[0].desc;
                     }
 
                     event.sender.send('app-preview-render-error', {
@@ -129,7 +135,11 @@ class PreviewEvents {
                         errorTitle = {
                             translation: 'core.rendering.renderingProcessFailed'
                         };
-                        errorDesc = data.result[0].message + "\n\n" + data.result[0].desc;
+                        console.log('dataResult',data.result[0]);
+                        let lineNumber = data.result[0].lineNumber;  
+                        let charNumber = data.result[0].charNumber; 
+                        errorDesc = data.result[0].message + "\n\n" + `Line ${lineNumber}, Char ${charNumber}: ` + data.result[0].desc;
+                        //errorDesc = data.result[0].message + "\n\n" + data.result[0].desc;
                     }
 
                     event.sender.send('app-preview-render-error', {

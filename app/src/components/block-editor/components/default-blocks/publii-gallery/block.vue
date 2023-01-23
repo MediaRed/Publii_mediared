@@ -154,7 +154,6 @@ export default {
     'icon': EditorIcon,
     'top-menu': TopMenuUI,
     'draggable': Draggable,
-    Glide,
     isImageUrl,
   },
   watch: {
@@ -177,7 +176,6 @@ export default {
       isHovered: false,
       imageUploadInProgress: false,
       imagesQueue: [],
-      slide: null,
       imageUploader: null,
       isImageUrl: isImageUrl,
       view: 'preview',
@@ -628,11 +626,15 @@ div.slider .slide {
 
 @for $i from 1 through 8 {
   .publii-block-gallery[data-cols="#{$i}"] .publii-block-gallery-item {
-    flex-grow: 1;
-    width: calc(100% / #{$i});
+      flex-grow: 1;
+      width: calc(100% / #{$i});
   }
 }
-
+.publii-block-gallery[data-cols="1"] .publii-block-gallery-item.glide__slide {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
 @keyframes loader {
   from {
     transform: translateX(-50%) translateY(-50%) rotate(0deg);

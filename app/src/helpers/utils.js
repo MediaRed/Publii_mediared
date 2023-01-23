@@ -42,6 +42,7 @@ class Utils {
      * @returns {string}
      */
     static generateErrorLog(errorData, returnText = false) {
+        console.log('errorData',errorData);
         let output = '';
 
         if (!Array.isArray(errorData) && errorData.message) {
@@ -168,7 +169,10 @@ class Utils {
      * Licensed under the MIT License
      */
     static normalizePath(str, stripTrailing) {
+        console.log('the problem is:',str);
+        console.log('ou bien strpTrail', stripTrailing);
         if (typeof str !== 'string') {
+            
             throw new TypeError('expected a string');
         }
         str = str.replace(/[\\\/]+/g, '/');
