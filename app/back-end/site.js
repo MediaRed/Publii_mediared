@@ -167,6 +167,7 @@ class Site {
         let themeConfig = UtilsHelper.loadThemeConfig(path.join(this.siteDir, 'input'), themeName);
 
         if(!UtilsHelper.responsiveImagesConfigExists(themeConfig)) {
+            console.log("pas de responsive");
             sender.send('app-site-regenerate-thumbnails-required-status', {
                 message: false
             });
@@ -240,6 +241,7 @@ class Site {
         let themeConfig = UtilsHelper.loadThemeConfig(path.join(this.siteDir, 'input'), themeName);
 
         if(!UtilsHelper.responsiveImagesConfigExists(themeConfig)) {
+            console.log("pas de responsive");
             sender.send('app-site-regenerate-thumbnails-error', {
                 message: {
                     translation: 'core.site.noConfigurationForResponsiveImages'

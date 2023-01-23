@@ -729,29 +729,29 @@ class ContentHelper {
     
      static setWebpCompatibility (forceWebp, text) {
         console.log('text in content', text);
-        // text = text.replace(/\<li class="publii-block-gallery-item glide__slide">[\s\S]*?<a[\s\S]*?href="(.*?)"[\s\S]+?>[\s\S]*?<img[\s\S]*?src="(.*?)"/gmi, (matches, linkUrl, imgUrl) => {
-        //     if (linkUrl && imgUrl) {
-        //         if (
-        //             forceWebp && 
-        //             ContentHelper.getImageType(linkUrl) === 'webp-compatible' && 
-        //             !ContentHelper.isWebpImage(imgUrl)
-        //         ) {
-        //             let imgExtension = ContentHelper.getImageExtension(imgUrl);
-        //             let newImgUrl = imgUrl.substr(0, imgUrl.length + (-1 * imgExtension.length)) + '.webp';
-        //             matches = matches.replace(imgUrl, newImgUrl);
-        //         } else if (
-        //             !forceWebp && 
-        //             ContentHelper.getImageType(linkUrl) === 'webp-compatible' && 
-        //             ContentHelper.isWebpImage(imgUrl)
-        //         ) {
-        //             let imgExtension = ContentHelper.getImageExtension(linkUrl);
-        //             let newImgUrl = imgUrl.substr(0, imgUrl.length - 5) + imgExtension;
-        //             matches = matches.replace(imgUrl, newImgUrl);
-        //         }
-        //     }
+        text = text.replace(/\<li class="publii-block-gallery-item glide__slide">[\s\S]*?<a[\s\S]*?href="(.*?)"[\s\S]+?>[\s\S]*?<img[\s\S]*?src="(.*?)"/gmi, (matches, linkUrl, imgUrl) => {
+            if (linkUrl && imgUrl) {
+                if (
+                    forceWebp && 
+                    ContentHelper.getImageType(linkUrl) === 'webp-compatible' && 
+                    !ContentHelper.isWebpImage(imgUrl)
+                ) {
+                    let imgExtension = ContentHelper.getImageExtension(imgUrl);
+                    let newImgUrl = imgUrl.substr(0, imgUrl.length + (-1 * imgExtension.length)) + '.webp';
+                    matches = matches.replace(imgUrl, newImgUrl);
+                } else if (
+                    !forceWebp && 
+                    ContentHelper.getImageType(linkUrl) === 'webp-compatible' && 
+                    ContentHelper.isWebpImage(imgUrl)
+                ) {
+                    let imgExtension = ContentHelper.getImageExtension(linkUrl);
+                    let newImgUrl = imgUrl.substr(0, imgUrl.length - 5) + imgExtension;
+                    matches = matches.replace(imgUrl, newImgUrl);
+                }
+            }
 
-        //     return matches;
-        // });
+            return matches;
+        });
 
         text = text.replace(/\<figure class="gallery__item">[\s\S]*?<a[\s\S]*?href="(.*?)"[\s\S]+?>[\s\S]*?<img[\s\S]*?src="(.*?)"/gmi, (matches, linkUrl, imgUrl) => {
             if (linkUrl && imgUrl) {
