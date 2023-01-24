@@ -8,7 +8,7 @@ let context = false;
 process.on('message', function(msg){
     let mediaPath = false;
     let catalog = false;
-
+    console.log('regenerate');
     if (msg.type === 'dependencies') {
         context = msg.context;
         catalog = msg.catalog;
@@ -76,7 +76,7 @@ function regenerateImage (images, fullPath, catalog) {
         id: catalog,
         path: fullImagePath
     });
-
+    console.log('regenerate image');
     let imageType = getImageType(context, image, catalog);
     let promises = imageHelper.createResponsiveImages(fullImagePath, imageType);
 

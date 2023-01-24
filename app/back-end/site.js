@@ -190,10 +190,14 @@ class Site {
 
             // Add gallery catalogs
             let galleryFullPath = path.join(mediaPath, catalog, 'gallery');
-
+            let galleryResponsiveFullPath = path.join(galleryFullPath, 'responsive');
             if(UtilsHelper.dirExists(galleryFullPath)) {
                 let galleryShortPath = path.join(catalog, 'gallery');
                 galleryCatalogs.push(galleryShortPath);
+                if(UtilsHelper.dirExists(galleryResponsiveFullPath)) {
+                    let galleryShortPath = path.join(galleryShortPath, 'responsive');
+                    galleryCatalogs.push(galleryShortPath);
+                }
             }
         }
 

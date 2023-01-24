@@ -635,6 +635,7 @@ class Post extends Model {
         // Iterate through images
         for (let i in images) {
             let imagePath = images[i];
+            console.log('imagePath in post.js', imagePath);
             let fullPath = path.join(imagesDir, imagePath);
 
             // Skip dirs and symlinks
@@ -706,7 +707,7 @@ class Post extends Model {
                 }
 
                 let responsiveImagePath = path.join(responsiveImagesDir, filename + '-' + dimensionName + extension);
-
+                console.log('responsiveImagePath in post.js',  responsiveImagePath);
                 if(Utils.fileExists(responsiveImagePath)){
                     fs.unlinkSync(responsiveImagePath);
                 }

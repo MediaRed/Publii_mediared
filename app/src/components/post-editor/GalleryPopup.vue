@@ -201,7 +201,6 @@ export default {
         },
         loadImages(imagesPaths) {
             let nextImagePath = imagesPaths.shift();
-
             mainProcessAPI.send('app-image-upload', {
                 id: this.postID,
                 site: this.$store.state.currentSite.config.name,

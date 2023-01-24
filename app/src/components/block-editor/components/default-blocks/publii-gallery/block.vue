@@ -35,9 +35,7 @@
         v-if="config.display === 'slide'"
       >
         <div class="glide__track" data-glide-el="track">
-          <ul class="glide__slides"
-
-          >
+          <ul class="glide__slides">
             <li 
             v-for="(image, index) of content.images"
             :key="'gallery-item-' + index"
@@ -58,8 +56,8 @@
         </div>
 
         <div class="glide__arrows" data-glide-el="controls">
-          <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
-          <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+          <button class="glide__arrow glide__arrow--left circle" data-glide-dir="<"> &lt </button>
+          <button class="glide__arrow glide__arrow--right circle" data-glide-dir=">"> &gt </button>
         </div>
       </div>
     </draggable>

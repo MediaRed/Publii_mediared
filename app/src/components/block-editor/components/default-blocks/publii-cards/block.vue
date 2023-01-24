@@ -100,14 +100,14 @@
       <span class="publii-block-cards-uploader-loader"></span>
     </div>
 
-    <div>isCircle : {{config.isCircle}}</div>
+    <!-- <div>isCircle : {{config.isCircle}}</div>
     <div>isIcon : {{config.isIcon}}</div>
     <div>isLink : {{config.isLink}}</div>
     <div>isInside : {{config.isInside}}</div>
     <div>Aspect ratio : {{config.aspectRatio}}</div>
     <div>Bg color : {{config.bgColor}}</div>
     <div>Title color : {{config.titleColor}}</div>
-    <div>Text shadow color : {{config.shadowColor}}</div>
+    <div>Text shadow color : {{config.shadowColor}}</div> -->
     <top-menu
       ref="top-menu"
       :config="linkEditorConfig"
