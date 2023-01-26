@@ -7,6 +7,7 @@ function render (blockData) {
   console.log('css', cssClasses);
   console.log('blockData.content', blockData.content);
   console.log("display:",blockData.config.display );
+  console.log('img',blockData.content.images[0]);
   if(blockData.config.display === 'slide') {
     images += `<div class="slider glide">
                   <div class="glide__track" data-glide-el="track">
@@ -30,7 +31,7 @@ function render (blockData) {
                         </figure>`; 
       } else if(blockData.config.display === 'slide') { 
         images += `<li class="publii-block-gallery-item glide__slide">
-                        <a href="${img.thumbnailSrc}" data-size="${img.dimensions}">
+                        <a href="void(0)" data-size="${img.dimensions}">
                           <img src="${img.src}" height="${img.height}" width="${img.width}" alt="${img.alt}">
                         </a>
                   </li>`;

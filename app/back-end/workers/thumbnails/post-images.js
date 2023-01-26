@@ -27,11 +27,11 @@ process.on('message', function(msg){
 
             return;
         }
-        console.log('result in post-images', result);
+
         if(!imageData.imageType) {
             imageData.imageType = 'contentImages';
         }
-        console.log("start createResponsiveImages in post-image");
+
 
         let promises = image.createResponsiveImages(result.newPath, imageData.imageType);
 
@@ -44,7 +44,7 @@ process.on('message', function(msg){
                 } catch(e) {
                     thumbnailDimensions = false;
                 }
-                console.log('image upload result', result);
+    
                 process.send({
                     type: 'finished',
                     result: {
@@ -71,7 +71,7 @@ process.on('message', function(msg){
                 } catch(e) {
                     thumbnailDimensions = false;
                 }
-                console.log('image post result', result);
+
                 // When process is ready - finish it by sending a proper event
                 process.send({
                     type: 'finished',

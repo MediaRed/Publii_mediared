@@ -226,7 +226,7 @@ class PostHelper {
 
     static setWebpCompatibility ($store, text) {
         let forceWebp = !!$store.state.currentSite.config.advanced.forceWebp;
-        console.log('text in PostHelpers', text);
+
         text = text.replace(/\<li class="publii-block-gallery-item glide__slide">[\s\S]*?<a[\s\S]*?href="(.*?)"[\s\S]+?>[\s\S]*?<img[\s\S]*?src="(.*?)"/gmi, (matches, linkUrl, imgUrl) => {
             if (linkUrl && imgUrl) {
                 if (

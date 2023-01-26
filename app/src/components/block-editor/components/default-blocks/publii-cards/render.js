@@ -56,6 +56,8 @@ function render (blockData) {
   for (let i = 0; i < blockData.content.images.length; i++) {
     let img = blockData.content.images[i];
     const href = (blockData.config.isLink) ? `href="${getHrefFromLink(img)}"` : ``;
+    console.log('isLink',blockData.config.isLink);
+    console.log('href', href);
     const circular = (blockData.config.isCircle) ? " circular" : "";
     const inside = (blockData.config.isInside) ? "internal" : "external";
     const inline = (blockData.config.isCircle) ? {height: img.height} : "";

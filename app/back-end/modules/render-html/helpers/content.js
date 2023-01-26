@@ -378,11 +378,8 @@ class ContentHelper {
 
         for (let dimension of dimensions) {
             let responsiveImage = ContentHelper._getSrcSet(baseUrl, dimension, useWebp);
-            responsiveImage = responsiveImage.replace('responsive/', '');
-            console.log('responsiveImage',responsiveImage);
             srcset.push(responsiveImage + ' ' + dimensionsData[dimension].width + 'w');
         }
-        console.log('srcSet in content.js', srcset);
         return srcset.join(' ,');
     }
 
@@ -417,9 +414,6 @@ class ContentHelper {
         filename = filename[filename.length - 1];
         let filenameFile = path.parse(filename).name;
         let filenameExtension = path.parse(filename).ext;
-        console.log('_getSrcSet:filename', filename);
-        console.log('_getSrcSet:filenameFile', filenameFile);
-        console.log('_getSrcSet:filenameExtension', filenameExtension);
 
         if (useWebp && ['.jpg', '.jpeg', '.png'].indexOf(filenameExtension.toLowerCase()) > -1) {
             filenameExtension = '.webp';
@@ -428,8 +422,6 @@ class ContentHelper {
         let baseUrlWithoutFilename = url.replace(filename, '');
         let responsiveImage = baseUrlWithoutFilename + 'responsive/' + filenameFile + '-' + dimension + filenameExtension;
         responsiveImage = responsiveImage.replace(/\s/g, '%20');
-        responsiveImage = responsiveImage.replace("responsive/", "");
-        console.log('responsiveImage',responsiveImage);
         return responsiveImage;
     }
 

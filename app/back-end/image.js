@@ -112,9 +112,9 @@ class Image extends Model {
             responsiveDirPath = path.join(this.siteDir, 'input', 'media', 'posts', (this.id).toString(), 'responsive');
             if (this.imageType === 'galleryImages') {
                 galleryDirPath = path.join(this.siteDir, 'input', 'media', 'posts', (this.id).toString(), 'gallery');
-                console.log('galleryDirPath',galleryDirPath);
+             
                 galleryResponsiveDirPath = path.join(galleryDirPath, 'responsive');
-                console.log('galleryResponsiveDirPath',galleryResponsiveDirPath);
+               
             }
         }
 
@@ -126,15 +126,15 @@ class Image extends Model {
                 fs.mkdirSync(responsiveDirPath);
             }
         }
-        console.log('galleryDirPath', galleryDirPath);
+
         // If gallery directory not exist - create it
         if (galleryDirPath !== '' && !Utils.dirExists(galleryDirPath)) {
-            console.log('gallery to be created');
+     
             fs.mkdirSync(galleryDirPath);
-            console.log("directory gallery created");
+      
             // If gallery responsive directory not exist - create it
             fs.mkdirSync(galleryResponsiveDirPath);
-            console.log("directory gallery/responsive created"); 
+       
         }
 
         // If responsive directory not exist - create it
@@ -143,7 +143,7 @@ class Image extends Model {
         }
 
         newPath = this.generateFileName(fileName, 1, dirPath, galleryDirPath);
-        console.log('newPath', newPath);
+  
         // Store main image
         try {
             fs.readFile(this.path, function(err, data) {
@@ -200,7 +200,7 @@ class Image extends Model {
      * Save responsive images
      */
     createResponsiveImages(originalPath, imageType = 'contentImages') {
-        console.log("inside createResponsiveImages");
+    
         let defaultSiteConfig = JSON.parse(JSON.stringify(defaultAstCurrentSiteConfig));
         let themesHelper = new Themes(this.application, { site: this.site });
         let currentTheme = themesHelper.currentTheme();
@@ -281,7 +281,7 @@ class Image extends Model {
         let themeConfig = Themes.loadThemeConfig(themeConfigPath, themeDirPath);
         let dimensions = false;
         let dimensionsConfig = false;
-        console.log('imageType', imageType);
+
         if (['featuredImages', 'optionImages', 'tagImages', 'authorImages'].indexOf(imageType) > -1) {
             if (Utils.responsiveImagesConfigExists(themeConfig, imageType)) {
                 dimensions = Utils.responsiveImagesDimensions(themeConfig, imageType);
@@ -299,7 +299,7 @@ class Image extends Model {
         } else if (imageType === 'galleryImages' && Utils.responsiveImagesConfigExists(themeConfig, 'galleryImages')) {
             dimensions = Utils.responsiveImagesDimensions(themeConfig, 'galleryImages');
             dimensionsConfig = Utils.responsiveImagesData(themeConfig, 'galleryImages');
-            console.log('dimensionsConfig',dimensionsConfig);
+   
             if (!dimensionsConfig) {
                 dimensions = ['thumbnail'];
 
@@ -314,12 +314,12 @@ class Image extends Model {
             let galleryPath = path.parse(originalPath).dir; 
             let galleryResponsivePath = path.parse(galleryPath, 'responsive');
             if (galleryPath !== '' && !Utils.dirExists(galleryPath)) {
-                console.log('gallery to be created');
+
                 fs.mkdirSync(galleryPath);
-                console.log("directory gallery created");
+  
                 // If gallery responsive directory not exist - create it
                 fs.mkdirSync(galleryResponsivePath);
-                console.log("directory gallery/responsive created"); 
+
             }
         }
 
@@ -328,12 +328,12 @@ class Image extends Model {
         }
 
         let targetImagesDir = path.parse(originalPath).dir;
-        console.log('targetImagesDir 1', targetImagesDir);
+
         if (imageType !== 'galleryImages') {
             targetImagesDir = path.join(targetImagesDir, 'responsive');
         } else if (imageType === 'galleryImages') {
             targetImagesDir = path.join(targetImagesDir, 'responsive');
-            console.log('targetImagesDir 2', targetImagesDir);
+
         }
         
        
@@ -347,9 +347,7 @@ class Image extends Model {
             let filename = path.parse(originalPath).name;
             let extension = path.parse(originalPath).ext;
             let destinationPath = path.join(targetImagesDir, filename + '-' + name + extension);
-            console.log('destinationPath', destinationPath);
-            console.log('filename', filename);
-            console.log('name', name);
+
             let result;
             let shouldBeChangedToWebp = false;
 

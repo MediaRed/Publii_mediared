@@ -76,7 +76,7 @@ function regenerateImage (images, fullPath, catalog) {
         id: catalog,
         path: fullImagePath
     });
-    console.log('regenerate image');
+
     let imageType = getImageType(context, image, catalog);
     let promises = imageHelper.createResponsiveImages(fullImagePath, imageType);
 
