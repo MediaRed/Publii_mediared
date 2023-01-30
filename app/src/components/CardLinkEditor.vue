@@ -148,7 +148,7 @@
                     :placeholder="$t('post.selectPostPage')"></v-select>
             </label>
 
-            <label  v-if="cardConfig.isLink === true" key="card-item-editor-field-title">
+            <label  v-if="cardConfig.isLink === true" key="card-item-editor-field-link">
                 <span>{{ $t('link.linkTitleAttribute') }}</span>
                 <input
                     v-model="image.title"

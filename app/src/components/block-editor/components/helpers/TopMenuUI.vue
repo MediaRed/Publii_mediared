@@ -277,10 +277,10 @@ export default {
       }
       if ( field === "isLink") {
         console.log("is link");
-        this.$parent.config.isLink = (this.$parent.config[field] && this.$parent.config[field]  === "off") ? true : false;
+        this.$parent.config.isLink = (this.$parent.config[field] && this.$parent.config[field] === true) ? false : true;
       }
       if ( field === "isInside") {
-        this.$parent.config.isInside = (this.$parent.config[field] && this.$parent.config[field] === "off") ? true : false;
+        this.$parent.config.isInside = (this.$parent.config[field] && this.$parent.config[field] === true) ? false : true;
       }
       if ( field === "setImages") {
         const active = (this.$parent.config[field] || this.$parent.config[field] === false);
