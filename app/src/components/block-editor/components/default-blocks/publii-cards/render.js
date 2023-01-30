@@ -82,7 +82,7 @@ function render (blockData) {
         </div>
         <h3 class="card-title ${inside}" style="color: ${blockData.config.titleColor}">${img.title}</h3>
         ${sub}
-        <figcaption class="card-caption ${inside}" style="color: ${blockData.config.titleColor}">{{${img.caption}}}</figcaption>
+        <figcaption class="card-caption ${inside}" style="color: ${blockData.config.titleColor}">${img.caption}</figcaption>
       </a>
     </figure>`;
   }
